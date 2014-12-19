@@ -1,5 +1,5 @@
 # Name of manuscript
-manuscript = template
+manuscript = cdances
 
 # PdfLaTeX compilation options
 latexopt = -halt-on-error -file-line-error -output-directory=build
