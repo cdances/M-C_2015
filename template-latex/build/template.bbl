@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{journal}
+B.~Author(s),
+\newblock ``Title,''
+\newblock {\em Journal Name in Italic}, {\bf Volume in Bold}, pp. 34--89
+  (19xx).
+
+\bibitem{proceedings}
+C.~D. Author(s),
+\newblock ``Article Title,''
+\newblock {\em Proceeding of Meeting}, Location, Dates of Meeting, 19xx.
+
+\bibitem{book}
+E.~F. Author,
+\newblock {\em Book Title},
+\newblock Publisher, City, Country (19xx).
+
+\bibitem{misc}
+``Spallation Neutron Source: The next-generation neutron-scattering facility
+  for the United States,'' 2002,
+\newblock http://www.sns.gov/documetation/sns\_brochure.pdf.
+
+\end{thebibliography}
