@@ -13,7 +13,7 @@ all: $(manuscript).pdf
 $(manuscript).pdf: $(manuscript).tex references.bib
 	mkdir -p build
 	pdflatex $(latexopt) $(manuscript)
-	bibtex -terse build/$(manuscript)
+#	bibtex -terse build/$(manuscript)
 	pdflatex $(latexopt) $(manuscript)
 	pdflatex $(latexopt) $(manuscript)
 
