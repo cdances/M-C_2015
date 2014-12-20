@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: build/cdances.aux
 The style file: mc2015.bst
 Database file #1: references.bib
-You've used 1 entry,
+You've used 2 entries,
             2062 wiz_defined-function locations,
-            462 strings with 3192 characters,
-and the built_in function-call counts, 958 in all, are:
-= -- 132
-> -- 6
+            468 strings with 3283 characters,
+and the built_in function-call counts, 1336 in all, are:
+= -- 185
+> -- 12
 < -- 1
-+ -- 96
-- -- 5
-* -- 32
-:= -- 142
-add.period$ -- 1
-call.type$ -- 1
-change.case$ -- 0
++ -- 133
+- -- 10
+* -- 38
+:= -- 206
+add.period$ -- 2
+call.type$ -- 2
+change.case$ -- 1
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 122
-empty$ -- 36
-format.name$ -- 2
-if$ -- 183
+cite$ -- 2
+duplicate$ -- 171
+empty$ -- 49
+format.name$ -- 4
+if$ -- 253
 int.to.chr$ -- 0
-int.to.str$ -- 1
+int.to.str$ -- 2
 missing$ -- 1
-newline$ -- 8
-num.names$ -- 1
-pop$ -- 4
+newline$ -- 13
+num.names$ -- 2
+pop$ -- 9
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 17
+skip$ -- 19
 stack$ -- 0
-substring$ -- 130
-swap$ -- 15
+substring$ -- 169
+swap$ -- 17
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 6
-width$ -- 2
-write$ -- 11
+while$ -- 9
+width$ -- 3
+write$ -- 21

@@ -21,12 +21,12 @@
 % Insert authors' names and short version of title in lines below
 
 \authorHead{Chris Dances, Vince Mousseau, Maria Avramova}
-\shortTitle{Transient Verification of CTF}
+\shortTitle{Transient Verification of COBRA-TF}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{Transient Verification study of Residual Formulation of COBRA-TF }
+\title{Initial 1-D Single Phase Liquid Transient Verification of COBRA-TF}
 
 \author{Chris Dances}
 \author{Dr. Maria Avramova}
@@ -50,6 +50,13 @@ Abstract \ldots
 \emph{Key Words}: List no more than five key words
 \end{abstract}
 
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\listoffigures
+\pagebreak
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
@@ -62,22 +69,33 @@ water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to effi- cient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics with in the reactor core
 is COBRA-TF. This FORTRAN based code solves 8 conservation equations for liquid,
-entrained droplet, and vapor phases in 3-D dimmensions [2]. 
-
-The conservation equations analytically reduce into a pressure matrix in a semi-implicit method with rod temperatures solved for explicitly. Because the physics are integrated into
-the numerical solution, the equations must be linear and the solution method semi-implicit.
-With a residual formulation, greater flexibility and control over the numerical solution is
-possible. COBRA-TF was originally written in FORTRAN 77, but over the years has been
+entrained droplet, and vapor phases in 3-D dimmensions \cite{CTF_Theory}. The
+conservation equations analytically reduce into a pressure matrix in a 
+semi-implicit  method with rod temperatures solved for explicitly. Because the 
+physics are integrated into the numerical solution, the equations  must be
+linear and the solution method semi-implicit. With a residual formulation,
+greater flexibility and control over the numerical solution is possible.
+COBRA-TF was originally written in FORTRAN 77, but over the years has been
 partially updated to newer versions of Fortran.
-The finite volume structure in COBRA-TF in figure 1.1 is for a one-dimmensional chan-
-nel in the axial direction with n number of cells. The first and last cells at 0 and n + 1 are
-ghost cells and act as the boundary conditions for the problem. Pressure, enthalpy, and den-
-sity are averaged over the cell volume and are located at the center of the cell. Mass flow rate
-and velocity are located at the faces in between cells. The cells are represented with an index
-i, and the faces with indexes of i + 12 or i − 12 . This project will initially focus on this 1-D
-configuration. Usually the code is three dimensional, with channels connecting to each other
-in two more dimmensions. Fully 3-D equations will be considered in future work.
- 
+
+The finite volume structure in COBRA-TF in figure \ref{fig:CTF-Cells} is for a
+one-dimmensional channel in the axial direction with n number of cells. The
+first and last cells at 0 and n + 1 are ghost cells and act as the boundary
+conditions for the problem. Pressure, enthalpy, and density are averaged over
+the cell volume and are located at the center of the cell. Mass flow rate and
+velocity are located at the faces in between cells. The cells  are represented
+with an index i, and the faces with indexes of $i + \frac{1}{2}$ or 
+$i-\frac{1}{2}$. This project will initially focus on this 1-D configuration.
+Usually the code  is 3-D,  with channels connecting to each other in two more 
+dimmensions.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.30\textwidth]{images/CTF-Cells}
+	\caption{The finite volume structure for COBRA-TF}
+	\label{fig:CTF-Cells}
+\end{figure}
+    
 \section{Sine Wave Advection Problem Setup}
 
 The problem is to transiently vary the inlet enthalpy $h$ and inlet mass flow
