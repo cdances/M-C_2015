@@ -1,7 +1,7 @@
 \contentsline {section}{Contents}{2}{Doc-Start}
-\contentsline {section}{List of Figures}{2}{Doc-Start}
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
-\contentsline {section}{\numberline {2}Sine Wave Advection Problem Setup}{4}{section.2}
-\contentsline {section}{\numberline {3}Conclusions}{5}{section.3}
-\contentsline {section}{\numberline {4}Acknowledgments}{5}{section.4}
-\contentsline {section}{\numberline {5}References}{5}{section.5}
+\contentsline {section}{List of Figures}{3}{Doc-Start}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {section}{\numberline {2}Sine Wave Advection Problem Setup}{5}{section.2}
+\contentsline {section}{\numberline {3}Conclusions}{6}{section.3}
+\contentsline {section}{\numberline {4}Acknowledgments}{6}{section.4}
+\contentsline {section}{\numberline {5}References}{6}{section.5}
