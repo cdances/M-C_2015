@@ -80,6 +80,8 @@ greater flexibility and control over the numerical solution is possible.
 COBRA-TF was originally written in FORTRAN 77, but over the years has been
 partially updated to newer versions of Fortran.
 
+\section{COBRA-TF}
+
 The finite volume structure in COBRA-TF in figure \ref{fig:CTF-Cells} is for a
 one-dimmensional channel in the axial direction with n number of cells. The
 first and last cells at 0 and n + 1 are ghost cells and act as the boundary
@@ -97,8 +99,56 @@ dimmensions.
 	\caption{The finite volume structure for COBRA-TF}
 	\label{fig:CTF-Cells}
 \end{figure}
-    
-\section{Sine Wave Advection Problem Setup}
+
+\section{Code Verification}
+
+Introduction here \ldots
+
+What is it, what are its objectives \ldots
+
+What distinguishes it from Solution Verification???
+
+\subsection{Software Quality Assurance}
+
+Git, unit tests, code documentation, doxygen, etc.
+
+\subsection{Verification Criteria}
+
+Code verification criteria can be defined to
+have the following levels of rigor \cite{Roy:2005:RCS:1082892.1082899}
+(cite the original source???)
+
+\begin{itemize}
+  \item expert judgement
+  \item error quantification
+  \item consistencey / convergence
+  \item order of accuracy
+\end{itemize}
+
+Error quantification, convergence, and order of accuracy will all be used. Order
+of accuracy is the most difficult to satisfy and the most sensitive to coding
+mistakes.
+
+\subsection{Method of Manufactured Solutions}
+
+What it is \ldots
+
+How it applies here
+
+Explanations of the expected results \ldots
+
+\section{Solution Verification}
+
+\subsection{Sources of Numerical Error}
+
+Round off error, iterative convergence error.
+
+Discretization error?? (Check with)
+
+\section{Sine Wave Advection Problem}
+
+Needs a figure and a table of parameters. Geometry and reference conditions
+should be for a PWR.
 
 The problem is to transiently vary the inlet enthalpy $h$ and inlet mass flow
 rate $\dot{m}$ using a smooth trigonometric function so as to keep velocity
@@ -122,6 +172,8 @@ density $\rho$, liquid enthalpy $h$, and liquid temperature $T$. Since velocity
 and pressure are cosntant, mass flow rate will be proportional to density, and
 enthlapy will be proportional to temperature.
 
+\subsection{Input Verification}
+
 For the inlet condition, a transient data table was generated for enthalpy and
 mass flow rate and applied at the inlet node. The comparison between the data
 table and the output in CTF are shown for enthalpy and mass flow rate in figures
@@ -144,6 +196,47 @@ values in the figure. This difference is more notable for smaller mesh sizes.
 	\caption{Mass Flow rate near the inlet and the analytical solution}
 	\label{fig:Inlet_m_dot}
 \end{figure}
+
+\section{Verification of All Solution Methods}
+
+Both COBRA-TF and residual version semi-implicit method, residual fully implicit
+method with and without linear EOS.
+
+\subsection{Code Verification}
+
+This compares the exact solution to the COBRA-TF Solution Methods
+
+\subsubsection{Error Quantification}
+
+Show qualatative plot and demonstrate that the error is quantified 
+for a single time step and space discretization
+
+A figure and a table of l1 normalized error
+
+\subsection{Convergence of Error}
+
+Show how error behaves for different time and space sizes
+
+\subsection{Order of Accuracy}
+
+\section{Parameter Study}
+
+Tables and figures of varying the results.
+
+\subsection{Changes in $\Delta$T}
+
+This changes the amplitude of the displacement
+
+\subsection{Changes in Frequencey}
+
+This changes the frequencey of the displacement
+
+\subsection{Changes in Mass Flow Rate}
+
+\section{Computational Time}
+
+The computational time of the two methods for different computational sizes.
+Compare the semi-implicit and fully implicit methods at 0.5 , 1.0, and 2.0 CFL. 
 
 \section{Conclusions}
 
