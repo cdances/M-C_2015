@@ -53,7 +53,77 @@ Abstract \ldots
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
- \cite{Roy:2005:RCS:1082892.1082899}
+\cite{Roy:2005:RCS:1082892.1082899}
+
+For the past several decades, the primary focus in nuclear engineering within
+the United States has been focused on light water reactors (LWR). Commercially,
+all nuclear reactors are either boiling water reactors (BWR) or pressurized
+water reactors (PWR). Correct computation of the thermal hydraulics within the
+reactor core leads to effi- cient design and accuracy in the safety analysis. A
+popular subchannel code for modelling the hydrodynamics with in the reactor core
+is COBRA-TF. This FORTRAN based code solves 8 conservation equations for liquid,
+entrained droplet, and vapor phases in 3-D dimmensions [2]. 
+
+The conservation equations analytically reduce into a pressure matrix in a semi-implicit method with rod temperatures solved for explicitly. Because the physics are integrated into
+the numerical solution, the equations must be linear and the solution method semi-implicit.
+With a residual formulation, greater flexibility and control over the numerical solution is
+possible. COBRA-TF was originally written in FORTRAN 77, but over the years has been
+partially updated to newer versions of Fortran.
+The finite volume structure in COBRA-TF in figure 1.1 is for a one-dimmensional chan-
+nel in the axial direction with n number of cells. The first and last cells at 0 and n + 1 are
+ghost cells and act as the boundary conditions for the problem. Pressure, enthalpy, and den-
+sity are averaged over the cell volume and are located at the center of the cell. Mass flow rate
+and velocity are located at the faces in between cells. The cells are represented with an index
+i, and the faces with indexes of i + 12 or i − 12 . This project will initially focus on this 1-D
+configuration. Usually the code is three dimensional, with channels connecting to each other
+in two more dimmensions. Fully 3-D equations will be considered in future work.
+ 
+\section{Sine Wave Advection Problem Setup}
+
+The problem is to transiently vary the inlet enthalpy $h$ and inlet mass flow
+rate $\dot{m}$ using a smooth trigonometric function so as to keep velocity
+constant throughout the solution. Using a cosine, the analytical solution for a
+variable $Y$ at time index $j$ and space index $i$, where $Y_{1}$ is the initial
+value, $Y_{2}$ is the minimum value of the wave, and $P$ is the period of the
+wave. The time step size $dt$, axial mesh size $dx$, and velocity $V_{o}$ are
+assumed constant. If $V_{o}*j*dt>i*x$, then this equation doesn't apply and the
+value should just equal the initial value $Y_{1}$.
+
+\begin{equation}
+	Y(i,j) = \frac{1}{2} \left( 
+			(Y_{1}+Y_{2}) + (Y_{1}-Y_{2}) cos\left(
+				\frac{2 \pi}{P} \left( j*dt + \frac{i*dx}{V_{o}} \right)
+				\right)
+			\right)
+\end{equation}
+
+This analytical solution can be applied to mass flow rate $\dot{m}$,
+density $\rho$, liquid enthalpy $h$, and liquid temperature $T$. Since velocity
+and pressure are cosntant, mass flow rate will be proportional to density, and
+enthlapy will be proportional to temperature.
+
+For the inlet condition, a transient data table was generated for enthalpy and
+mass flow rate and applied at the inlet node. The comparison between the data
+table and the output in CTF are shown for enthalpy and mass flow rate in figures
+\ref{fig:Inlet_h} and \ref{fig:Inlet_m_dot} respectively. The CTF output was
+read from hdf5 data files at each point in time, wich omitted the actual ghost
+cell where these values were applied. The CTF values are located at the nearest
+node to the inlet, and therefore will be slightly out of phase to the exact
+values in the figure. This difference is more notable for smaller mesh sizes.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.675\textwidth]{images/Inlet_h}
+	\caption{Enthalpy near the inlet and the analytical solution}
+	\label{fig:Inlet_h}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.675\textwidth]{images/Inlet_m_dot}
+	\caption{Mass Flow rate near the inlet and the analytical solution}
+	\label{fig:Inlet_m_dot}
+\end{figure}
 
 \section{Conclusions}
 
