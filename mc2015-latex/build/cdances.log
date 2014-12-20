@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  19 DEC 2014 16:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.8)  20 DEC 2014 09:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -6,7 +6,7 @@ entering extended mode
 **cdances
 (./cdances.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 4 languages loaded.
+Babel <3.9h> and hyphenation patterns for 2 languages loaded.
 (./mc2015.cls
 
 LaTeX Warning: You have requested document class `mc2015',
@@ -1171,7 +1171,7 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14> not available
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 46.
 
-
+(build/cdances.bbl) 
 AED: lastpage setting LastPage
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -1186,22 +1186,22 @@ Package rerunfilecheck Info: File `cdances.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 79.
  ) 
 Here is how much of TeX's memory you used:
- 17812 strings out of 494985
- 338448 string characters out of 6180356
- 488313 words of memory out of 5000000
- 20729 multiletter control sequences out of 15000+600000
- 32131 words of font info for 65 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 43i,14n,45p,10439b,743s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 17831 strings out of 495028
+ 338702 string characters out of 6181498
+ 489213 words of memory out of 5000000
+ 20726 multiletter control sequences out of 15000+600000
+ 35495 words of font info for 72 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 43i,14n,45p,10439b,745s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on build/cdances.pdf (1 page, 51588 bytes).
+Output written on build/cdances.pdf (1 page, 53345 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 22553 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 51 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 26657 words of extra memory for PDF output out of 29859 (max. 10000000)
 
