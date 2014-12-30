@@ -5,10 +5,10 @@ R.~K. Salko,
 \newblock ``{CTF Theory Manual},''
 \newblock The Pennsylvania State University (2014).
 
-\bibitem{Roy:2005:RCS:1082892.1082899}
-C.~J. Roy,
-\newblock ``Review of Code and Solution Verification Procedures for
-  Computational Simulation,''
-\newblock {\em J. Comput. Phys.}, {\bf 205}, {\em 1}, pp. 131--156 (2005).
+\bibitem{VV_Book}
+K.~{P. Knupp},
+\newblock {\em Verification of Computer Codes in Computational Science and
+  Engineering},
+\newblock Chapman and Hall/CRC, Boca Raton, FL (2003).
 
 \end{thebibliography}

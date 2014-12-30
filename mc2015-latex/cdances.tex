@@ -98,6 +98,19 @@ dimmensions.
 	\label{fig:CTF-Cells}
 \end{figure}
 
+\subsection{Software Quality Assurance}
+
+Software quality assurance is a set of tools and procedures that helps
+ensure that the software is reliable. COBRA-TF is managed by Github Repository
+setup and maintained by CASL. An exensive test matrix is run before each major
+push to ensure that the code meets the specificed requirements. The test matrix
+consists of unit tests, code coverage runs, validation problems, and validation
+problems. The code documentation consists of a theory manual, a users manual, a
+developers manual, and a validation manual. Further work might involve using
+autodocumentation tools to keep an up to date developers manual. This paper will
+be the begining of a verification manual, integrating this verificaiton problem
+directly into the test matrix.
+
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
 The thermal hydraulics of a LWR core is an important part of nuclear
@@ -353,50 +366,20 @@ terms.
 
 \section{Code Verification}
 
-Introduction here \ldots
+Code verification is the set of procedures set in place to ensure that the code
+was written properly. The procedures can use the following as code verification
+criteria from least to most rigorous are expert judgement, error quantification,
+consistencey / convergence, and order of accuruacy \cite{VV_Book}. For this work
+the method of known solutions will be used to initially quantify the error at
+for a particular problem setup. Next a Richardson Extrapolation will be used to
+check for convegence and order of accruacy of the error in space and time.
+ 
 
-What is it, what are its objectives \ldots
 
-What distinguishes it from Solution Verification???
+%Round off error, iterative convergence error.
+%Discretization error?? (Check with)
 
-\subsection{Software Quality Assurance}
-
-Git, unit tests, code documentation, doxygen, etc.
-
-\subsection{Verification Criteria}
-
-Code verification criteria can be defined to
-have the following levels of rigor \cite{Roy:2005:RCS:1082892.1082899}
-(cite the original source???)
-
-\begin{itemize}
-  \item expert judgement
-  \item error quantification
-  \item consistencey / convergence
-  \item order of accuracy
-\end{itemize}
-
-Error quantification, convergence, and order of accuracy will all be used. Order
-of accuracy is the most difficult to satisfy and the most sensitive to coding
-mistakes.
-
-\subsection{Method of Exact Solutions}
-
-What it is \ldots
-
-How it applies here
-
-Explanations of the expected results \ldots
-
-\section{Solution Verification}
-
-\subsection{Sources of Numerical Error}
-
-Round off error, iterative convergence error.
-
-Discretization error?? (Check with)
-
-\section{Isokinetic Sine Wave Advection Problem}
+\subsection{Isokinetic Sine Wave Advection Problem Setup}
 
 Needs a figure and a table of parameters. Geometry and reference conditions
 should be for a PWR.
@@ -448,12 +431,12 @@ values in the figure. This difference is more notable for smaller mesh sizes.
 	\label{fig:Inlet_m_dot}
 \end{figure}
 
-\section{Verification of All Solution Methods}
+\section{Temporal Verification}
 
 Both COBRA-TF and residual version semi-implicit method, residual fully implicit
 method with and without linear EOS.
 
-\subsection{Code Verification}
+\subsection{Problem Setup}
 
 This compares the exact solution to the COBRA-TF Solution Methods
 

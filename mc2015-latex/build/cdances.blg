@@ -5,42 +5,42 @@ The style file: mc2015.bst
 Database file #1: references.bib
 You've used 2 entries,
             2062 wiz_defined-function locations,
-            468 strings with 3283 characters,
-and the built_in function-call counts, 1336 in all, are:
-= -- 185
+            465 strings with 3192 characters,
+and the built_in function-call counts, 1268 in all, are:
+= -- 184
 > -- 12
-< -- 1
-+ -- 133
-- -- 10
-* -- 38
-:= -- 206
+< -- 0
++ -- 149
+- -- 12
+* -- 16
+:= -- 213
 add.period$ -- 2
 call.type$ -- 2
 change.case$ -- 1
 chr.to.int$ -- 0
 cite$ -- 2
-duplicate$ -- 171
-empty$ -- 49
+duplicate$ -- 179
+empty$ -- 33
 format.name$ -- 4
-if$ -- 253
+if$ -- 227
 int.to.chr$ -- 0
 int.to.str$ -- 2
-missing$ -- 1
+missing$ -- 2
 newline$ -- 13
 num.names$ -- 2
-pop$ -- 9
+pop$ -- 15
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 19
+skip$ -- 5
 stack$ -- 0
-substring$ -- 169
-swap$ -- 17
-text.length$ -- 1
+substring$ -- 155
+swap$ -- 4
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 9
+while$ -- 7
 width$ -- 3
-write$ -- 21
+write$ -- 23
