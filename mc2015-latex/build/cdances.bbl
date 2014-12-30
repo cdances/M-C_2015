@@ -11,4 +11,11 @@ K.~{P. Knupp},
   Engineering},
 \newblock Chapman and Hall/CRC, Boca Raton, FL (2003).
 
+\bibitem{IAPWS}
+IAPWS,
+\newblock ``Revised Release on the IAPWS Industrial Formulation 1997 for the
+  Thermodynamic Properties of Water and Steam,''
+\newblock The International Association for the Properties of Water and Steam
+  (IAPWS) (2007).
+
 \end{thebibliography}

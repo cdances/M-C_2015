@@ -80,23 +80,16 @@ partially updated to newer versions of Fortran.
 
 \section{COBRA-TF}
 
-The finite volume structure in COBRA-TF in figure \ref{fig:CTF-Cells} is for a
-one-dimmensional channel in the axial direction with n number of cells. The
-first and last cells at 0 and n + 1 are ghost cells and act as the boundary
-conditions for the problem. Pressure, enthalpy, and density are averaged over
-the cell volume and are located at the center of the cell. Mass flow rate and
-velocity are located at the faces in between cells. The cells  are represented
-with an index i, and the faces with indexes of $i + \frac{1}{2}$ or 
-$i-\frac{1}{2}$. This project will initially focus on this 1-D configuration.
-Usually the code  is 3-D,  with channels connecting to each other in two more 
-dimmensions.
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.30\textwidth]{images/CTF-Cells}
-	\caption{The finite volume structure for COBRA-TF}
-	\label{fig:CTF-Cells}
-\end{figure}
+The thermal hydraulics of a LWR core is an important part of nuclear
+reactor desigin. COBRA-TF solves 8 conservation equations for liquid,
+entrained droplet, and vapor phases of water boiling within the rod structure
+of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
+equations analytically reduce into a pressure matrix in a semi-implicit
+method with rod temperatures solved for explicitly. This work involves
+representing the 1-D single phase liquid conservation equations and calculated 
+variables in a residual formulation. This residual formulation should allow for
+easier and more in depth verification analysis. This paper details the intitial
+comparison of the residual formulation to the original code.
 
 \subsection{Software Quality Assurance}
 
@@ -113,16 +106,23 @@ directly into the test matrix.
 
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
-The thermal hydraulics of a LWR core is an important part of nuclear
-reactor desigin. COBRA-TF solves 8 conservation equations for liquid,
-entrained droplet, and vapor phases of water boiling within the rod structure
-of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
-equations analytically reduce into a pressure matrix in a semi-implicit
-method with rod temperatures solved for explicitly. This work involves
-representing the 1-D single phase liquid conservation equations and calculated 
-variables in a residual formulation. The full jacobian matrix can then be
-built numerically, and  can then either be reduced to a pressure matrix or
-solved directly.
+The finite volume structure in COBRA-TF in figure \ref{fig:CTF-Cells} is for a
+one-dimmensional channel in the axial direction with n number of cells. The
+first and last cells at 0 and n + 1 are ghost cells and act as the boundary
+conditions for the problem. Pressure, enthalpy, and density are averaged over
+the cell volume and are located at the center of the cell. Mass flow rate and
+velocity are located at the faces in between cells. The cells  are represented
+with an index i, and the faces with indexes of $i + \frac{1}{2}$ or 
+$i-\frac{1}{2}$. This project will initially focus on this 1-D configuration.
+Usually the code  is 3-D,  with channels connecting to each other in two more 
+dimmensions.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.20\textwidth]{images/CTF-Cells}
+	\caption{The finite volume structure for COBRA-TF}
+	\label{fig:CTF-Cells}
+\end{figure}
 
 The single phase Euler partial differential equations for mass
 \eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
@@ -150,6 +150,83 @@ terms.
     	= 0
     \end{equation}
     
+
+
+\subsection{Residual Formulation and Jacobian Construction}
+
+	A residual is simply the difference between the value at some future time
+    $n+1$ and the value at the current iteration $k$. This can be applied to
+    desired variables as shown in equations
+    \eqref{eq:residual_def:P}, \eqref{eq:residual_def:h},
+    \eqref{eq:residual_def:u}, and \eqref{eq:residual_def:rho}. Residuals can
+    also be applied to the conservation equations by substituting the definition
+    of the residual variables into the conservation equations. This will
+    effectively change any variables evaluated at $n+1$ to $k$. Each cell will
+    have three residual variables and three residual equations. For the entire
+    solution, we will then have a residual variable array $\delta X$, and a
+    residual function array $F(X)$ which defines a linear system as seen in 
+    equation \eqref{eq:linear_system}.
+        
+    \begin{equation}
+    	\label{eq:residual_def:P}
+    	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:residual_def:h}
+    	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:residual_def:u}
+    	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:residual_def:rho}
+    	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:linear_system}
+    	J \delta X = - F(X)
+    \end{equation}
+    
+    The Jacobian matrix is defined in equation \eqref{eq:jac_def} as the derivative
+    of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
+    The derivative can be calculated numerically as shown by equation
+    \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
+    COBRA-TF the equations are linear, and this numerical approximation
+    of the Jacobian matrix is exact. This should produce the same jacobian
+    matrix that COBRA-TF currently generates analytically. 
+    
+    \begin{equation}
+    	\label{eq:jac_def}
+    	J_{i,j}=\frac{ \partial F_{j}(X)}{\partial X_{i}}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:jac_numerical}
+    	J_{i,j}  \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
+    \end{equation}
+    
+	To build the jacobian matrix, an object oriented class was created that
+    contains three arrays. An array that points to the residual functions, an
+    array that points to the position within a target variable arrray, and an
+    array that has the index that the function is to be evaluated at. These
+    lists can be appended to in any order, but have to be appended all at the
+    same time so that variables and functions must correspond with each other.
+    Then to construct the jacobian matrix, the residual function and residual
+    variable arrays can each be looped over to numerically build the jacobian
+    matrix as seen in figure \ref{fig:Jacobian_Setup}. 
+    
+    \begin{figure}[!h]
+    	\centering
+    	\includegraphics[width=0.30\textwidth]{images/Jacobian_Setup}
+    	\caption{Strucutre of the jacobian matrix for single phase liquid}
+    	\label{fig:Jacobian_Setup}
+    \end{figure}
+
 \subsection{Modified Equation Analysis}
     
     The original mass balance equation can be re-written to 
@@ -289,82 +366,7 @@ terms.
     	= 0
     \end{equation}
 
-\subsection{Residual Formulation and Jacobian Construction}
-
-	A residual is simply the difference between the value at some future time
-    $n+1$ and the value at the current iteration $k$. This can be applied to
-    desired variables as shown in equations
-    \eqref{eq:residual_def:P}, \eqref{eq:residual_def:h},
-    \eqref{eq:residual_def:u}, and \eqref{eq:residual_def:rho}. Residuals can
-    also be applied to the conservation equations by substituting the definition
-    of the residual variables into the conservation equations. This will
-    effectively change any variables evaluated at $n+1$ to $k$. Each cell will
-    have three residual variables and three residual equations. For the entire
-    solution, we will then have a residual variable array $\delta X$, and a
-    residual function array $F(X)$ which defines a linear system as seen in 
-    equation \eqref{eq:linear_system}.
-        
-    \begin{equation}
-    	\label{eq:residual_def:P}
-    	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:residual_def:h}
-    	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:residual_def:u}
-    	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:residual_def:rho}
-    	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:linear_system}
-    	J \delta X = - F(X)
-    \end{equation}
-    
-    The Jacobian matrix is defined in equation \eqref{eq:jac_def} as the derivative
-    of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
-    The derivative can be calculated numerically as shown by equation
-    \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
-    COBRA-TF the equations are linear, and this numerical approximation
-    of the Jacobian matrix is exact. This should produce the same jacobian
-    matrix that COBRA-TF currently generates analytically. 
-    
-    \begin{equation}
-    	\label{eq:jac_def}
-    	J_{i,j}=\frac{ \partial F_{j}(X)}{\partial X_{i}}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:jac_numerical}
-    	J_{i,j}  \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
-    \end{equation}
-    
-	To build the jacobian matrix, an object oriented class was created that
-    contains three arrays. An array that points to the residual functions, an
-    array that points to the position within a target variable arrray, and an
-    array that has the index that the function is to be evaluated at. These
-    lists can be appended to in any order, but have to be appended all at the
-    same time so that variables and functions must correspond with each other.
-    Then to construct the jacobian matrix, the residual function and residual
-    variable arrays can each be looped over to numerically build the jacobian
-    matrix as seen in figure \ref{fig:Jacobian_Setup}. 
-    
-    \begin{figure}[!h]
-    	\centering
-    	\includegraphics[width=0.45\textwidth]{images/Jacobian_Setup}
-    	\caption{Strucutre of the jacobian matrix for single phase liquid}
-    	\label{fig:Jacobian_Setup}
-    \end{figure}
-
-\section{Code Verification}
+\section{Problem Setup}
 
 Code verification is the set of procedures set in place to ensure that the code
 was written properly. The procedures can use the following as code verification
@@ -379,15 +381,21 @@ check for convegence and order of accruacy of the error in space and time.
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-\subsection{Isokinetic Sine Wave Advection Problem Setup}
+\subsection{Isokinetic Sine Wave Advection}
 
-Needs a figure and a table of parameters. Geometry and reference conditions
-should be for a PWR.
+The verication problem is defined as a single horizontal channel problem the
+base parameters listed in table \ref{table:parameters}. The problem will have a
+fixed channel area and perimeter across the entire height of the channel with no
+grid spacers. The velocity and pressure are assumed to be constant, but small
+fluctuations may occur due to coding mistakes or nuermical noise. The channel
+geometry and operating conditions are taken to be approximate a standard PWR.
+The inlet of the channel has a constant velocity with a fluctuating enthalpy
+that corresponds to a 37.5 $^\circ$C temperature change.
 
 \begin{table}[h]
 \center
 \caption{Problem Parameters}
-\label{table:prameters}
+\label{table:parameters}
 \begin{tabular}{|c|c|c|c|}
 \hline
 Parameter	&	Symbol	&	Value	&	Unit	\\ \hline
@@ -396,65 +404,89 @@ Channel Area	&	$A_{ch}$	&	4.94E-005	&	$m^{2}$	\\ \hline
 Wetted Perimeter	&	$P_{w}$	&	1.49E-002	&	$m$	\\ \hline
 Velocity	&	$V_{o}$	&	7.35	&	$\frac{m}{s}$	\\ \hline
 Pressure	&	$P_{o}$	&	155.00	&	bar	\\ \hline
-Temperature 1	&	$T_{1}$	&	289.500	&	$^{\circ}$C	\\ \hline
-Temperature 2	&	$T_{2}$	&	327.00	&	$^{\circ}$C	\\ \hline
 Enthalpy 1	&	$h_{1}$	&	1281.55	&	$\frac{kJ}{kg}$	\\ \hline
 Enthalpy 2	&	$h_{2}$	&	1497.21	&	$\frac{kJ}{kg}$	\\ \hline
-Density 1	&	$\rho_{1}$	&	747.14	&	$\frac{kg}{m^{3}}$	\\ \hline
-Density 2	&	$\rho_{2}$	&	660.68	&	$\frac{kg}{m^{3}}$	\\ \hline
+Mass Flow Rate 1	&	$\dot{m}_{1}$	&	0.2713	&	$\frac{kg}{s}$	\\ \hline
+Mass Flow Rate 2	&	$\dot{m}_{2}$	&	0.2399	&	$\frac{kg}{s}$	\\ \hline
 Final Time	&	$t_{f}$	&	2.00	&	sec	\\ \hline
 Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 \end{tabular}
 \end{table}
 
-The problem is to transiently vary the inlet enthalpy $h$ and inlet mass flow
-rate $\dot{m}$ using a smooth trigonometric function so as to keep velocity
-constant throughout the solution. Using a cosine, the analytical solution for a
-variable $Y$ at time index $j$ and space index $i$, where $Y_{1}$ is the initial
-value, $Y_{2}$ is the minimum value of the wave, and $P$ is the period of the
-wave. The time step size $dt$, axial mesh size $dx$, and velocity $V_{o}$ are
-assumed constant. If $V_{o}*j*dt>i*x$, then this equation doesn't apply and the
-value should just equal the initial value $Y_{1}$.
+The lookup table to vary the inlet enthalpy $h$ and inlet mass
+flow rate $\dot{m}$ use smooth trigonometric functions given in equations
+\ref{eq:Sine_Wave:h} and \ref{eq:Sine_Wave:m_dot}. The equations assume constant
+axial spacing $\Delta x$ and time step size $\Delta t$ where $i$ and $j$ are
+the spatial and temporal index respectively. These equations should also
+behave as the known solutions throughout the entire domain of the problem. The
+enthalpy and mass flow rate should vary proportionally to the density as to
+create an isokinetic boundary condition at the inlet. However this is dependent
+on the steam tables used. A python script was used to generate the data tables
+according to trignometric equations using lookup tables that mimic the IAPWS-97
+steam tables used by the code \cite{IAPWS}.
 
 \begin{equation}
-	Y(i,j) = \frac{1}{2} \left( 
-			(Y_{1}+Y_{2}) + (Y_{1}-Y_{2}) cos\left(
+	\label{eq:Sine_Wave:h}
+	h(i,j) = \frac{1}{2} \left( 
+			(h_{1}+h_{2}) + (h_{1}-h_{2}) cos\left(
 				\omega \left( j \Delta t + \frac{i \Delta x}{V_{o}} \right)
 				\right)
 			\right)
 \end{equation}
 
-This analytical solution can be applied to mass flow rate $\dot{m}$,
-density $\rho$, liquid enthalpy $h$, and liquid temperature $T$. Since velocity
-and pressure are cosntant, mass flow rate will be proportional to density, and
-enthlapy will be proportional to temperature.
+\begin{equation}
+	\label{eq:Sine_Wave:m_dot}
+	\dot{m}(i,j) = \frac{1}{2} \left( 
+			(\dot{m}_{1}+\dot{m}_{2}) + (\dot{m}_{1}-\dot{m}_{2}) cos\left(
+				\omega \left( j \Delta t + \frac{i \Delta x}{V_{o}} \right)
+				\right)
+			\right)
+\end{equation}
 
-\subsection{Input Verification}
 
-For the inlet condition, a transient data table was generated for enthalpy and
-mass flow rate and applied at the inlet node. The comparison between the data
-table and the output in CTF are shown for enthalpy and mass flow rate in figures
-\ref{fig:Inlet_h} and \ref{fig:Inlet_m_dot} respectively. The CTF output was
-read from hdf5 data files at each point in time, wich omitted the actual ghost
-cell where these values were applied. The CTF values are located at the nearest
-node to the inlet, and therefore will be slightly out of phase to the exact
-values in the figure. This difference is more notable for smaller mesh sizes.
+The comparison between the data table and the output in CTF are shown for
+enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
+\ref{fig:Inlet_m_dot} respectively. The CTF output was read from hdf5 data files
+at each point in time, wich omitted the actual ghost cell where these values
+were applied. The CTF values are located at the nearest node to the inlet, and
+therefore will be slightly out of phase to the exact values but this effect is
+small in the figure.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Inlet_h}
-	\caption{Enthalpy near the inlet and the analytical solution}
+	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_00/residual/results/Inlet_h}
+	\caption{Enthalpy Near the Inlet and the Analytical Solution}
 	\label{fig:Inlet_h}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Inlet_m_dot}
-	\caption{Mass Flow rate near the inlet and the analytical solution}
+	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_00/residual/results/Inlet_m_dot}
+	\caption{Density Near the Inlet and the Analytical Solution}
 	\label{fig:Inlet_m_dot}
 \end{figure}
 
+For the original version of COBRA-TF there is a small discrepancy in the way the
+density is calculated at the inlet that causes the velocity to be non-consatnt.
+%as shown in figure \ref{fig:Inlet_vel}.
+ This is considered small for this problem and should not greatly affect the
+ order of accuracy. The residual formulation was coded in such a way as to avoid
+ this problem and has considerably less fluctation in the inlet velocity.
+
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_00/original/results/Inlet_vel}
+%	\caption{Velocity Near the Inlet and the Analytical Solution for the Original
+%	Version}
+%	\label{fig:Inlet_vel}
+%\end{figure}
+
 \subsection{Code Convergence}
+
+The current version of COBRA-TF uses global code convergance criteria across the
+inlet and the entire domain. These approximate the residauls for the equation.
+For this problem, the solid energy storate is zero since there are not any heat
+structures present. 
 
 \begin{figure}[!h]
 	\centering
@@ -476,6 +508,8 @@ values in the figure. This difference is more notable for smaller mesh sizes.
 	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
 	\label{fig:Residuals_Plot}
 \end{figure}
+
+\subsection{Comparison to Known Solution}
 
 \section{Temporal Verification}
 
