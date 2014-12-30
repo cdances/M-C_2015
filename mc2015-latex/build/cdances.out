@@ -7,12 +7,10 @@
 \BOOKMARK [1][-]{section.3}{Problem Setup}{}% 7
 \BOOKMARK [2][-]{subsection.3.1}{Isokinetic Sine Wave Advection}{section.3}% 8
 \BOOKMARK [2][-]{subsection.3.2}{Code Convergence}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.3}{Comparison to Known Solution}{section.3}% 10
-\BOOKMARK [1][-]{section.4}{Temporal Verification}{}% 11
-\BOOKMARK [2][-]{subsection.4.1}{Problem Setup}{section.4}% 12
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Error Quantification}{subsection.4.1}% 13
-\BOOKMARK [2][-]{subsection.4.2}{Convergence of Error}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.3}{Order of Accuracy}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Conclusions}{}% 16
-\BOOKMARK [1][-]{section.6}{Acknowledgments}{}% 17
-\BOOKMARK [1][-]{section.7}{References}{}% 18
+\BOOKMARK [2][-]{subsection.3.3}{Error Quantification}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Richardson Extrapolation}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Convergence of Error}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Order of Accuracy}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Conclusions}{}% 14
+\BOOKMARK [1][-]{section.6}{Acknowledgments}{}% 15
+\BOOKMARK [1][-]{section.7}{References}{}% 16

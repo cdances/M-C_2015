@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  30 DEC 2014 04:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  30 DEC 2014 18:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -966,7 +966,11 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
 Package: lipsum 2011/04/14 v1.2 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count168
-) (build/cdances.aux)
+) (build/cdances.aux
+
+LaTeX Warning: Label `fig:Temporal:Diff_m_dot' multiply defined.
+
+)
 \openout1 = `cdances.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
@@ -984,7 +988,7 @@ LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 27.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 Package lastpage Info: Please have a look at the pageslts package at
@@ -1175,14 +1179,14 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 ] [2
 
 ]
-<images/CTF-Cells.jpg, id=96, 551.05875pt x 1023.825pt>
+<images/CTF-Cells.jpg, id=88, 551.05875pt x 1023.825pt>
 File: images/CTF-Cells.jpg Graphic file (type jpg)
 
 <use images/CTF-Cells.jpg>
 Package pdftex.def Info: images/CTF-Cells.jpg used on input line 122.
 (pdftex.def)             Requested size: 93.94955pt x 174.54785pt.
  [3 <./images/CTF-Cells.jpg>]
-<images/Jacobian_Setup.jpg, id=125, 421.575pt x 399.4925pt>
+<images/Jacobian_Setup.jpg, id=117, 421.575pt x 399.4925pt>
 File: images/Jacobian_Setup.jpg Graphic file (type jpg)
 
 <use images/Jacobian_Setup.jpg>
@@ -1213,99 +1217,124 @@ Underfull \hbox (badness 10000) in paragraph at lines 322--323
  []
 
 [6] [7]
-<images/Code_Verification/run_00_00/residual/results/Inlet_h.png, id=196, 578.1
+<images/Code_Verification/run_00_00/residual/results/Inlet_h.png, id=188, 578.1
 6pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Inlet_h.png Graphic f
 ile (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Inlet_h.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
-let_h.png used on input line 457.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+let_h.png used on input line 459.
+(pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
-<images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png, id=198, 5
+<images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png, id=190, 5
 78.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png Graph
 ic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
-let_m_dot.png used on input line 464.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+let_m_dot.png used on input line 466.
+(pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-<images/Code_Verification/run_00_00/original/results/Convergence_Plot.png, id=1
-99, 578.16pt x 433.62pt>
+Underfull \vbox (badness 1622) has occurred while \output is active []
+
+ [8 <./images/Code_Verification/run_00_00/residual/results/Inlet_h.png>]
+<images/Code_Verification/run_00_00/original/results/Convergence_Plot.png, id=2
+02, 578.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/original/results/Convergence_Plot.png 
 Graphic file (type png)
 
 <use images/Code_Verification/run_00_00/original/results/Convergence_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/original/results/Co
-nvergence_Plot.png used on input line 493.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+nvergence_Plot.png used on input line 500.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 <images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png, id=2
-00, 578.16pt x 433.62pt>
+03, 578.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png 
 Graphic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/Co
-nvergence_Plot.png used on input line 500.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+nvergence_Plot.png used on input line 507.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-<images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png, id=201
+<images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png, id=205
 , 578.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png Gr
 aphic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/Re
-siduals_Plot.png used on input line 507.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+siduals_Plot.png used on input line 518.
+(pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <./images/Code_Verification/run_00_00/residual/results/Inlet_h.png>]
-
-LaTeX Warning: Text page 9 contains only floats.
-
 [9 <./images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png> <./i
-mages/Code_Verification/run_00_00/original/results/Convergence_Plot.png> <./ima
-ges/Code_Verification/run_00_00/residual/results/Convergence_Plot.png>]
-(build/cdances.bbl [10 <./images/Code_Verification/run_00_00/residual/results/R
-esiduals_Plot.png>]) 
+mages/Code_Verification/run_00_00/original/results/Convergence_Plot.png>]
+<images/Temporal_Study/Difference_m_dot.jpg, id=215, 1204.5pt x 602.25pt>
+File: images/Temporal_Study/Difference_m_dot.jpg Graphic file (type jpg)
+
+<use images/Temporal_Study/Difference_m_dot.jpg>
+Package pdftex.def Info: images/Temporal_Study/Difference_m_dot.jpg used on inp
+ut line 557.
+(pdftex.def)             Requested size: 258.36667pt x 129.17796pt.
+ [10 <./images/Code_Verification/run_00_00/residual/results/Convergence_Plot.pn
+g> <./images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png>]
+<images/Temporal_Study/Difference_h.jpg, id=224, 1204.5pt x 602.25pt>
+File: images/Temporal_Study/Difference_h.jpg Graphic file (type jpg)
+
+<use images/Temporal_Study/Difference_h.jpg>
+Package pdftex.def Info: images/Temporal_Study/Difference_h.jpg used on input l
+ine 564.
+(pdftex.def)             Requested size: 258.36667pt x 129.17796pt.
+
+<images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=225, 1204.5pt x 602.25
+pt>
+File: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jp
+g)
+ <use images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>
+Package pdftex.def Info: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg us
+ed on input line 575.
+(pdftex.def)             Requested size: 258.36667pt x 129.17796pt.
+
+(build/cdances.bbl [11 <./images/Temporal_Study/Difference_m_dot.jpg> <./images
+/Temporal_Study/Difference_h.jpg> <./images/Temporal_Study/Order_Of_Accuracy_Su
+mmary.jpg>]) 
 AED: lastpage setting LastPage
-[11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 576.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 576.
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 620.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 620.
  (build/cdances.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 576.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 576.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 620.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 620.
 Package rerunfilecheck Info: File `cdances.out' has not changed.
 (rerunfilecheck)             Checksum: 7F985C80FEBEDAB6C70E0BA8CC761824;503.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 576.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 620.
  ) 
 Here is how much of TeX's memory you used:
- 18082 strings out of 494985
- 343167 string characters out of 6180356
- 495600 words of memory out of 5000000
- 20830 multiletter control sequences out of 15000+600000
- 39187 words of font info for 128 fonts, out of 8000000 for 9000
+ 18097 strings out of 494985
+ 343771 string characters out of 6180356
+ 495785 words of memory out of 5000000
+ 20836 multiletter control sequences out of 15000+600000
+ 39317 words of font info for 130 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 43i,14n,45p,10439b,789s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,14n,45p,10439b,785s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
@@ -1317,10 +1346,10 @@ m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on build/cdances.pdf (11 pages, 516164 bytes).
+Output written on build/cdances.pdf (12 pages, 782014 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
- 248 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
- 26804 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 293 PDF objects out of 1000 (max. 8388607)
+ 250 compressed objects within 3 object streams
+ 69 named destinations out of 1000 (max. 500000)
+ 26803 words of extra memory for PDF output out of 29859 (max. 10000000)
 

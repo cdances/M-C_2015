@@ -404,6 +404,8 @@ Channel Area	&	$A_{ch}$	&	4.94E-005	&	$m^{2}$	\\ \hline
 Wetted Perimeter	&	$P_{w}$	&	1.49E-002	&	$m$	\\ \hline
 Velocity	&	$V_{o}$	&	7.35	&	$\frac{m}{s}$	\\ \hline
 Pressure	&	$P_{o}$	&	155.00	&	bar	\\ \hline
+Temperature 1	&	$T_{1}$	&	289.500	&	$^{\circ}$C	\\ \hline
+Temperature 2	&	$T_{2}$	&	327.00	&	$^{\circ}$C	\\ \hline
 Enthalpy 1	&	$h_{1}$	&	1281.55	&	$\frac{kJ}{kg}$	\\ \hline
 Enthalpy 2	&	$h_{2}$	&	1497.21	&	$\frac{kJ}{kg}$	\\ \hline
 Mass Flow Rate 1	&	$\dot{m}_{1}$	&	0.2713	&	$\frac{kg}{s}$	\\ \hline
@@ -486,52 +488,94 @@ density is calculated at the inlet that causes the velocity to be non-consatnt.
 The current version of COBRA-TF uses global code convergance criteria across the
 inlet and the entire domain. These approximate the residauls for the equation.
 For this problem, the solid energy storate is zero since there are not any heat
-structures present. 
+structures present. The original convergence criteria in COBRA-TF is shown in
+figure \ref{fig:Code_Convergance:Original} and for the residual version in
+figure \ref{fig:Code_Convergance:Original}. Note how the residual version has
+zero mass storage and fluid energy terms. The other terms are balances across
+the inlet and outlet of the problem and follow the sinusodial nature of the
+transient. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
+	\includegraphics[width=0.60\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
 	\caption{Code Convergence Criteria for the original version of COBRA-TF}
 	\label{fig:Code_Convergance:Original}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Convergence_Plot}
+	\includegraphics[width=0.60\textwidth]{images/Code_Verification/run_00_00/residual/results/Convergence_Plot}
 	\caption{Code Convergence Criteria for the residual version of COBRA-TF}
 	\label{fig:Code_Convergance:Residual}
 \end{figure}
 
+The residual formulation prints out the sumnation of the residuals functions
+across the domain to an output file for eac time step and can be seen in
+figure\ref{fig:Residuals_Plot}.
+
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
+	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
 	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
 	\label{fig:Residuals_Plot}
 \end{figure}
 
-\subsection{Comparison to Known Solution}
+\subsection{Error Quantification}
 
-\section{Temporal Verification}
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200}
+%	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+%	\label{fig:Residuals_Plot}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200}
+%	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+%	\label{fig:Residuals_Plot}
+%\end{figure}
 
-Both COBRA-TF and residual version semi-implicit method, residual fully implicit
-method with and without linear EOS.
+\section{Richardson Extrapolation}
 
-\subsection{Problem Setup}
+Richardson extrapolation is \ldots
 
-This compares the exact solution to the COBRA-TF Solution Methods
+It is used to compare that the error converges to zero with the correct order of
+accuracy in space and time. The order of accuracy needs to match the modified
+equation analysis.
 
-\subsubsection{Error Quantification}
+These are the equations used \ldots
 
-Show qualatative plot and demonstrate that the error is quantified 
-for a single time step and space discretization
-
-A figure and a table of l1 normalized error
 
 \subsection{Convergence of Error}
+
+Talk about how the error for all of the variables approaches zero, with a linear
+trend line.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Difference_m_dot}
+	\caption{Difference Between Succssessive Temporal Refinements}
+	\label{fig:Temporal:Diff_m_dot}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Difference_h}
+	\caption{Difference Between Succssessive Temporal Refinements}
+	\label{fig:Temporal:Diff_m_dot}
+\end{figure}
 
 Show how error behaves for different time and space sizes
 
 \subsection{Order of Accuracy}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\caption{Temporal Order of Accuracy}
+	\label{fig:Temporal:OOA}
+\end{figure}
 
 %\section{Parameter Study}
 %
