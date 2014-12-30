@@ -53,16 +53,14 @@ Abstract \ldots
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\tableofcontents
-\clearpage
-
-\listoffigures
-\clearpage
+%\tableofcontents
+%\clearpage
+%
+%\listoffigures
+%\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-
-\cite{Roy:2005:RCS:1082892.1082899}
 
 For the past several decades, the primary focus in nuclear engineering within
 the United States has been focused on light water reactors (LWR). Commercially,
@@ -82,7 +80,6 @@ partially updated to newer versions of Fortran.
 
 \section{COBRA-TF}
 
-\subsection{Background}
 The finite volume structure in COBRA-TF in figure \ref{fig:CTF-Cells} is for a
 one-dimmensional channel in the axial direction with n number of cells. The
 first and last cells at 0 and n + 1 are ghost cells and act as the boundary
@@ -103,7 +100,256 @@ dimmensions.
 
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
+The thermal hydraulics of a LWR core is an important part of nuclear
+reactor desigin. COBRA-TF solves 8 conservation equations for liquid,
+entrained droplet, and vapor phases of water boiling within the rod structure
+of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
+equations analytically reduce into a pressure matrix in a semi-implicit
+method with rod temperatures solved for explicitly. This work involves
+representing the 1-D single phase liquid conservation equations and calculated 
+variables in a residual formulation. The full jacobian matrix can then be
+built numerically, and  can then either be reduced to a pressure matrix or
+solved directly.
+
+The single phase Euler partial differential equations for mass
+\eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
+\eqref{eq:pde_energy} corresond to the unknown variables density $\rho$,
+velocity $u$, pressure $P$, and enthalpy $h$. The first terms in each of the
+equations are temporal terms. The rest of the terms are steady state spatial
+terms. 
+    
+    \begin{equation}
+    	\label{eq:pde_mass}
+    	\frac{ \partial \rho}{\partial t} + \bigtriangledown \rho u = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:pde_momentum}
+    	\frac{ \partial \rho u}{\partial t} + \bigtriangledown \rho u^{2} +
+    	\bigtriangledown P - \rho g  = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:pde_energy}
+    	\frac{ \partial \rho h}{\partial t} -
+    	\frac{ \partial  P}{\partial t} + 
+    	\bigtriangledown ( \rho  u h )
+    	= 0
+    \end{equation}
+    
+\subsection{Modified Equation Analysis}
+    
+    For this isokinetic problem, the original mass balance equation can be re-written to 
+    look like equation \ref{CAD:eq:isokinetic_start}. Using upwinding, the finite difference
+    can be written to look like equation \ref{CAD:eq:mass_isok_fd}. A second order Taylor 
+    series approximation can be used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown 
+    in equations \ref{CAD:eq:rho_taylor_series_time} and \ref{CAD:eq:rho_taylor_series_space} 
+    respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
+    not taken into account for this approximation. The Taylor series
+    approximations can then be substituted into \ref{CAD:eq:mass_isok_fd} to yield
+    \ref{CAD:eq:MEA_start}. This is the beginning of the modified equation analysis.
+    The goal will be to isolate the original PDE and define the truncation error.
+    
+    \begin{equation}
+    	\label{CAD:eq:isokinetic_start}
+    	\frac{\partial \rho}{\partial t} + U_{0} \frac{\partial \rho}{\partial x} = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:mass_isok_fd}
+    	\frac{ \rho_{i}^{n+1} - \rho_{i}^{n} }{\Delta t} 
+    	+ U_{0} \frac{\rho_{i}^{n} - \rho_{i-1}^{n}}{\Delta x} = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:rho_taylor_series_time}
+    	\rho_{i}^{n+1} =  \rho_{i}^{n} + 
+    	\frac{\partial \rho}{\partial t} \Delta t +
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 + O(\Delta t^{3})
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:rho_taylor_series_space}
+    	\rho_{i-1}^{n} =  \rho_{i}^{n} - 
+    	\frac{\partial \rho}{\partial x} \Delta x +
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 + O(\Delta x^{3})
+    \end{equation}
+    
+    The lengthy equation \ref{CAD:eq:MEA_start} can be reduced to equation
+    \ref{CAD:eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
+    t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
+    can the be re-written into equation \ref{CAD:eq:MEA_p1}, with the original PDE
+    followed by the truncation terms. Notice how the terms on the right are
+    dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
+    on the second derivatives of density with respect to space and time.
+    
+    \begin{equation}
+    	\label{CAD:eq:MEA_start}
+    	\frac{ \left( \rho_{i}^{n} + \frac{\partial \rho}{\partial t} \Delta t +
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 \right)-\rho_{i}^{n} }{\Delta t} 
+    	+ U_{0} \frac{\rho_{i}^{n} - \left( \rho_{i}^{n} -  \frac{\partial \rho}{\partial x} \Delta x + 
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 \right)}{\Delta x} 
+    	+ O(\Delta x^{2},\Delta t^{2}) 
+    	= 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:MEA_p0}
+    	 \frac{\partial \rho}{\partial t}  + \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t +
+    	 U_{0} \left(   \frac{\partial \rho}{\partial x}  - \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x \right) 
+    	 + O(\Delta x^{2},\Delta t^{2}) 
+    	 = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:MEA_p1}
+    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} + 
+    	 \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t -
+    	   U_{0}  \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x  
+    	   + O(\Delta x^{2},\Delta t^{2}) = 0 
+    \end{equation} \linebreak
+    
+    Before we can procede, we need to take the derivative of the original PDE with respect
+    to space and time as shown in equations \ref{CAD:eq:mass_dt} and  \ref{CAD:eq:mass_dx} 
+    respectively. These two derivatives can substitute into each other using the common 
+    term $\frac{\partial^2 \rho}{\partial x \partial t}$. The second derivatives of density with 
+    respect to space and time are therefore related by the velocity squared as
+    shown by equation \ref{CAD:eq:mass_second_derivatives}.
+    
+    \begin{equation}
+    \label{CAD:eq:mass_dt}
+    	 \frac{\partial^2 \rho}{\partial t^2} + U_{0} \frac{\partial^2 \rho}{\partial x \partial t} = 0
+    \end{equation}
+    
+    \begin{equation}
+    \label{CAD:eq:mass_dx}
+    	 \frac{\partial^2 \rho}{\partial t \partial x} + U_{0} \frac{\partial^2 \rho}{\partial x^2} = 0
+    \end{equation}
+    
+    \begin{equation}
+    \label{CAD:eq:mass_second_derivatives}
+    	 \frac{\partial^2 \rho}{\partial t^2} =  U_{0}^2 \frac{\partial^2 \rho}{\partial x^2}
+    \end{equation} \linebreak
+    
+    This relationship can then be substituted back into equation \ref{CAD:eq:MEA_p1}, 
+    which can be reduced to equation \ref{CAD:eq:MEA_result} after igonoring the higher
+    order terms. The error depends on the CFL number, the axial spacing, and the
+    second order derivative of density with respect to space. This derivative is
+    what gives the error the characterisitcs of diffusion. When the CFL number is
+    less than one, the error term is negative and the diffusion is dampening. When
+    the CFL number is greater than one, the error term becomes positive, and the
+    accumulation of the error destabilizes the solution. 
+    
+    \begin{equation}
+    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
+    	  \frac{1}{2}  \left(  \Delta x U_{0} \frac{\partial^2 \rho}{\partial
+    	  x^2} -   U_{0}^2 \frac{\partial^2 \rho}{\partial x^2} \Delta t  \right) 
+    	   + O(\Delta x^{2},\Delta t^{2}) = 0
+    \end{equation}
+    
+    \begin{equation}
+    \label{CAD:eq:MEA_result}
+    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
+    	 \frac{\Delta x U_{0}}{2} \frac{\partial^2 \rho}{\partial x^2}  
+    	 \left(  1 - CFL  \right) 
+    	 + O(\Delta x^{2},\Delta t^{2})  = 0
+    \end{equation}
+    
+    Modified eqauation analysis can be applied to the energy balance equation
+    presented in equation \ref{CAD:eq:MEA_energy}. The energy equation is presented in a form where
+    the momentum equation was substituted in as zero and then divided through by
+    density. The result presented in equation \ref{CAD:eq:MEA_ene_result} is similar in
+    form to the result for the mass balance equation \ref{CAD:eq:MEA_result}.
+    
+    \begin{equation}
+    	\label{CAD:eq:MEA_energy}
+    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
+    	U_{0} \frac{\partial h}{\partial x} = 0
+    \end{equation}
+    
+    \begin{equation}
+    \label{CAD:eq:MEA_ene_result}
+    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
+    	U_{0} \frac{\partial h}{\partial x} - 
+    	\frac{\Delta x U_{0}}{2} \frac{\partial^2 h}{\partial x^2}
+    	\left( 1 - CFL \right)
+    	= 0
+    \end{equation}
+
 \subsection{Residual Formulation and Jacobian Construction}
+
+	A residual is simply the difference between the value at some future time
+    $n+1$ and the value at the current iteration $k$. This can be applied to
+    desired variables as shown in equations
+    \eqref{CAD:eq:residual_def:P}, \eqref{CAD:eq:residual_def:h},
+    \eqref{CAD:eq:residual_def:u}, and \eqref{CAD:eq:residual_def:rho}. Residuals can
+    also be applied to the conservation equations by substituting the definition
+    of the residual variables into the conservation equations. This will
+    effectively change any variables evaluated at $n+1$ to $k$. Each cell will
+    have three residual variables and three residual equations. For the entire
+    solution, we will then have a residual variable array $\delta X$, and a
+    residual function array $F(X)$ which defines a linear system as seen in 
+    equation \eqref{CAD:eq:linear_system}.
+        
+    \begin{equation}
+    	\label{CAD:eq:residual_def:P}
+    	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:residual_def:h}
+    	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:residual_def:u}
+    	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:residual_def:rho}
+    	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:linear_system}
+    	J \delta X = - F(X)
+    \end{equation}
+    
+    The Jacobian matrix is defined in equation \eqref{CAD:eq:jac_def} as the derivative
+    of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
+    The derivative can be calculated numerically as shown by equation
+    \eqref{CAD:eq:jac_numerical} where $\epsilon$ is a small numerical value. For
+    COBRA-TF the equations are linear, and this numerical approximation
+    of the Jacobian matrix is exact. This should produce the same jacobian
+    matrix that COBRA-TF currently generates analytically. 
+    
+    \begin{equation}
+    	\label{CAD:eq:jac_def}
+    	J_{i,j}=\frac{ \partial F_{j}(X)}{\partial X_{i}}
+    \end{equation}
+    
+    \begin{equation}
+    	\label{CAD:eq:jac_numerical}
+    	J_{i,j}  \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
+    \end{equation}
+    
+	To build the jacobian matrix, an object oriented class was created that
+    contains three arrays. An array that points to the residual functions, an
+    array that points to the position within a target variable arrray, and an
+    array that has the index that the function is to be evaluated at. These
+    lists can be appended to in any order, but have to be appended all at the
+    same time so that variables and functions must correspond with each other.
+    Then to construct the jacobian matrix, the residual function and residual
+    variable arrays can each be looped over to numerically build the jacobian
+    matrix as seen in figure \ref{CAD:fig:Jacobian_Setup}. 
+    
+    \begin{figure}[!h]
+    	\centering
+    	\includegraphics[width=0.45\textwidth]{images/Jacobian_Setup}
+    	\caption{Strucutre of the jacobian matrix for single phase liquid}
+    	\label{CAD:fig:Jacobian_Setup}
+    \end{figure}
 
 \section{Code Verification}
 
@@ -150,7 +396,7 @@ Round off error, iterative convergence error.
 
 Discretization error?? (Check with)
 
-\section{Sine Wave Advection Problem}
+\section{Isokinetic Sine Wave Advection Problem}
 
 Needs a figure and a table of parameters. Geometry and reference conditions
 should be for a PWR.
@@ -224,24 +470,24 @@ Show how error behaves for different time and space sizes
 
 \subsection{Order of Accuracy}
 
-\section{Parameter Study}
-
-Tables and figures of varying the results.
-
-\subsection{Changes in $\Delta$T}
-
-This changes the amplitude of the displacement
-
-\subsection{Changes in Frequencey}
-
-This changes the frequencey of the displacement
-
-\subsection{Changes in Mass Flow Rate}
-
-\section{Computational Time}
-
-The computational time of the two methods for different computational sizes.
-Compare the semi-implicit and fully implicit methods at 0.5 , 1.0, and 2.0 CFL. 
+%\section{Parameter Study}
+%
+%Tables and figures of varying the results.
+%
+%\subsection{Changes in $\Delta$T}
+%
+%This changes the amplitude of the displacement
+%
+%\subsection{Changes in Frequencey}
+%
+%This changes the frequencey of the displacement
+%
+%\subsection{Changes in Mass Flow Rate}
+%
+%\section{Computational Time}
+%
+%The computational time of the two methods for different computational sizes.
+%Compare the semi-implicit and fully implicit methods at 0.5 , 1.0, and 2.0 CFL. 
 
 \section{Conclusions}
 
