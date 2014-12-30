@@ -384,6 +384,29 @@ check for convegence and order of accruacy of the error in space and time.
 Needs a figure and a table of parameters. Geometry and reference conditions
 should be for a PWR.
 
+\begin{table}[h]
+\center
+\caption{Problem Parameters}
+\label{table:prameters}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Parameter	&	Symbol	&	Value	&	Unit	\\ \hline
+Axial Height	&	$H$	&	3.6586	&	$m$	\\ \hline
+Channel Area	&	$A_{ch}$	&	4.94E-005	&	$m^{2}$	\\ \hline
+Wetted Perimeter	&	$P_{w}$	&	1.49E-002	&	$m$	\\ \hline
+Velocity	&	$V_{o}$	&	7.35	&	$\frac{m}{s}$	\\ \hline
+Pressure	&	$P_{o}$	&	155.00	&	bar	\\ \hline
+Temperature 1	&	$T_{1}$	&	289.500	&	$^{\circ}$C	\\ \hline
+Temperature 2	&	$T_{2}$	&	327.00	&	$^{\circ}$C	\\ \hline
+Enthalpy 1	&	$h_{1}$	&	1281.55	&	$\frac{kJ}{kg}$	\\ \hline
+Enthalpy 2	&	$h_{2}$	&	1497.21	&	$\frac{kJ}{kg}$	\\ \hline
+Density 1	&	$\rho_{1}$	&	747.14	&	$\frac{kg}{m^{3}}$	\\ \hline
+Density 2	&	$\rho_{2}$	&	660.68	&	$\frac{kg}{m^{3}}$	\\ \hline
+Final Time	&	$t_{f}$	&	2.00	&	sec	\\ \hline
+Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
+\end{tabular}
+\end{table}
+
 The problem is to transiently vary the inlet enthalpy $h$ and inlet mass flow
 rate $\dot{m}$ using a smooth trigonometric function so as to keep velocity
 constant throughout the solution. Using a cosine, the analytical solution for a
@@ -396,7 +419,7 @@ value should just equal the initial value $Y_{1}$.
 \begin{equation}
 	Y(i,j) = \frac{1}{2} \left( 
 			(Y_{1}+Y_{2}) + (Y_{1}-Y_{2}) cos\left(
-				\frac{2 \pi}{P} \left( j*dt + \frac{i*dx}{V_{o}} \right)
+				\omega \left( j \Delta t + \frac{i \Delta x}{V_{o}} \right)
 				\right)
 			\right)
 \end{equation}
