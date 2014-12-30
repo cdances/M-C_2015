@@ -152,52 +152,52 @@ terms.
     
 \subsection{Modified Equation Analysis}
     
-    For this isokinetic problem, the original mass balance equation can be re-written to 
-    look like equation \ref{CAD:eq:isokinetic_start}. Using upwinding, the finite difference
-    can be written to look like equation \ref{CAD:eq:mass_isok_fd}. A second order Taylor 
+    The original mass balance equation can be re-written to 
+    look like equation \ref{eq:isokinetic_start}. Using upwinding, the finite difference
+    can be written to look like equation \ref{eq:mass_isok_fd}. A second order Taylor 
     series approximation can be used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown 
-    in equations \ref{CAD:eq:rho_taylor_series_time} and \ref{CAD:eq:rho_taylor_series_space} 
+    in equations \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space} 
     respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
     not taken into account for this approximation. The Taylor series
-    approximations can then be substituted into \ref{CAD:eq:mass_isok_fd} to yield
-    \ref{CAD:eq:MEA_start}. This is the beginning of the modified equation analysis.
+    approximations can then be substituted into \ref{eq:mass_isok_fd} to yield
+    \ref{eq:MEA_start}. This is the beginning of the modified equation analysis.
     The goal will be to isolate the original PDE and define the truncation error.
     
     \begin{equation}
-    	\label{CAD:eq:isokinetic_start}
+    	\label{eq:isokinetic_start}
     	\frac{\partial \rho}{\partial t} + U_{0} \frac{\partial \rho}{\partial x} = 0
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:mass_isok_fd}
+    	\label{eq:mass_isok_fd}
     	\frac{ \rho_{i}^{n+1} - \rho_{i}^{n} }{\Delta t} 
     	+ U_{0} \frac{\rho_{i}^{n} - \rho_{i-1}^{n}}{\Delta x} = 0
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:rho_taylor_series_time}
+    	\label{eq:rho_taylor_series_time}
     	\rho_{i}^{n+1} =  \rho_{i}^{n} + 
     	\frac{\partial \rho}{\partial t} \Delta t +
     	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 + O(\Delta t^{3})
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:rho_taylor_series_space}
+    	\label{eq:rho_taylor_series_space}
     	\rho_{i-1}^{n} =  \rho_{i}^{n} - 
     	\frac{\partial \rho}{\partial x} \Delta x +
     	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 + O(\Delta x^{3})
     \end{equation}
     
-    The lengthy equation \ref{CAD:eq:MEA_start} can be reduced to equation
-    \ref{CAD:eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
+    The lengthy equation \ref{eq:MEA_start} can be reduced to equation
+    \ref{eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
     t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
-    can the be re-written into equation \ref{CAD:eq:MEA_p1}, with the original PDE
+    can the be re-written into equation \ref{eq:MEA_p1}, with the original PDE
     followed by the truncation terms. Notice how the terms on the right are
     dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
     on the second derivatives of density with respect to space and time.
     
     \begin{equation}
-    	\label{CAD:eq:MEA_start}
+    	\label{eq:MEA_start}
     	\frac{ \left( \rho_{i}^{n} + \frac{\partial \rho}{\partial t} \Delta t +
     	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 \right)-\rho_{i}^{n} }{\Delta t} 
     	+ U_{0} \frac{\rho_{i}^{n} - \left( \rho_{i}^{n} -  \frac{\partial \rho}{\partial x} \Delta x + 
@@ -207,7 +207,7 @@ terms.
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:MEA_p0}
+    	\label{eq:MEA_p0}
     	 \frac{\partial \rho}{\partial t}  + \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t +
     	 U_{0} \left(   \frac{\partial \rho}{\partial x}  - \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x \right) 
     	 + O(\Delta x^{2},\Delta t^{2}) 
@@ -215,7 +215,7 @@ terms.
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:MEA_p1}
+    	\label{eq:MEA_p1}
     	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} + 
     	 \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t -
     	   U_{0}  \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x  
@@ -223,29 +223,29 @@ terms.
     \end{equation} \linebreak
     
     Before we can procede, we need to take the derivative of the original PDE with respect
-    to space and time as shown in equations \ref{CAD:eq:mass_dt} and  \ref{CAD:eq:mass_dx} 
+    to space and time as shown in equations \ref{eq:mass_dt} and  \ref{eq:mass_dx} 
     respectively. These two derivatives can substitute into each other using the common 
     term $\frac{\partial^2 \rho}{\partial x \partial t}$. The second derivatives of density with 
     respect to space and time are therefore related by the velocity squared as
-    shown by equation \ref{CAD:eq:mass_second_derivatives}.
+    shown by equation \ref{eq:mass_second_derivatives}.
     
     \begin{equation}
-    \label{CAD:eq:mass_dt}
+    \label{eq:mass_dt}
     	 \frac{\partial^2 \rho}{\partial t^2} + U_{0} \frac{\partial^2 \rho}{\partial x \partial t} = 0
     \end{equation}
     
     \begin{equation}
-    \label{CAD:eq:mass_dx}
+    \label{eq:mass_dx}
     	 \frac{\partial^2 \rho}{\partial t \partial x} + U_{0} \frac{\partial^2 \rho}{\partial x^2} = 0
     \end{equation}
     
     \begin{equation}
-    \label{CAD:eq:mass_second_derivatives}
+    \label{eq:mass_second_derivatives}
     	 \frac{\partial^2 \rho}{\partial t^2} =  U_{0}^2 \frac{\partial^2 \rho}{\partial x^2}
     \end{equation} \linebreak
     
-    This relationship can then be substituted back into equation \ref{CAD:eq:MEA_p1}, 
-    which can be reduced to equation \ref{CAD:eq:MEA_result} after igonoring the higher
+    This relationship can then be substituted back into equation \ref{eq:MEA_p1}, 
+    which can be reduced to equation \ref{eq:MEA_result} after igonoring the higher
     order terms. The error depends on the CFL number, the axial spacing, and the
     second order derivative of density with respect to space. This derivative is
     what gives the error the characterisitcs of diffusion. When the CFL number is
@@ -261,7 +261,7 @@ terms.
     \end{equation}
     
     \begin{equation}
-    \label{CAD:eq:MEA_result}
+    \label{eq:MEA_result}
     	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
     	 \frac{\Delta x U_{0}}{2} \frac{\partial^2 \rho}{\partial x^2}  
     	 \left(  1 - CFL  \right) 
@@ -269,19 +269,19 @@ terms.
     \end{equation}
     
     Modified eqauation analysis can be applied to the energy balance equation
-    presented in equation \ref{CAD:eq:MEA_energy}. The energy equation is presented in a form where
+    presented in equation \ref{eq:MEA_energy}. The energy equation is presented in a form where
     the momentum equation was substituted in as zero and then divided through by
-    density. The result presented in equation \ref{CAD:eq:MEA_ene_result} is similar in
-    form to the result for the mass balance equation \ref{CAD:eq:MEA_result}.
+    density. The result presented in equation \ref{eq:MEA_ene_result} is similar in
+    form to the result for the mass balance equation \ref{eq:MEA_result}.
     
     \begin{equation}
-    	\label{CAD:eq:MEA_energy}
+    	\label{eq:MEA_energy}
     	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
     	U_{0} \frac{\partial h}{\partial x} = 0
     \end{equation}
     
     \begin{equation}
-    \label{CAD:eq:MEA_ene_result}
+    \label{eq:MEA_ene_result}
     	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
     	U_{0} \frac{\partial h}{\partial x} - 
     	\frac{\Delta x U_{0}}{2} \frac{\partial^2 h}{\partial x^2}
@@ -294,56 +294,56 @@ terms.
 	A residual is simply the difference between the value at some future time
     $n+1$ and the value at the current iteration $k$. This can be applied to
     desired variables as shown in equations
-    \eqref{CAD:eq:residual_def:P}, \eqref{CAD:eq:residual_def:h},
-    \eqref{CAD:eq:residual_def:u}, and \eqref{CAD:eq:residual_def:rho}. Residuals can
+    \eqref{eq:residual_def:P}, \eqref{eq:residual_def:h},
+    \eqref{eq:residual_def:u}, and \eqref{eq:residual_def:rho}. Residuals can
     also be applied to the conservation equations by substituting the definition
     of the residual variables into the conservation equations. This will
     effectively change any variables evaluated at $n+1$ to $k$. Each cell will
     have three residual variables and three residual equations. For the entire
     solution, we will then have a residual variable array $\delta X$, and a
     residual function array $F(X)$ which defines a linear system as seen in 
-    equation \eqref{CAD:eq:linear_system}.
+    equation \eqref{eq:linear_system}.
         
     \begin{equation}
-    	\label{CAD:eq:residual_def:P}
+    	\label{eq:residual_def:P}
     	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:residual_def:h}
+    	\label{eq:residual_def:h}
     	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:residual_def:u}
+    	\label{eq:residual_def:u}
     	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:residual_def:rho}
+    	\label{eq:residual_def:rho}
     	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:linear_system}
+    	\label{eq:linear_system}
     	J \delta X = - F(X)
     \end{equation}
     
-    The Jacobian matrix is defined in equation \eqref{CAD:eq:jac_def} as the derivative
+    The Jacobian matrix is defined in equation \eqref{eq:jac_def} as the derivative
     of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
     The derivative can be calculated numerically as shown by equation
-    \eqref{CAD:eq:jac_numerical} where $\epsilon$ is a small numerical value. For
+    \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
     COBRA-TF the equations are linear, and this numerical approximation
     of the Jacobian matrix is exact. This should produce the same jacobian
     matrix that COBRA-TF currently generates analytically. 
     
     \begin{equation}
-    	\label{CAD:eq:jac_def}
+    	\label{eq:jac_def}
     	J_{i,j}=\frac{ \partial F_{j}(X)}{\partial X_{i}}
     \end{equation}
     
     \begin{equation}
-    	\label{CAD:eq:jac_numerical}
+    	\label{eq:jac_numerical}
     	J_{i,j}  \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
     \end{equation}
     
@@ -355,13 +355,13 @@ terms.
     same time so that variables and functions must correspond with each other.
     Then to construct the jacobian matrix, the residual function and residual
     variable arrays can each be looped over to numerically build the jacobian
-    matrix as seen in figure \ref{CAD:fig:Jacobian_Setup}. 
+    matrix as seen in figure \ref{fig:Jacobian_Setup}. 
     
     \begin{figure}[!h]
     	\centering
     	\includegraphics[width=0.45\textwidth]{images/Jacobian_Setup}
     	\caption{Strucutre of the jacobian matrix for single phase liquid}
-    	\label{CAD:fig:Jacobian_Setup}
+    	\label{fig:Jacobian_Setup}
     \end{figure}
 
 \section{Code Verification}
@@ -419,16 +419,39 @@ values in the figure. This difference is more notable for smaller mesh sizes.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.675\textwidth]{images/Inlet_h}
+	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Inlet_h}
 	\caption{Enthalpy near the inlet and the analytical solution}
 	\label{fig:Inlet_h}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.675\textwidth]{images/Inlet_m_dot}
+	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Inlet_m_dot}
 	\caption{Mass Flow rate near the inlet and the analytical solution}
 	\label{fig:Inlet_m_dot}
+\end{figure}
+
+\subsection{Code Convergence}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
+	\caption{Code Convergence Criteria for the original version of COBRA-TF}
+	\label{fig:Code_Convergance:Original}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Convergence_Plot}
+	\caption{Code Convergence Criteria for the residual version of COBRA-TF}
+	\label{fig:Code_Convergance:Residual}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.500\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
+	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+	\label{fig:Residuals_Plot}
 \end{figure}
 
 \section{Temporal Verification}
