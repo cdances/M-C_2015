@@ -359,8 +359,10 @@ grid spacers. The velocity and pressure are assumed to be constant, but small
 fluctuations may occur due to coding mistakes or nuermical noise. The channel
 geometry and operating conditions are taken to be approximate a standard PWR.
 The inlet of the channel has a constant velocity with a fluctuating enthalpy
-that corresponds to a 37.5 $^\circ$C temperature change. The time it takes for
-the fluid at the inlet to reach the outlet is roughly 
+that corresponds to a 37.5 $^\circ$C temperature change.  The length
+of the transient was defined to be quadrouple the time needed for the liquid at
+the inlet to advect to the outlet.The frequencey of the sine wave was defined so
+generate a full period of a spatial wave across the height of the channel. 
 
 \begin{table}[h]
 \center
@@ -472,16 +474,16 @@ information at every position, variable, and equation.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
+	\includegraphics[width=1.00\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
 	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
 	\label{fig:Residuals_Plot}
 \end{figure}
 
-%\subsection{Error Quantification}
+\subsection{Error Quantification}
 
 %\begin{figure}[!h]
 %	\centering
-%	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200}
+%	\includegraphics[width=1.00\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200.png}
 %	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
 %	\label{fig:Residuals_Plot}
 %\end{figure}
@@ -520,7 +522,14 @@ trend line.
 	\centering
 	\includegraphics[width=0.80\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
-	\label{fig:Temporal:Diff_m_dot}
+	\label{fig:Temporal:Diff_h}
+\end{figure} 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.80\textwidth]{images/Spatial_Study/Difference_h}
+	\caption{Difference Between Succssessive Temporal Refinements}
+	\label{fig:Spatial:Diff_h}
 \end{figure} 
 
 Show how error behaves for different time and space sizes
