@@ -66,13 +66,13 @@ For the past several decades, the primary focus in nuclear engineering within
 the United States has been focused on light water reactors (LWR). Commercially,
 all nuclear reactors are either boiling water reactors (BWR) or pressurized
 water reactors (PWR). Correct computation of the thermal hydraulics within the
-reactor core leads to effi- cient design and accuracy in the safety analysis. A
+reactor core leads to efficient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics with in the reactor core
 is COBRA-TF. This FORTRAN based code solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases in 3-D dimmensions \cite{CTF_Theory}. A 1-D
 residual formulation of the code has been created. This paper outlines an
 intitial verification of the original verion of code as well as the residual
-version of the code. The verification problem is a single pahes 1-D channel with
+version of the code. The verification problem is a single phase 1-D channel with
 transient inlet density and mass flow rate. The problem will undergo a
 Richardson's extrapolation in the temporal and spatial domains to verify the
 convergence and order of accuracy of the error. The study of the order of
@@ -86,11 +86,13 @@ reactor desigin. COBRA-TF solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases of water boiling within the rod structure
 of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
 equations analytically reduce into a pressure matrix in a semi-implicit
-method with rod temperatures solved for explicitly. This work involves
-representing the 1-D single phase liquid conservation equations and calculated 
-variables in a residual formulation. This residual formulation should allow for
-easier and more in depth verification analysis. This paper details the intitial
-comparison of the residual formulation to the original code.
+method with rod temperatures solved for explicitly. The residual formulation of
+the code currently solves the 1-D single phase liquid conservation equations and
+calculated variables in a residual formulation. While it has the ability to
+solve the code semi-implicitly or implicitly, only the semi-implicit
+solution method is considered in this paper. This residual formulation should
+allow for easier and more in depth verification  analysis. This paper details
+the intitial comparison of the residual  formulation to the original code.
 
 \subsection{Software Quality Assurance}
 
@@ -214,7 +216,6 @@ should be 1.
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-
 The verication problem is defined as a single horizontal channel problem the
 base parameters listed in table \ref{table:parameters}. The problem will have a
 fixed channel area and perimeter across the entire height of the channel with no
@@ -308,7 +309,9 @@ density is calculated at the inlet that causes the velocity to be non-consatnt.
 %as shown in figure \ref{fig:Inlet_vel}.
  This is considered small for this problem and should not greatly affect the
  order of accuracy. The residual formulation was coded in such a way as to avoid
- this problem and has considerably less fluctation in the inlet velocity.
+ this problem and has considerably less fluctation in the inlet velocity. The
+ hdf5 output files allow for a high level of precision of the code, reducing
+ round off error in the output. 
 
 \subsection{Code Convergence}
 
@@ -504,8 +507,9 @@ information at every position, variable, and equation.
 The richardson extrapolation was performed by  refining the spatial and temporal
 step sizes by a factor of 2 for a set number of times. The spatial and temporal
 studies are refined seperately in their own study in order to isolate the
-spatial and temporal affects on the the solution. 
-
+spatial and temporal affects on the the solution. The generation of the inputs,
+running of the codes, and analysis of the output were automated with a python
+script in order to reduce user input errors and increase repeatability.
 
 \subsection{Convergence of Error}
 
@@ -536,9 +540,10 @@ reduced, the numerical error approaches zero.
 
 \subsection{Order of Accuracy}
 
-Each study generates at least 3 points $f_{1}$,$f_{2}$,$f_{3}$ with a constant
-refinement factor $R$ of 2. The order of accuracy $p$ between 3 points is given
-by equation \eqref{eq:OOA}. 
+The order of accuracy for this verification problem is first order as shown by
+the modified equation analysis. This can be considred to be the exponent on
+the power fits as seen in figures \ref{fig:Temporal:Diff_h} study
+generates at 3 conse points $f_{1}$,$f_{2}$,$f_{3}$ with a constant refinement factor $R$ of 2. The order of accuracy $p$ between 3 points is given by equation \eqref{eq:OOA}.
 
 \begin{equation}
 	\label{eq:OOA}
