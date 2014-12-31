@@ -69,14 +69,15 @@ water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to effi- cient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics with in the reactor core
 is COBRA-TF. This FORTRAN based code solves 8 conservation equations for liquid,
-entrained droplet, and vapor phases in 3-D dimmensions \cite{CTF_Theory}. The
-conservation equations analytically reduce into a pressure matrix in a 
-semi-implicit  method with rod temperatures solved for explicitly. Because the 
-physics are integrated into the numerical solution, the equations  must be
-linear and the solution method semi-implicit. With a residual formulation,
-greater flexibility and control over the numerical solution is possible.
-COBRA-TF was originally written in FORTRAN 77, but over the years has been
-partially updated to newer versions of Fortran.
+entrained droplet, and vapor phases in 3-D dimmensions \cite{CTF_Theory}. A 1-D
+residual formulation of the code has been created. This paper outlines an
+intitial verification of the original verion of code as well as the residual
+version of the code. The verification problem is a single pahes 1-D channel with
+transient inlet density and mass flow rate. The problem will undergo a
+Richardson's extrapolation in the temporal and spatial domains to verify the
+convergence and order of accuracy of the error. The study of the order of
+accuracy is considered one of the more rigourous verification criteria
+\cite{VV_review}.
 
 \section{COBRA-TF}
 
@@ -94,7 +95,7 @@ comparison of the residual formulation to the original code.
 \subsection{Software Quality Assurance}
 
 Software quality assurance is a set of tools and procedures that helps
-ensure that the software is reliable. COBRA-TF is managed by Github Repository
+ensure that the software is reliable. COBRA-TF is managed by Github repository
 setup and maintained by CASL. An exensive test matrix is run before each major
 push to ensure that the code meets the specificed requirements. The test matrix
 consists of unit tests, code coverage runs, validation problems, and validation
@@ -149,50 +150,47 @@ terms.
     	\bigtriangledown ( \rho  u h )
     	= 0
     \end{equation}
-    
-
 
 \subsection{Residual Formulation and Jacobian Construction}
 
 	A residual is simply the difference between the value at some future time
     $n+1$ and the value at the current iteration $k$. This can be applied to
-    desired variables as shown in equations
-    \eqref{eq:residual_def:P}, \eqref{eq:residual_def:h},
-    \eqref{eq:residual_def:u}, and \eqref{eq:residual_def:rho}. Residuals can
-    also be applied to the conservation equations by substituting the definition
-    of the residual variables into the conservation equations. This will
-    effectively change any variables evaluated at $n+1$ to $k$. Each cell will
-    have three residual variables and three residual equations. For the entire
-    solution, we will then have a residual variable array $\delta X$, and a
-    residual function array $F(X)$ which defines a linear system as seen in 
-    equation \eqref{eq:linear_system}.
+    desired variables and equations. For example, the residual for density,
+    $\delta \rho_{i}$, is difference between iterate levels
+    $n+1$ and $k$, $\rho^{n+1}_{i} - \rho^{k}_{i}$. The residuals for the
+    equations are determined by susbsituting the residuals into the discretized
+    equations, which should effectively change all $n+1$ into $k$. Each cell
+    will have three residual variables and three residual equations. For the
+    entire solution, we will then have a residual variable array $\delta X$, and
+    a residual function array $F(X)$ which defines a linear system $J \delta X =
+    - F(X)$.
         
-    \begin{equation}
-    	\label{eq:residual_def:P}
-    	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
-    \end{equation}
+%    \begin{equation}
+%    	\label{eq:residual_def:P}
+%    	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
+%    \end{equation}
+%    
+%    \begin{equation}
+%    	\label{eq:residual_def:h}
+%    	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
+%    \end{equation}
+%    
+%    \begin{equation}
+%    	\label{eq:residual_def:u}
+%    	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
+%    \end{equation}
+%    
+%    \begin{equation}
+%    	\label{eq:residual_def:rho}
+%    	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
+%    \end{equation}
+%   
+%   \begin{equation}
+%   	\label{eq:linear_system}
+%   	J \delta X = - F(X)
+%   \end{equation}
     
-    \begin{equation}
-    	\label{eq:residual_def:h}
-    	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:residual_def:u}
-    	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:residual_def:rho}
-    	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:linear_system}
-    	J \delta X = - F(X)
-    \end{equation}
-    
-    The Jacobian matrix is defined in equation \eqref{eq:jac_def} as the derivative
+    The Jacobian matrix is defined as the derivative
     of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
     The derivative can be calculated numerically as shown by equation
     \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
@@ -201,13 +199,9 @@ terms.
     matrix that COBRA-TF currently generates analytically. 
     
     \begin{equation}
-    	\label{eq:jac_def}
-    	J_{i,j}=\frac{ \partial F_{j}(X)}{\partial X_{i}}
-    \end{equation}
-    
-    \begin{equation}
     	\label{eq:jac_numerical}
-    	J_{i,j}  \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
+    	J_{i,j}=\frac{ \partial F_{j}(X)}{\partial X_{i}}
+    	      \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
     \end{equation}
     
 	To build the jacobian matrix, an object oriented class was created that
@@ -572,7 +566,7 @@ Show how error behaves for different time and space sizes
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.75\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}

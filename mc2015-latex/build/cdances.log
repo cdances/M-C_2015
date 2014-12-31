@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  30 DEC 2014 18:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  30 DEC 2014 19:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1179,162 +1179,171 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 ] [2
 
 ]
-<images/CTF-Cells.jpg, id=88, 551.05875pt x 1023.825pt>
+<images/CTF-Cells.jpg, id=90, 551.05875pt x 1023.825pt>
 File: images/CTF-Cells.jpg Graphic file (type jpg)
 
 <use images/CTF-Cells.jpg>
-Package pdftex.def Info: images/CTF-Cells.jpg used on input line 122.
+Package pdftex.def Info: images/CTF-Cells.jpg used on input line 123.
 (pdftex.def)             Requested size: 93.94955pt x 174.54785pt.
  [3 <./images/CTF-Cells.jpg>]
-<images/Jacobian_Setup.jpg, id=117, 421.575pt x 399.4925pt>
+<images/Jacobian_Setup.jpg, id=109, 421.575pt x 399.4925pt>
 File: images/Jacobian_Setup.jpg Graphic file (type jpg)
 
 <use images/Jacobian_Setup.jpg>
-Package pdftex.def Info: images/Jacobian_Setup.jpg used on input line 225.
+Package pdftex.def Info: images/Jacobian_Setup.jpg used on input line 219.
 (pdftex.def)             Requested size: 140.92792pt x 133.54584pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4] [5 <./images/Jacobian_Setup.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
+ [4 <./images/Jacobian_Setup.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 294--295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
+Underfull \hbox (badness 10000) in paragraph at lines 294--295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--323
+Underfull \hbox (badness 10000) in paragraph at lines 316--317
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--323
+Underfull \hbox (badness 10000) in paragraph at lines 316--317
 
  []
 
-[6] [7]
-<images/Code_Verification/run_00_00/residual/results/Inlet_h.png, id=188, 578.1
+[5] [6]
+<images/Code_Verification/run_00_00/residual/results/Inlet_h.png, id=170, 578.1
 6pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Inlet_h.png Graphic f
 ile (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Inlet_h.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
-let_h.png used on input line 459.
+let_h.png used on input line 453.
 (pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
-<images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png, id=190, 5
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+<images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png, id=172, 5
 78.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png Graph
 ic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
-let_m_dot.png used on input line 466.
+let_m_dot.png used on input line 460.
 (pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-Underfull \vbox (badness 1622) has occurred while \output is active []
-
- [8 <./images/Code_Verification/run_00_00/residual/results/Inlet_h.png>]
-<images/Code_Verification/run_00_00/original/results/Convergence_Plot.png, id=2
-02, 578.16pt x 433.62pt>
+[7]
+<images/Code_Verification/run_00_00/original/results/Convergence_Plot.png, id=1
+86, 578.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/original/results/Convergence_Plot.png 
 Graphic file (type png)
 
 <use images/Code_Verification/run_00_00/original/results/Convergence_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/original/results/Co
-nvergence_Plot.png used on input line 500.
-(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
-
-<images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png, id=2
-03, 578.16pt x 433.62pt>
-File: images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png 
-Graphic file (type png)
-
-<use images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png>
-Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/Co
-nvergence_Plot.png used on input line 507.
+nvergence_Plot.png used on input line 494.
 (pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-<images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png, id=205
+<images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png, id=1
+87, 578.16pt x 433.62pt>
+File: images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png 
+Graphic file (type png)
+
+<use images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png>
+Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/Co
+nvergence_Plot.png used on input line 501.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8 <./images/Code_Verification/run_00_00/residual/results/Inlet_h.png> <./image
+s/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>]
+<images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png, id=197
 , 578.16pt x 433.62pt>
 File: images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png Gr
 aphic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/Re
-siduals_Plot.png used on input line 518.
+siduals_Plot.png used on input line 512.
 (pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png> <./i
-mages/Code_Verification/run_00_00/original/results/Convergence_Plot.png>]
-<images/Temporal_Study/Difference_m_dot.jpg, id=215, 1204.5pt x 602.25pt>
+[9 <./images/Code_Verification/run_00_00/original/results/Convergence_Plot.png>
+ <./images/Code_Verification/run_00_00/residual/results/Convergence_Plot.png>]
+<images/Temporal_Study/Difference_m_dot.jpg, id=207, 1204.5pt x 602.25pt>
 File: images/Temporal_Study/Difference_m_dot.jpg Graphic file (type jpg)
 
 <use images/Temporal_Study/Difference_m_dot.jpg>
 Package pdftex.def Info: images/Temporal_Study/Difference_m_dot.jpg used on inp
-ut line 557.
+ut line 551.
 (pdftex.def)             Requested size: 258.36667pt x 129.17796pt.
- [10 <./images/Code_Verification/run_00_00/residual/results/Convergence_Plot.pn
-g> <./images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png>]
-<images/Temporal_Study/Difference_h.jpg, id=224, 1204.5pt x 602.25pt>
+
+<images/Temporal_Study/Difference_h.jpg, id=208, 1204.5pt x 602.25pt>
 File: images/Temporal_Study/Difference_h.jpg Graphic file (type jpg)
 
 <use images/Temporal_Study/Difference_h.jpg>
 Package pdftex.def Info: images/Temporal_Study/Difference_h.jpg used on input l
-ine 564.
+ine 558.
 (pdftex.def)             Requested size: 258.36667pt x 129.17796pt.
 
-<images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=225, 1204.5pt x 602.25
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+<images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=209, 1204.5pt x 602.25
 pt>
 File: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jp
 g)
  <use images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>
 Package pdftex.def Info: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg us
-ed on input line 575.
-(pdftex.def)             Requested size: 258.36667pt x 129.17796pt.
+ed on input line 569.
+(pdftex.def)             Requested size: 352.31624pt x 176.1551pt.
 
-(build/cdances.bbl [11 <./images/Temporal_Study/Difference_m_dot.jpg> <./images
-/Temporal_Study/Difference_h.jpg> <./images/Temporal_Study/Order_Of_Accuracy_Su
-mmary.jpg>]) 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(build/cdances.bbl [10 <./images/Code_Verification/run_00_00/residual/results/R
+esiduals_Plot.png> <./images/Temporal_Study/Difference_m_dot.jpg>])
+
 AED: lastpage setting LastPage
-[12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 620.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 620.
+[11 <./images/Temporal_Study/Difference_h.jpg> <./images/Temporal_Study/Order_O
+f_Accuracy_Summary.jpg>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 614.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 614.
  (build/cdances.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 620.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 620.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 614.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 614.
 Package rerunfilecheck Info: File `cdances.out' has not changed.
 (rerunfilecheck)             Checksum: 7F985C80FEBEDAB6C70E0BA8CC761824;503.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 620.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 614.
  ) 
 Here is how much of TeX's memory you used:
- 18097 strings out of 494985
- 343771 string characters out of 6180356
- 495785 words of memory out of 5000000
- 20836 multiletter control sequences out of 15000+600000
- 39317 words of font info for 130 fonts, out of 8000000 for 9000
+ 18083 strings out of 494985
+ 343573 string characters out of 6180356
+ 496371 words of memory out of 5000000
+ 20831 multiletter control sequences out of 15000+600000
+ 39187 words of font info for 128 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 43i,14n,45p,10439b,785s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,14n,45p,10439b,789s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
@@ -1346,10 +1355,10 @@ m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on build/cdances.pdf (12 pages, 782014 bytes).
+Output written on build/cdances.pdf (11 pages, 780898 bytes).
 PDF statistics:
- 293 PDF objects out of 1000 (max. 8388607)
- 250 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
+ 277 PDF objects out of 1000 (max. 8388607)
+ 235 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
  26803 words of extra memory for PDF output out of 29859 (max. 10000000)
 
