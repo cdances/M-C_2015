@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  30 DEC 2014 19:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  30 DEC 2014 22:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1216,7 +1216,7 @@ ile (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Inlet_h.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
-let_h.png used on input line 428.
+let_h.png used on input line 429.
 (pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
 
@@ -1230,7 +1230,7 @@ ic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
-let_m_dot.png used on input line 435.
+let_m_dot.png used on input line 436.
 (pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
 
 
@@ -1244,7 +1244,7 @@ Graphic file (type png)
 
 <use images/Code_Verification/run_00_00/original/results/Convergence_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/original/results/Co
-nvergence_Plot.png used on input line 459.
+nvergence_Plot.png used on input line 460.
 (pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 
@@ -1259,7 +1259,7 @@ aphic file (type png)
 
 <use images/Code_Verification/run_00_00/residual/results/Residuals_Plot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/Re
-siduals_Plot.png used on input line 474.
+siduals_Plot.png used on input line 475.
 (pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 [9 <./images/Code_Verification/run_00_00/original/results/Convergence_Plot.png>
@@ -1269,7 +1269,7 @@ File: images/Temporal_Study/Difference_h.jpg Graphic file (type jpg)
 
 <use images/Temporal_Study/Difference_h.jpg>
 Package pdftex.def Info: images/Temporal_Study/Difference_h.jpg used on input l
-ine 520.
+ine 521.
 (pdftex.def)             Requested size: 375.80542pt x 187.8994pt.
 
 <images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=201, 1204.5pt x 602.25
@@ -1278,33 +1278,46 @@ File: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jp
 g)
  <use images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>
 Package pdftex.def Info: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg us
-ed on input line 531.
+ed on input line 532.
+(pdftex.def)             Requested size: 469.75499pt x 234.87654pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+<images/Spatial_Study/Order_Of_Accuracy_Summary.jpg, id=202, 1204.5pt x 602.25p
+t>
+File: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jpg
+)
+ <use images/Spatial_Study/Order_Of_Accuracy_Summary.jpg>
+Package pdftex.def Info: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg use
+d on input line 539.
 (pdftex.def)             Requested size: 469.75499pt x 234.87654pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [10 <./images/Temporal_Study/Difference_h.jpg>] [11 <./images/Temporal_Study/Or
-der_Of_Accuracy_Summary.jpg>] (build/cdances.bbl)
-
+der_Of_Accuracy_Summary.jpg> <./images/Spatial_Study/Order_Of_Accuracy_Summary.
+jpg>] (build/cdances.bbl) 
 AED: lastpage setting LastPage
 [12
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 578.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 578.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 585.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 585.
  (build/cdances.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 578.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 578.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 585.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 585.
 Package rerunfilecheck Info: File `cdances.out' has not changed.
 (rerunfilecheck)             Checksum: 7F985C80FEBEDAB6C70E0BA8CC761824;503.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 578.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 585.
  ) 
 Here is how much of TeX's memory you used:
- 18073 strings out of 494985
- 342994 string characters out of 6180356
- 496201 words of memory out of 5000000
- 20821 multiletter control sequences out of 15000+600000
+ 18080 strings out of 494985
+ 343272 string characters out of 6180356
+ 496259 words of memory out of 5000000
+ 20826 multiletter control sequences out of 15000+600000
  39317 words of font info for 130 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  43i,14n,45p,10439b,751s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1319,10 +1332,10 @@ m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on build/cdances.pdf (12 pages, 653743 bytes).
+Output written on build/cdances.pdf (12 pages, 755942 bytes).
 PDF statistics:
- 272 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 26785 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 274 PDF objects out of 1000 (max. 8388607)
+ 233 compressed objects within 3 object streams
+ 62 named destinations out of 1000 (max. 500000)
+ 26790 words of extra memory for PDF output out of 29859 (max. 10000000)
 
