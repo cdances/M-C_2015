@@ -611,6 +611,12 @@ decreasing mesh size.
 	\label{fig:Temporal:OOA}
 \end{figure}
 
+The slight differences between the orginal version of CTF and the residual
+formulation might be due to the different solution methods and back substitution
+of variables. Despite the small differences, both versions of the code exhibit
+order of accuracies very close the the values obtained through the modifed
+equation analysis.
+
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
@@ -639,7 +645,19 @@ decreasing mesh size.
 
 \section{Conclusions}
 
-Present your summary and conclusions here.
+The residual formulation of CTF allows for a numerical computation of the
+multivariable Jacobian matrix compared to the original analytical derivation of
+a pressure matrix. The 1-D isokinetic single phase liquid verification problem
+was shown to be a good verificaiton problem through its isolation of the order
+of accuracies through modified equation analysis. The discretization error for
+both versions of the code converged to zero with decreasing time step and axial
+mesh size. The order of accuracy for the temporal and spatial refinements
+matched very closely with the modified equation analysis for both codes. For all
+of these data points, the residual formulation of the code showed discretization
+errors that were very close with the original version of the code. Future work
+might be comparing the resuls with CFL number of 1 to the known soluions of the
+code. This would be a less rigourous study, but would be a quick verificaiton
+problem that could be easily integrated into the CTF test matrix. 
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
