@@ -72,7 +72,6 @@ to determine the convergence and order of accuracy of the discretization error.
 While extensive valdiation work has been present for CTF, there has been little
 to no verificaiton work previously. 
 
-
 \emph{Key Words}: CTF, thermal hydraulic, verifiation, residual, Richardson
 extrapolation
 
@@ -532,12 +531,19 @@ information at every position, variable, and equation.
 
 \section{Richardson Extrapolation}
 
-The richardson extrapolation was performed by  refining the spatial and temporal
+The richardson extrapolation was performed by refining the spatial and temporal
 step sizes by a factor of 2 for a set number of times. The spatial and temporal
 studies are refined seperately in their own study in order to isolate the
 spatial and temporal affects on the the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
-script in order to reduce user input errors and increase repeatability.
+script in order to reduce user input errors and increase repeatability. With
+each additinal refinement level, the amount of computational resources doubles.
+For this analysis, a significant amount of infromation was added to the hdf5
+output files. The spatial refinements require more computational resources
+that the temporal refinements due to the need to keep the study in the
+asymptotic range. In order to keep the computational resources needed to perform
+this analysis reasonable, fewer spatial refinements were performed compared to
+the temporal analysis. 
 
 \subsection{Convergence of Error}
 
@@ -547,21 +553,26 @@ refinement, the lower iterate values were numerically integrated to match the
 shape of the initial domain. The errors were then sumned over the entire domain
 to yield a total error for each variable. The total error for enthalpy is
 plotted in figures \ref{fig:Temporal:Diff_h} and \ref{fig:Spatial:Diff_h} as a
-function of temporal and spatial step size respecitvely.  The data points where
-chosen to be outside of the asymptotic range as shown by the good linear fit of
-the data. The plots show that as the temporal and spatial step sizes are
-reduced, the numerical error approaches zero. 
+function of temporal and spatial step size respecitvely. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.75\textwidth]{images/Temporal_Study/Difference_h}
+	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Temporal:Diff_h}
 \end{figure} 
 
+The data points where
+chosen to be outside of the asymptotic range as shown by the good linear fit of
+the data. The plots show that as the temporal and spatial step sizes are
+reduced, the numerical error approaches zero. The discretization error
+between the original version of CTF is relatively small and is most likely due
+to the small fluctations in the velocity present in the original version of the
+code
+
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.75\textwidth]{images/Spatial_Study/Difference_h}
+	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
@@ -572,8 +583,8 @@ The order of accuracy for this verification problem is first order as shown by
 the modified equation analysis. This can be considred to be the exponent on
 the power fits as seen in figures \ref{fig:Temporal:Diff_h}. However the order
 of accuracy $p$ can be calculated by using equation \ref{eq:OOA} where $f_{1}$,
-$f_{2}$, $f_{3}$ are consecutive lvels within the same Richardson extrapolation study. The
-refinement factor, $R$, has the constnat value of 2 for both the spatial and
+$f_{2}$, $f_{3}$ are consecutive levels within the same Richardson extrapolation
+study. The refinement factor, $R$, has the constnat value of 2 for both the spatial and
 temporal studies.
 
 \begin{equation}
@@ -585,16 +596,24 @@ temporal studies.
 	    }{ln(R)}
 \end{equation}
 
+The order of accuracy for all of the variables are presented for the temporal
+analysis and spatial analysis in figures \ref{fig:Temporal:OOA} and
+\ref{fig:Spatial:OOA} respectively. The temporal order of accuracy is well
+within the asymptotic range for the whole analysis, and moves closer to 1.0 with
+decreasing time step size. The spatial order of accuracy is a little bit outside
+the aysmptotic range, but also approaches an order of accuracy of 1.0 with
+decreasing mesh size. 
+
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
 	\caption{Spatial Order of Accuracy}
 	\label{fig:Spatial:OOA}
 \end{figure}
