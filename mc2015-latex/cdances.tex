@@ -164,31 +164,6 @@ terms.
     entire solution, we will then have a residual variable array $\delta X$, and
     a residual function array $F(X)$ which defines a linear system $J \delta X =
     - F(X)$.
-        
-%    \begin{equation}
-%    	\label{eq:residual_def:P}
-%    	\delta P_{i} = P^{n+1}_{i} - P^{k}_{i}
-%    \end{equation}
-%    
-%    \begin{equation}
-%    	\label{eq:residual_def:h}
-%    	\delta h_{i} = h^{n+1}_{i} - h^{k}_{i}
-%    \end{equation}
-%    
-%    \begin{equation}
-%    	\label{eq:residual_def:u}
-%    	\delta u_{i+\frac{1}{2}} = u^{n+1}_{i+\frac{1}{2}} - u^{k}_{i+\frac{1}{2}}
-%    \end{equation}
-%    
-%    \begin{equation}
-%    	\label{eq:residual_def:rho}
-%    	\delta \rho_{i} = \rho^{n+1}_{i} - \rho^{k}_{i}
-%    \end{equation}
-%   
-%   \begin{equation}
-%   	\label{eq:linear_system}
-%   	J \delta X = - F(X)
-%   \end{equation}
     
     The Jacobian matrix is defined as the derivative
     of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
@@ -360,7 +335,7 @@ terms.
     	= 0
     \end{equation}
 
-\section{Problem Setup}
+\section{Isokinetic Sine Wave Advection}
 
 Code verification is the set of procedures set in place to ensure that the code
 was written properly. The procedures can use the following as code verification
@@ -375,7 +350,7 @@ check for convegence and order of accruacy of the error in space and time.
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-\subsection{Isokinetic Sine Wave Advection}
+\subsection{Problem Setup}
 
 The verication problem is defined as a single horizontal channel problem the
 base parameters listed in table \ref{table:parameters}. The problem will have a
@@ -384,7 +359,8 @@ grid spacers. The velocity and pressure are assumed to be constant, but small
 fluctuations may occur due to coding mistakes or nuermical noise. The channel
 geometry and operating conditions are taken to be approximate a standard PWR.
 The inlet of the channel has a constant velocity with a fluctuating enthalpy
-that corresponds to a 37.5 $^\circ$C temperature change.
+that corresponds to a 37.5 $^\circ$C temperature change. The time it takes for
+the fluid at the inlet to reach the outlet is roughly 
 
 \begin{table}[h]
 \center
@@ -469,25 +445,15 @@ density is calculated at the inlet that causes the velocity to be non-consatnt.
  order of accuracy. The residual formulation was coded in such a way as to avoid
  this problem and has considerably less fluctation in the inlet velocity.
 
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_00/original/results/Inlet_vel}
-%	\caption{Velocity Near the Inlet and the Analytical Solution for the Original
-%	Version}
-%	\label{fig:Inlet_vel}
-%\end{figure}
-
 \subsection{Code Convergence}
 
-The current version of COBRA-TF uses global code convergance criteria across the
-inlet and the entire domain. These approximate the residauls for the equation.
-For this problem, the solid energy storate is zero since there are not any heat
-structures present. The original convergence criteria in COBRA-TF is shown in
-figure \ref{fig:Code_Convergance:Original} and for the residual version in
-figure \ref{fig:Code_Convergance:Original}. Note how the residual version has
-zero mass storage and fluid energy terms. The other terms are balances across
-the inlet and outlet of the problem and follow the sinusodial nature of the
-transient. 
+The current version of COBRA-TF uses global code convergance criteria that are
+used to estimate the eror assocaited with the solution of the code for transient
+and steady state problems as shown in figure
+\ref{fig:Code_Convergance:Original}. For this problem, the solid energy storate
+is zero since there are not any heat structures present. The fluctuating values
+represent differences between the enrgy and mass entering and leaving the
+system.
 
 \begin{figure}[!h]
 	\centering
@@ -496,25 +462,22 @@ transient.
 	\label{fig:Code_Convergance:Original}
 \end{figure}
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.60\textwidth]{images/Code_Verification/run_00_00/residual/results/Convergence_Plot}
-	\caption{Code Convergence Criteria for the residual version of COBRA-TF}
-	\label{fig:Code_Convergance:Residual}
-\end{figure}
-
 The residual formulation prints out the sumnation of the residuals functions
 across the domain to an output file for eac time step and can be seen in
-figure\ref{fig:Residuals_Plot}.
+figure \ref{fig:Residuals_Plot}. The mass balance and energy balances present in
+the code convergeance criteria are much smaller for the residual formulation.
+These residuals provide a much better indication as to the level of error present in
+the solution of the system. They can even be expanded to provide convergence
+information at every position, variable, and equation. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
+	\includegraphics[width=0.60\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
 	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
 	\label{fig:Residuals_Plot}
 \end{figure}
 
-\subsection{Error Quantification}
+%\subsection{Error Quantification}
 
 %\begin{figure}[!h]
 %	\centering
@@ -546,19 +509,19 @@ These are the equations used \ldots
 Talk about how the error for all of the variables approaches zero, with a linear
 trend line.
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Difference_m_dot}
-	\caption{Difference Between Succssessive Temporal Refinements}
-	\label{fig:Temporal:Diff_m_dot}
-\end{figure}
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.80\textwidth]{images/Temporal_Study/Difference_m_dot}
+%	\caption{Difference Between Succssessive Temporal Refinements}
+%	\label{fig:Temporal:Diff_m_dot}
+%\end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Difference_h}
+	\includegraphics[width=0.80\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Temporal:Diff_m_dot}
-\end{figure}
+\end{figure} 
 
 Show how error behaves for different time and space sizes
 
@@ -566,7 +529,7 @@ Show how error behaves for different time and space sizes
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.75\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=1.00\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}
@@ -594,6 +557,8 @@ Show how error behaves for different time and space sizes
 
 Present your summary and conclusions here.
 
+
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgments}
 

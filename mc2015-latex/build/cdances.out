@@ -4,13 +4,12 @@
 \BOOKMARK [2][-]{subsection.2.2}{1-D Single Phase Liquid Conservation Equations}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Residual Formulation and Jacobian Construction}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Modified Equation Analysis}{section.2}% 6
-\BOOKMARK [1][-]{section.3}{Problem Setup}{}% 7
-\BOOKMARK [2][-]{subsection.3.1}{Isokinetic Sine Wave Advection}{section.3}% 8
+\BOOKMARK [1][-]{section.3}{Isokinetic Sine Wave Advection}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Problem Setup}{section.3}% 8
 \BOOKMARK [2][-]{subsection.3.2}{Code Convergence}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.3}{Error Quantification}{section.3}% 10
-\BOOKMARK [1][-]{section.4}{Richardson Extrapolation}{}% 11
-\BOOKMARK [2][-]{subsection.4.1}{Convergence of Error}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.2}{Order of Accuracy}{section.4}% 13
-\BOOKMARK [1][-]{section.5}{Conclusions}{}% 14
-\BOOKMARK [1][-]{section.6}{Acknowledgments}{}% 15
-\BOOKMARK [1][-]{section.7}{References}{}% 16
+\BOOKMARK [1][-]{section.4}{Richardson Extrapolation}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Convergence of Error}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Order of Accuracy}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Conclusions}{}% 13
+\BOOKMARK [1][-]{section.6}{Acknowledgments}{}% 14
+\BOOKMARK [1][-]{section.7}{References}{}% 15
