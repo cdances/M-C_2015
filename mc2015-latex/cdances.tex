@@ -21,12 +21,12 @@
 % Insert authors' names and short version of title in lines below
 
 \authorHead{Chris Dances, Vince Mousseau, Maria Avramova}
-\shortTitle{Transient Verification of COBRA-TF}
+\shortTitle{Transient Verification of CTF}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{Initial 1-D Single Phase Liquid Transient Verification of COBRA-TF}
+\title{Initial 1-D Single Phase Liquid Transient Verification of CTF}
 
 \author{Chris Dances}
 \author{Dr. Maria Avramova}
@@ -46,6 +46,7 @@
 
 \begin{abstract}
 Abstract \ldots
+When in the course of human events \ldots
 
 \emph{Key Words}: List no more than five key words
 \end{abstract}
@@ -68,7 +69,7 @@ all nuclear reactors are either boiling water reactors (BWR) or pressurized
 water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to efficient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics with in the reactor core
-is COBRA-TF. This FORTRAN based code solves 8 conservation equations for liquid,
+is CTF. This FORTRAN based code solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases in 3-D dimmensions \cite{CTF_Theory}. A 1-D
 residual formulation of the code has been created. This paper outlines an
 intitial verification of the original verion of code as well as the residual
@@ -79,10 +80,10 @@ convergence and order of accuracy of the error. The study of the order of
 accuracy is considered one of the more rigourous verification criteria
 \cite{VV_review}.
 
-\section{COBRA-TF}
+\section{CTF}
 
 The thermal hydraulics of a LWR core is an important part of nuclear
-reactor desigin. COBRA-TF solves 8 conservation equations for liquid,
+reactor desigin. CTF solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases of water boiling within the rod structure
 of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
 equations analytically reduce into a pressure matrix in a semi-implicit
@@ -97,7 +98,7 @@ the intitial comparison of the residual  formulation to the original code.
 \subsection{Software Quality Assurance}
 
 Software quality assurance is a set of tools and procedures that helps
-ensure that the software is reliable. COBRA-TF is managed by Github repository
+ensure that the software is reliable. CTF is managed by Github repository
 setup and maintained by CASL. An exensive test matrix is run before each major
 push to ensure that the code meets the specificed requirements. The test matrix
 consists of unit tests, code coverage runs, validation problems, and validation
@@ -109,7 +110,7 @@ directly into the test matrix.
 
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
-The finite volume structure in COBRA-TF in figure \ref{fig:CTF-Cells} is for a
+The finite volume structure in CTF in figure \ref{fig:CTF-Cells} is for a
 one-dimmensional channel in the axial direction with n number of cells. The
 first and last cells at 0 and n + 1 are ghost cells and act as the boundary
 conditions for the problem. Pressure, enthalpy, and density are averaged over
@@ -123,7 +124,7 @@ dimmensions.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.30\textwidth]{images/CTF-Cells}
-	\caption{The finite volume structure for COBRA-TF}
+	\caption{The finite volume structure for CTF}
 	\label{fig:CTF-Cells}
 \end{figure}
 
@@ -171,9 +172,9 @@ terms.
     of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
     The derivative can be calculated numerically as shown by equation
     \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
-    COBRA-TF the equations are linear, and this numerical approximation
+    CTF the equations are linear, and this numerical approximation
     of the Jacobian matrix is exact. This should produce the same jacobian
-    matrix that COBRA-TF currently generates analytically. 
+    matrix that CTF currently generates analytically. 
     
     \begin{equation}
     	\label{eq:jac_numerical}
@@ -304,7 +305,7 @@ small in the figure.
 	\label{fig:Inlet_m_dot}
 \end{figure}
 
-For the original version of COBRA-TF there is a small discrepancy in the way the
+For the original version of CTF there is a small discrepancy in the way the
 density is calculated at the inlet that causes the velocity to be non-consatnt.
 %as shown in figure \ref{fig:Inlet_vel}.
  This is considered small for this problem and should not greatly affect the
@@ -315,7 +316,7 @@ density is calculated at the inlet that causes the velocity to be non-consatnt.
 
 \subsection{Code Convergence}
 
-The current version of COBRA-TF uses global code convergance criteria that are
+The current version of CTF uses global code convergance criteria that are
 used to estimate the eror assocaited with the solution of the code for transient
 and steady state problems as shown in figure
 \ref{fig:Code_Convergance:Original}. For this problem, the solid energy storate
@@ -326,14 +327,14 @@ system.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
-	\caption{Code Convergence Criteria for the original version of COBRA-TF}
+	\caption{Code Convergence Criteria for the original version of CTF}
 	\label{fig:Code_Convergance:Original}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
-	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+	\caption{Sumnation of the residuals for the residual version of CTF}
 	\label{fig:Residuals_Plot}
 \end{figure}
 
@@ -352,14 +353,14 @@ information at every position, variable, and equation.
 %\begin{figure}[!h]
 %	\centering
 %	\includegraphics[width=1.00\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200.png}
-%	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+%	\caption{Sumnation of the residuals for the residual version of CTF}
 %	\label{fig:Residuals_Plot}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %	\centering
 %	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200}
-%	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+%	\caption{Sumnation of the residuals for the residual version of CTF}
 %	\label{fig:Residuals_Plot}
 %\end{figure}
 
@@ -526,14 +527,14 @@ reduced, the numerical error approaches zero.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Temporal_Study/Difference_h}
+	\includegraphics[width=0.75\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Temporal:Diff_h}
 \end{figure} 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Spatial_Study/Difference_h}
+	\includegraphics[width=0.75\textwidth]{images/Spatial_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
@@ -542,8 +543,11 @@ reduced, the numerical error approaches zero.
 
 The order of accuracy for this verification problem is first order as shown by
 the modified equation analysis. This can be considred to be the exponent on
-the power fits as seen in figures \ref{fig:Temporal:Diff_h} study
-generates at 3 conse points $f_{1}$,$f_{2}$,$f_{3}$ with a constant refinement factor $R$ of 2. The order of accuracy $p$ between 3 points is given by equation \eqref{eq:OOA}.
+the power fits as seen in figures \ref{fig:Temporal:Diff_h}. However the order
+of accuracy $p$ can be calculated by using equation \ref{eq:OOA} where $f_{1}$,
+$f_{2}$, $f_{3}$ are consecutive lvels within the same Richardson extrapolation study. The
+refinement factor, $R$, has the constnat value of 2 for both the spatial and
+temporal studies.
 
 \begin{equation}
 	\label{eq:OOA}
