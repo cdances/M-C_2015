@@ -120,7 +120,7 @@ dimmensions.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.20\textwidth]{images/CTF-Cells}
+	\includegraphics[width=0.30\textwidth]{images/CTF-Cells}
 	\caption{The finite volume structure for COBRA-TF}
 	\label{fig:CTF-Cells}
 \end{figure}
@@ -191,149 +191,12 @@ terms.
     
     \begin{figure}[!h]
     	\centering
-    	\includegraphics[width=0.30\textwidth]{images/Jacobian_Setup}
+    	\includegraphics[width=0.40\textwidth]{images/Jacobian_Setup}
     	\caption{Strucutre of the jacobian matrix for single phase liquid}
     	\label{fig:Jacobian_Setup}
     \end{figure}
 
-\subsection{Modified Equation Analysis}
-    
-    The original mass balance equation can be re-written to 
-    look like equation \ref{eq:isokinetic_start}. Using upwinding, the finite difference
-    can be written to look like equation \ref{eq:mass_isok_fd}. A second order Taylor 
-    series approximation can be used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown 
-    in equations \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space} 
-    respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
-    not taken into account for this approximation. The Taylor series
-    approximations can then be substituted into \ref{eq:mass_isok_fd} to yield
-    \ref{eq:MEA_start}. This is the beginning of the modified equation analysis.
-    The goal will be to isolate the original PDE and define the truncation error.
-    
-    \begin{equation}
-    	\label{eq:isokinetic_start}
-    	\frac{\partial \rho}{\partial t} + U_{0} \frac{\partial \rho}{\partial x} = 0
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:mass_isok_fd}
-    	\frac{ \rho_{i}^{n+1} - \rho_{i}^{n} }{\Delta t} 
-    	+ U_{0} \frac{\rho_{i}^{n} - \rho_{i-1}^{n}}{\Delta x} = 0
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:rho_taylor_series_time}
-    	\rho_{i}^{n+1} =  \rho_{i}^{n} + 
-    	\frac{\partial \rho}{\partial t} \Delta t +
-    	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 + O(\Delta t^{3})
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:rho_taylor_series_space}
-    	\rho_{i-1}^{n} =  \rho_{i}^{n} - 
-    	\frac{\partial \rho}{\partial x} \Delta x +
-    	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 + O(\Delta x^{3})
-    \end{equation}
-    
-    The lengthy equation \ref{eq:MEA_start} can be reduced to equation
-    \ref{eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
-    t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
-    can the be re-written into equation \ref{eq:MEA_p1}, with the original PDE
-    followed by the truncation terms. Notice how the terms on the right are
-    dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
-    on the second derivatives of density with respect to space and time.
-    
-    \begin{equation}
-    	\label{eq:MEA_start}
-    	\frac{ \left( \rho_{i}^{n} + \frac{\partial \rho}{\partial t} \Delta t +
-    	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 \right)-\rho_{i}^{n} }{\Delta t} 
-    	+ U_{0} \frac{\rho_{i}^{n} - \left( \rho_{i}^{n} -  \frac{\partial \rho}{\partial x} \Delta x + 
-    	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 \right)}{\Delta x} 
-    	+ O(\Delta x^{2},\Delta t^{2}) 
-    	= 0
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:MEA_p0}
-    	 \frac{\partial \rho}{\partial t}  + \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t +
-    	 U_{0} \left(   \frac{\partial \rho}{\partial x}  - \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x \right) 
-    	 + O(\Delta x^{2},\Delta t^{2}) 
-    	 = 0
-    \end{equation}
-    
-    \begin{equation}
-    	\label{eq:MEA_p1}
-    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} + 
-    	 \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t -
-    	   U_{0}  \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x  
-    	   + O(\Delta x^{2},\Delta t^{2}) = 0 
-    \end{equation} \linebreak
-    
-    Before we can procede, we need to take the derivative of the original PDE with respect
-    to space and time as shown in equations \ref{eq:mass_dt} and  \ref{eq:mass_dx} 
-    respectively. These two derivatives can substitute into each other using the common 
-    term $\frac{\partial^2 \rho}{\partial x \partial t}$. The second derivatives of density with 
-    respect to space and time are therefore related by the velocity squared as
-    shown by equation \ref{eq:mass_second_derivatives}.
-    
-    \begin{equation}
-    \label{eq:mass_dt}
-    	 \frac{\partial^2 \rho}{\partial t^2} + U_{0} \frac{\partial^2 \rho}{\partial x \partial t} = 0
-    \end{equation}
-    
-    \begin{equation}
-    \label{eq:mass_dx}
-    	 \frac{\partial^2 \rho}{\partial t \partial x} + U_{0} \frac{\partial^2 \rho}{\partial x^2} = 0
-    \end{equation}
-    
-    \begin{equation}
-    \label{eq:mass_second_derivatives}
-    	 \frac{\partial^2 \rho}{\partial t^2} =  U_{0}^2 \frac{\partial^2 \rho}{\partial x^2}
-    \end{equation} \linebreak
-    
-    This relationship can then be substituted back into equation \ref{eq:MEA_p1}, 
-    which can be reduced to equation \ref{eq:MEA_result} after igonoring the higher
-    order terms. The error depends on the CFL number, the axial spacing, and the
-    second order derivative of density with respect to space. This derivative is
-    what gives the error the characterisitcs of diffusion. When the CFL number is
-    less than one, the error term is negative and the diffusion is dampening. When
-    the CFL number is greater than one, the error term becomes positive, and the
-    accumulation of the error destabilizes the solution. 
-    
-    \begin{equation}
-    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
-    	  \frac{1}{2}  \left(  \Delta x U_{0} \frac{\partial^2 \rho}{\partial
-    	  x^2} -   U_{0}^2 \frac{\partial^2 \rho}{\partial x^2} \Delta t  \right) 
-    	   + O(\Delta x^{2},\Delta t^{2}) = 0
-    \end{equation}
-    
-    \begin{equation}
-    \label{eq:MEA_result}
-    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
-    	 \frac{\Delta x U_{0}}{2} \frac{\partial^2 \rho}{\partial x^2}  
-    	 \left(  1 - CFL  \right) 
-    	 + O(\Delta x^{2},\Delta t^{2})  = 0
-    \end{equation}
-    
-    Modified eqauation analysis can be applied to the energy balance equation
-    presented in equation \ref{eq:MEA_energy}. The energy equation is presented in a form where
-    the momentum equation was substituted in as zero and then divided through by
-    density. The result presented in equation \ref{eq:MEA_ene_result} is similar in
-    form to the result for the mass balance equation \ref{eq:MEA_result}.
-    
-    \begin{equation}
-    	\label{eq:MEA_energy}
-    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
-    	U_{0} \frac{\partial h}{\partial x} = 0
-    \end{equation}
-    
-    \begin{equation}
-    \label{eq:MEA_ene_result}
-    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
-    	U_{0} \frac{\partial h}{\partial x} - 
-    	\frac{\Delta x U_{0}}{2} \frac{\partial^2 h}{\partial x^2}
-    	\left( 1 - CFL \right)
-    	= 0
-    \end{equation}
+
 
 \section{Isokinetic Sine Wave Advection}
 
@@ -341,16 +204,16 @@ Code verification is the set of procedures set in place to ensure that the code
 was written properly. The procedures can use the following as code verification
 criteria from least to most rigorous are expert judgement, error quantification,
 consistencey / convergence, and order of accuruacy \cite{VV_Book}. For this work
-the method of known solutions will be used to initially quantify the error at
-for a particular problem setup. Next a Richardson Extrapolation will be used to
-check for convegence and order of accruacy of the error in space and time.
+the a Richardson Extrapolation will be used to check for convegence and order of
+accruacy of the error in space and time. As shown by the modified equation
+analysis in the previous section, the spatial and temporal order of accuracies
+should be 1. 
  
-
+\subsection{Problem Setup}
 
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-\subsection{Problem Setup}
 
 The verication problem is defined as a single horizontal channel problem the
 base parameters listed in table \ref{table:parameters}. The problem will have a
@@ -459,9 +322,16 @@ system.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
+	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
 	\caption{Code Convergence Criteria for the original version of COBRA-TF}
 	\label{fig:Code_Convergance:Original}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
+	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
+	\label{fig:Residuals_Plot}
 \end{figure}
 
 The residual formulation prints out the sumnation of the residuals functions
@@ -472,15 +342,10 @@ These residuals provide a much better indication as to the level of error presen
 the solution of the system. They can even be expanded to provide convergence
 information at every position, variable, and equation. 
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=1.00\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
-	\caption{Sumnation of the residuals for the residual version of COBRA-TF}
-	\label{fig:Residuals_Plot}
-\end{figure}
 
-\subsection{Error Quantification}
 
+%\subsection{Error Quantification}
+%
 %\begin{figure}[!h]
 %	\centering
 %	\includegraphics[width=1.00\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200.png}
@@ -495,46 +360,194 @@ information at every position, variable, and equation.
 %	\label{fig:Residuals_Plot}
 %\end{figure}
 
+\subsection{Modified Equation Analysis}
+    
+    The original mass balance equation can be re-written to 
+    look like equation \ref{eq:isokinetic_start}. Using upwinding, the finite difference
+    can be written to look like equation \ref{eq:mass_isok_fd}. A second order Taylor 
+    series approximation can be used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown 
+    in equations \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space} 
+    respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
+    not taken into account for this approximation. The Taylor series
+    approximations can then be substituted into \ref{eq:mass_isok_fd} to yield
+    \ref{eq:MEA_start}. This is the beginning of the modified equation analysis.
+    The goal will be to isolate the original PDE and define the truncation error.
+    
+    \begin{equation}
+    	\label{eq:isokinetic_start}
+    	\frac{\partial \rho}{\partial t} + U_{0} \frac{\partial \rho}{\partial x} = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:mass_isok_fd}
+    	\frac{ \rho_{i}^{n+1} - \rho_{i}^{n} }{\Delta t} 
+    	+ U_{0} \frac{\rho_{i}^{n} - \rho_{i-1}^{n}}{\Delta x} = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:rho_taylor_series_time}
+    	\rho_{i}^{n+1} =  \rho_{i}^{n} + 
+    	\frac{\partial \rho}{\partial t} \Delta t +
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 + O(\Delta t^{3})
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:rho_taylor_series_space}
+    	\rho_{i-1}^{n} =  \rho_{i}^{n} - 
+    	\frac{\partial \rho}{\partial x} \Delta x +
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 + O(\Delta x^{3})
+    \end{equation}
+    
+    The lengthy equation \ref{eq:MEA_start} can be reduced to equation
+    \ref{eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
+    t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
+    can the be re-written into equation \ref{eq:MEA_p1}, with the original PDE
+    followed by the truncation terms. Notice how the terms on the right are
+    dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
+    on the second derivatives of density with respect to space and time.
+    
+    \begin{equation}
+    	\label{eq:MEA_start}
+    	\frac{ \left( \rho_{i}^{n} + \frac{\partial \rho}{\partial t} \Delta t +
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t^2 \right)-\rho_{i}^{n} }{\Delta t} 
+    	+ U_{0} \frac{\rho_{i}^{n} - \left( \rho_{i}^{n} -  \frac{\partial \rho}{\partial x} \Delta x + 
+    	\frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x^2 \right)}{\Delta x} 
+    	+ O(\Delta x^{2},\Delta t^{2}) 
+    	= 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:MEA_p0}
+    	 \frac{\partial \rho}{\partial t}  + \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t +
+    	 U_{0} \left(   \frac{\partial \rho}{\partial x}  - \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x \right) 
+    	 + O(\Delta x^{2},\Delta t^{2}) 
+    	 = 0
+    \end{equation}
+    
+    \begin{equation}
+    	\label{eq:MEA_p1}
+    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} + 
+    	 \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t -
+    	   U_{0}  \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x  
+    	   + O(\Delta x^{2},\Delta t^{2}) = 0 
+    \end{equation} \linebreak
+    
+%    Before we can procede, we need to take the derivative of the original PDE with respect
+%    to space and time as shown in equations \ref{eq:mass_dt} and  \ref{eq:mass_dx} 
+%    respectively. These two derivatives can substitute into each other using the common 
+%    term $\frac{\partial^2 \rho}{\partial x \partial t}$. The second derivatives of density with 
+%    respect to space and time are therefore related by the velocity squared as
+%    shown by equation \ref{eq:mass_second_derivatives}.
+%    
+%    \begin{equation}
+%    \label{eq:mass_dt}
+%    	 \frac{\partial^2 \rho}{\partial t^2} + U_{0} \frac{\partial^2 \rho}{\partial x \partial t} = 0
+%    \end{equation}
+%    
+%    \begin{equation}
+%    \label{eq:mass_dx}
+%    	 \frac{\partial^2 \rho}{\partial t \partial x} + U_{0} \frac{\partial^2 \rho}{\partial x^2} = 0
+%    \end{equation}
+%    
+%    \begin{equation}
+%    \label{eq:mass_second_derivatives}
+%    	 \frac{\partial^2 \rho}{\partial t^2} =  U_{0}^2 \frac{\partial^2 \rho}{\partial x^2}
+%    \end{equation} \linebreak
+%    
+%    This relationship can then be substituted back into equation \ref{eq:MEA_p1}, 
+%    which can be reduced to equation \ref{eq:MEA_result} after igonoring the higher
+%    order terms. The error depends on the CFL number, the axial spacing, and the
+%    second order derivative of density with respect to space. This derivative is
+%    what gives the error the characterisitcs of diffusion. When the CFL number is
+%    less than one, the error term is negative and the diffusion is dampening. When
+%    the CFL number is greater than one, the error term becomes positive, and the
+%    accumulation of the error destabilizes the solution. 
+%    
+%    \begin{equation}
+%    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
+%    	  \frac{1}{2}  \left(  \Delta x U_{0} \frac{\partial^2 \rho}{\partial
+%    	  x^2} -   U_{0}^2 \frac{\partial^2 \rho}{\partial x^2} \Delta t  \right) 
+%    	   + O(\Delta x^{2},\Delta t^{2}) = 0
+%    \end{equation}
+%    
+%    \begin{equation}
+%    \label{eq:MEA_result}
+%    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
+%    	 \frac{\Delta x U_{0}}{2} \frac{\partial^2 \rho}{\partial x^2}  
+%    	 \left(  1 - CFL  \right) 
+%    	 + O(\Delta x^{2},\Delta t^{2})  = 0
+%    \end{equation}
+%    
+%    Modified eqauation analysis can be applied to the energy balance equation
+%    presented in equation \ref{eq:MEA_energy}. The energy equation is presented in a form where
+%    the momentum equation was substituted in as zero and then divided through by
+%    density. The result presented in equation \ref{eq:MEA_ene_result} is similar in
+%    form to the result for the mass balance equation \ref{eq:MEA_result}.
+%    
+%    \begin{equation}
+%    	\label{eq:MEA_energy}
+%    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
+%    	U_{0} \frac{\partial h}{\partial x} = 0
+%    \end{equation}
+%    
+%    \begin{equation}
+%    \label{eq:MEA_ene_result}
+%    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
+%    	U_{0} \frac{\partial h}{\partial x} - 
+%    	\frac{\Delta x U_{0}}{2} \frac{\partial^2 h}{\partial x^2}
+%    	\left( 1 - CFL \right)
+%    	= 0
+%    \end{equation}
+
 \section{Richardson Extrapolation}
 
-Richardson extrapolation is \ldots
-
-It is used to compare that the error converges to zero with the correct order of
-accuracy in space and time. The order of accuracy needs to match the modified
-equation analysis.
-
-These are the equations used \ldots
+The richardson extrapolation was performed by  refining the spatial and temporal
+step sizes by a factor of 2 for a set number of times. The spatial and temporal
+studies are refined seperately in their own study in order to isolate the
+spatial and temporal affects on the the solution. 
 
 
 \subsection{Convergence of Error}
 
-Talk about how the error for all of the variables approaches zero, with a linear
-trend line.
-
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=0.80\textwidth]{images/Temporal_Study/Difference_m_dot}
-%	\caption{Difference Between Succssessive Temporal Refinements}
-%	\label{fig:Temporal:Diff_m_dot}
-%\end{figure}
+The relative difference at each point for a particular time step was calculated
+between each iteration for each quantity of interest. For the spatial
+refinement, the lower iterate values were numerically integrated to match the
+shape of the initial domain. The errors were then sumned over the entire domain
+to yield a total error for each variable. The total error for enthalpy is
+plotted in figures \ref{fig:Temporal:Diff_h} and \ref{fig:Spatial:Diff_h} as a
+function of temporal and spatial step size respecitvely.  The data points where
+chosen to be outside of the asymptotic range as shown by the good linear fit of
+the data. The plots show that as the temporal and spatial step sizes are
+reduced, the numerical error approaches zero. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.80\textwidth]{images/Temporal_Study/Difference_h}
+	\includegraphics[width=1.00\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Temporal:Diff_h}
 \end{figure} 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.80\textwidth]{images/Spatial_Study/Difference_h}
+	\includegraphics[width=1.00\textwidth]{images/Spatial_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
 
-Show how error behaves for different time and space sizes
-
 \subsection{Order of Accuracy}
+
+Each study generates at least 3 points $f_{1}$,$f_{2}$,$f_{3}$ with a constant
+refinement factor $R$ of 2. The order of accuracy $p$ between 3 points is given
+by equation \eqref{eq:OOA}. 
+
+\begin{equation}
+	\label{eq:OOA}
+	p= \frac{
+	      	ln \left(
+	      	\frac{f_{3}-f_{2}}{f_{2}-f_{1}}
+	      	\right)
+	    }{ln(R)}
+\end{equation}
 
 \begin{figure}[!h]
 	\centering
