@@ -21,12 +21,12 @@
 % Insert authors' names and short version of title in lines below
 
 \authorHead{Chris Dances, Vince Mousseau, Maria Avramova}
-\shortTitle{Transient Verification of CTF}
+\shortTitle{Initial Verification of CTF}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{Initial 1-D Single Phase Liquid Transient Verification of CTF}
+\title{Initial 1-D Single Phase Liquid Verification of CTF}
 
 \author{Chris Dances}
 \author{Dr. Maria Avramova}
@@ -45,10 +45,37 @@
 \maketitle
 
 \begin{abstract}
-Abstract \ldots
-When in the course of human events \ldots
+Nuclear engineering codes are being used to simulate more challenging problems
+and at higher fidelities than they were initially developed for. In order to
+expand the capabilities of these codes, state of the art numerical methods and
+computer science need to be implemented. One of the key players in this effort
+is the Consortium for Advanced Simulation of Light Water Reactors (CASL) through
+development of the Virtual Environment for Reactor Applications (VERA). The
+sub-channel thermal hydraulic code used in VERA, COBRA-TF (Coolant-Boiling in
+Rod Arrays - Three Fluids), is partially developed at the Pennsylvania State
+University by the Reactor Dynamics and Fuel Management Research Group (RDFMG).
+The RDFMG version COBRA-TF is referred to as CTF.
 
-\emph{Key Words}: List no more than five key words
+In an effort to help meet the objectives of CASL, a version of CTF has been
+developed that solves the residual formulation of the one dimensional 
+single-phase conservation equations. The formulation of the base equations as
+residuals allows the for the isoloation of different sources of error and is a
+good tool for verification purposes. This paper outlines the initial
+verification work of both the original version of CTF and its residual
+formulation. The verification problem is a simple 1-D single phase liquid
+channel with no heat conduction, friction, and gravity. A transient boundary
+condition is applied that alters the inlet density and temperature while keeping
+the velocity within the channel constant. The constant velocity simplifies the modified
+equation analysis and the order of accuracy is readily obtained. A Richardson
+extrapolation is performed on the problem on the temporal and spatial step sizes
+to determine the convergence and order of accuracy of the discretization error.
+While extensive valdiation work has been present for CTF, there has been little
+to no verificaiton work previously. 
+
+
+\emph{Key Words}: CTF, thermal hydraulic, verifiation, residual, Richardson
+extrapolation
+
 \end{abstract}
 
 \clearpage
