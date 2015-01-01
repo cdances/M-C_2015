@@ -73,7 +73,7 @@ While extensive valdiation work has been present for CTF, there has been little
 to no verificaiton work previously. 
 
 \emph{Key Words}: CTF, thermal hydraulic, verifiation, residual, Richardson
-extrapolation
+extrapolation, CASL
 
 \end{abstract}
 
@@ -96,9 +96,9 @@ water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to efficient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics with in the reactor core
 is CTF. This FORTRAN based code solves 8 conservation equations for liquid,
-entrained droplet, and vapor phases in 3-D dimmensions \cite{CTF_Theory}. A 1-D
+entrained droplet, and vapor phases in 3-D dimensions \cite{CTF_Theory}. A 1-D
 residual formulation of the code has been created. This paper outlines an
-intitial verification of the original verion of code as well as the residual
+initial verification of the original verion of code as well as the residual
 version of the code. The verification problem is a single phase 1-D channel with
 transient inlet density and mass flow rate. The problem will undergo a
 Richardson's extrapolation in the temporal and spatial domains to verify the
@@ -109,7 +109,7 @@ accuracy is considered one of the more rigourous verification criteria
 \section{CTF}
 
 The thermal hydraulics of a LWR core is an important part of nuclear
-reactor desigin. CTF solves 8 conservation equations for liquid,
+reactor design. CTF solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases of water boiling within the rod structure
 of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
 equations analytically reduce into a pressure matrix in a semi-implicit
@@ -119,25 +119,25 @@ calculated variables in a residual formulation. While it has the ability to
 solve the code semi-implicitly or implicitly, only the semi-implicit
 solution method is considered in this paper. This residual formulation should
 allow for easier and more in depth verification  analysis. This paper details
-the intitial comparison of the residual  formulation to the original code.
+the initial comparison of the residual  formulation to the original code.
 
 \subsection{Software Quality Assurance}
 
 Software quality assurance is a set of tools and procedures that helps
-ensure that the software is reliable. CTF is managed by Github repository
-setup and maintained by CASL. An exensive test matrix is run before each major
-push to ensure that the code meets the specificed requirements. The test matrix
+ensure that the software is reliable. CTF is managed by GitHub repository
+setup and maintained by CASL. An extensive test matrix is run before each major
+push to ensure that the code meets the specified requirements. The test matrix
 consists of unit tests, code coverage runs, validation problems, and validation
 problems. The code documentation consists of a theory manual, a users manual, a
 developers manual, and a validation manual. Further work might involve using
-autodocumentation tools to keep an up to date developers manual. This paper will
-be the begining of a verification manual, integrating this verificaiton problem
+auto documentation tools to keep an up to date developers manual. This paper
+will be the beginning of a verification manual, integrating this verificaiton problem
 directly into the test matrix.
 
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
 The finite volume structure in CTF in figure \ref{fig:CTF-Cells} is for a
-one-dimmensional channel in the axial direction with n number of cells. The
+one-dimensional channel in the axial direction with n number of cells. The
 first and last cells at 0 and n + 1 are ghost cells and act as the boundary
 conditions for the problem. Pressure, enthalpy, and density are averaged over
 the cell volume and are located at the center of the cell. Mass flow rate and
@@ -145,7 +145,7 @@ velocity are located at the faces in between cells. The cells  are represented
 with an index i, and the faces with indexes of $i + \frac{1}{2}$ or 
 $i-\frac{1}{2}$. This project will initially focus on this 1-D configuration.
 Usually the code  is 3-D,  with channels connecting to each other in two more 
-dimmensions.
+dimensions.
 
 \begin{figure}[!h]
 	\centering
@@ -156,7 +156,7 @@ dimmensions.
 
 The single phase Euler partial differential equations for mass
 \eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
-\eqref{eq:pde_energy} corresond to the unknown variables density $\rho$,
+\eqref{eq:pde_energy} correspond to the unknown variables density $\rho$,
 velocity $u$, pressure $P$, and enthalpy $h$. The first terms in each of the
 equations are temporal terms. The rest of the terms are steady state spatial
 terms. 
@@ -187,7 +187,7 @@ terms.
     desired variables and equations. For example, the residual for density,
     $\delta \rho_{i}$, is difference between iterate levels
     $n+1$ and $k$, $\rho^{n+1}_{i} - \rho^{k}_{i}$. The residuals for the
-    equations are determined by susbsituting the residuals into the discretized
+    equations are determined by substituting the residuals into the discretized
     equations, which should effectively change all $n+1$ into $k$. Each cell
     will have three residual variables and three residual equations. For the
     entire solution, we will then have a residual variable array $\delta X$, and
@@ -210,7 +210,7 @@ terms.
     
 	To build the jacobian matrix, an object oriented class was created that
     contains three arrays. An array that points to the residual functions, an
-    array that points to the position within a target variable arrray, and an
+    array that points to the position within a target variable array, and an
     array that has the index that the function is to be evaluated at. These
     lists can be appended to in any order, but have to be appended all at the
     same time so that variables and functions must correspond with each other.
@@ -221,7 +221,7 @@ terms.
     \begin{figure}[!h]
     	\centering
     	\includegraphics[width=0.40\textwidth]{images/Jacobian_Setup}
-    	\caption{Strucutre of the jacobian matrix for single phase liquid}
+    	\caption{Structure of the jacobian matrix for single phase liquid}
     	\label{fig:Jacobian_Setup}
     \end{figure}
 
@@ -232,9 +232,9 @@ terms.
 Code verification is the set of procedures set in place to ensure that the code
 was written properly. The procedures can use the following as code verification
 criteria from least to most rigorous are expert judgement, error quantification,
-consistencey / convergence, and order of accuruacy \cite{VV_Book}. For this work
-the a Richardson Extrapolation will be used to check for convegence and order of
-accruacy of the error in space and time. As shown by the modified equation
+consistencey / convergence, and order of accuracy \cite{VV_Book}. For this work
+the a Richardson Extrapolation will be used to check for convergence and order
+of accuracy of the error in space and time. As shown by the modified equation
 analysis in the previous section, the spatial and temporal order of accuracies
 should be 1. 
  
@@ -243,15 +243,15 @@ should be 1.
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-The verication problem is defined as a single horizontal channel problem the
+The verification problem is defined as a single horizontal channel problem the
 base parameters listed in table \ref{table:parameters}. The problem will have a
 fixed channel area and perimeter across the entire height of the channel with no
 grid spacers. The velocity and pressure are assumed to be constant, but small
-fluctuations may occur due to coding mistakes or nuermical noise. The channel
+fluctuations may occur due to coding mistakes or numerical noise. The channel
 geometry and operating conditions are taken to be approximate a standard PWR.
 The inlet of the channel has a constant velocity with a fluctuating enthalpy
 that corresponds to a 37.5 $^\circ$C temperature change.  The length
-of the transient was defined to be quadrouple the time needed for the liquid at
+of the transient was defined to be quadruple the time needed for the liquid at
 the inlet to advect to the outlet.The frequencey of the sine wave was defined so
 generate a full period of a spatial wave across the height of the channel. 
 
@@ -557,22 +557,23 @@ function of temporal and spatial step size respecitvely.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Difference_h}
+	\includegraphics[width=0.70\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Temporal:Diff_h}
 \end{figure} 
 
 The data points where
-chosen to be outside of the asymptotic range as shown by the good linear fit of
-the data. The plots show that as the temporal and spatial step sizes are
-reduced, the numerical error approaches zero. The discretization error
+chosen to be outside of the asymptotic range as shown by the good power fit
+with an exponent near 1. The fit shows that as the temporal and spatial step
+sizes are reduced, the numerical error approaches zero. The discretization error
 between the original version of CTF is relatively small and is most likely due
 to the small fluctations in the velocity present in the original version of the
-code
+code. While only the enthalpy is shown here, the mass flow rate and the density
+showed similar trends.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Difference_h}
+	\includegraphics[width=0.70\textwidth]{images/Spatial_Study/Difference_h}
 	\caption{Difference Between Succssessive Temporal Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
@@ -584,8 +585,8 @@ the modified equation analysis. This can be considred to be the exponent on
 the power fits as seen in figures \ref{fig:Temporal:Diff_h}. However the order
 of accuracy $p$ can be calculated by using equation \ref{eq:OOA} where $f_{1}$,
 $f_{2}$, $f_{3}$ are consecutive levels within the same Richardson extrapolation
-study. The refinement factor, $R$, has the constnat value of 2 for both the spatial and
-temporal studies.
+study. The refinement factor, $R$, has the constnat value of 2 for both the
+spatial and temporal studies.
 
 \begin{equation}
 	\label{eq:OOA}
@@ -606,7 +607,7 @@ decreasing mesh size.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.70\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}
@@ -619,7 +620,7 @@ equation analysis.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.70\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
 	\caption{Spatial Order of Accuracy}
 	\label{fig:Spatial:OOA}
 \end{figure}
@@ -659,7 +660,6 @@ might be comparing the resuls with CFL number of 1 to the known soluions of the
 code. This would be a less rigourous study, but would be a quick verificaiton
 problem that could be easily integrated into the CTF test matrix. 
 
-\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgments}
 
