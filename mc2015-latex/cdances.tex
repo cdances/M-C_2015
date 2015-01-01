@@ -70,7 +70,7 @@ equation analysis and the order of accuracy is readily obtained. A Richardson
 extrapolation is performed on the problem on the temporal and spatial step sizes
 to determine the convergence and order of accuracy of the discretization error.
 While extensive valdiation work has been present for CTF, there has been little
-to no verificaiton work previously. 
+to no verification work previously. 
 
 \emph{Key Words}: CTF, thermal hydraulic, verifiation, residual, Richardson
 extrapolation, CASL
@@ -103,7 +103,7 @@ version of the code. The verification problem is a single phase 1-D channel with
 transient inlet density and mass flow rate. The problem will undergo a
 Richardson's extrapolation in the temporal and spatial domains to verify the
 convergence and order of accuracy of the error. The study of the order of
-accuracy is considered one of the more rigourous verification criteria
+accuracy is considered one of the more rigorous verification criteria
 \cite{VV_review}.
 
 \section{CTF}
@@ -131,8 +131,8 @@ consists of unit tests, code coverage runs, validation problems, and validation
 problems. The code documentation consists of a theory manual, a users manual, a
 developers manual, and a validation manual. Further work might involve using
 auto documentation tools to keep an up to date developers manual. This paper
-will be the beginning of a verification manual, integrating this verificaiton problem
-directly into the test matrix.
+will be the beginning of a verification manual, integrating this verification
+problem directly into the test matrix.
 
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
@@ -232,7 +232,7 @@ terms.
 Code verification is the set of procedures set in place to ensure that the code
 was written properly. The procedures can use the following as code verification
 criteria from least to most rigorous are expert judgement, error quantification,
-consistencey / convergence, and order of accuracy \cite{VV_Book}. For this work
+consistency / convergence, and order of accuracy \cite{VV_Book}. For this work
 the a Richardson Extrapolation will be used to check for convergence and order
 of accuracy of the error in space and time. As shown by the modified equation
 analysis in the previous section, the spatial and temporal order of accuracies
@@ -252,7 +252,7 @@ geometry and operating conditions are taken to be approximate a standard PWR.
 The inlet of the channel has a constant velocity with a fluctuating enthalpy
 that corresponds to a 37.5 $^\circ$C temperature change.  The length
 of the transient was defined to be quadruple the time needed for the liquid at
-the inlet to advect to the outlet.The frequencey of the sine wave was defined so
+the inlet to advect to the outlet.The frequency of the sine wave was defined so
 generate a full period of a spatial wave across the height of the channel. 
 
 \begin{table}[h]
@@ -279,7 +279,7 @@ Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 \end{table}
 
 The lookup table to vary the inlet enthalpy $h$ and inlet mass
-flow rate $\dot{m}$ use smooth trigonometric functions given in equations
+flow rate $\dot{m}$ use smooth trignometric functions given in equations
 \ref{eq:Sine_Wave:h} and \ref{eq:Sine_Wave:m_dot}. The equations assume constant
 axial spacing $\Delta x$ and time step size $\Delta t$ where $i$ and $j$ are
 the spatial and temporal index respectively. These equations should also
@@ -312,7 +312,7 @@ steam tables used by the code \cite{IAPWS}.
 The comparison between the data table and the output in CTF are shown for
 enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
 \ref{fig:Inlet_m_dot} respectively. The CTF output was read from hdf5 data files
-at each point in time, wich omitted the actual ghost cell where these values
+at each point in time, which omitted the actual ghost cell where these values
 were applied. The CTF values are located at the nearest node to the inlet, and
 therefore will be slightly out of phase to the exact values but this effect is
 small in the figure.
@@ -332,42 +332,42 @@ small in the figure.
 \end{figure}
 
 For the original version of CTF there is a small discrepancy in the way the
-density is calculated at the inlet that causes the velocity to be non-consatnt.
+density is calculated at the inlet that causes the velocity to be non-constant.
 %as shown in figure \ref{fig:Inlet_vel}.
  This is considered small for this problem and should not greatly affect the
  order of accuracy. The residual formulation was coded in such a way as to avoid
- this problem and has considerably less fluctation in the inlet velocity. The
+ this problem and has considerably less fluctuation in the inlet velocity. The
  hdf5 output files allow for a high level of precision of the code, reducing
  round off error in the output. 
 
 \subsection{Code Convergence}
 
-The current version of CTF uses global code convergance criteria that are
-used to estimate the eror assocaited with the solution of the code for transient
-and steady state problems as shown in figure
-\ref{fig:Code_Convergance:Original}. For this problem, the solid energy storate
+The current version of CTF uses global code convergence criteria that are
+used to estimate the error associated with the solution of the code for
+transient and steady state problems as shown in figure
+\ref{fig:Code_Convergence:Original}. For this problem, the solid energy storage
 is zero since there are not any heat structures present. The fluctuating values
-represent differences between the enrgy and mass entering and leaving the
+represent differences between the energy and mass entering and leaving the
 system.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
 	\caption{Code Convergence Criteria for the original version of CTF}
-	\label{fig:Code_Convergance:Original}
+	\label{fig:Code_Convergence:Original}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
-	\caption{Sumnation of the residuals for the residual version of CTF}
+	\caption{Summation of the residuals for the residual version of CTF}
 	\label{fig:Residuals_Plot}
 \end{figure}
 
-The residual formulation prints out the sumnation of the residuals functions
-across the domain to an output file for eac time step and can be seen in
+The residual formulation prints out the summation of the residuals functions
+across the domain to an output file for each time step and can be seen in
 figure \ref{fig:Residuals_Plot}. The mass balance and energy balances present in
-the code convergeance criteria are much smaller for the residual formulation.
+the code convergence criteria are much smaller for the residual formulation.
 These residuals provide a much better indication as to the level of error present in
 the solution of the system. They can even be expanded to provide convergence
 information at every position, variable, and equation. 
@@ -379,14 +379,14 @@ information at every position, variable, and equation.
 %\begin{figure}[!h]
 %	\centering
 %	\includegraphics[width=1.00\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200.png}
-%	\caption{Sumnation of the residuals for the residual version of CTF}
+%	\caption{Summation of the residuals for the residual version of CTF}
 %	\label{fig:Residuals_Plot}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %	\centering
 %	\includegraphics[width=0.55\textwidth]{images/Code_Verification/run_00_01/residual/results/tmp/h_0200}
-%	\caption{Sumnation of the residuals for the residual version of CTF}
+%	\caption{Summation of the residuals for the residual version of CTF}
 %	\label{fig:Residuals_Plot}
 %\end{figure}
 
@@ -533,12 +533,12 @@ information at every position, variable, and equation.
 
 The richardson extrapolation was performed by refining the spatial and temporal
 step sizes by a factor of 2 for a set number of times. The spatial and temporal
-studies are refined seperately in their own study in order to isolate the
+studies are refined separately in their own study in order to isolate the
 spatial and temporal affects on the the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
 script in order to reduce user input errors and increase repeatability. With
-each additinal refinement level, the amount of computational resources doubles.
-For this analysis, a significant amount of infromation was added to the hdf5
+each additional refinement level, the amount of computational resources doubles.
+For this analysis, a significant amount of information was added to the hdf5
 output files. The spatial refinements require more computational resources
 that the temporal refinements due to the need to keep the study in the
 asymptotic range. In order to keep the computational resources needed to perform
@@ -550,15 +550,15 @@ the temporal analysis.
 The relative difference at each point for a particular time step was calculated
 between each iteration for each quantity of interest. For the spatial
 refinement, the lower iterate values were numerically integrated to match the
-shape of the initial domain. The errors were then sumned over the entire domain
+shape of the initial domain. The errors were then summed over the entire domain
 to yield a total error for each variable. The total error for enthalpy is
 plotted in figures \ref{fig:Temporal:Diff_h} and \ref{fig:Spatial:Diff_h} as a
-function of temporal and spatial step size respecitvely. 
+function of temporal and spatial step size respectively. 
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.70\textwidth]{images/Temporal_Study/Difference_h}
-	\caption{Difference Between Succssessive Temporal Refinements}
+	\caption{Difference Between Successive Temporal Refinements}
 	\label{fig:Temporal:Diff_h}
 \end{figure} 
 
@@ -567,25 +567,25 @@ chosen to be outside of the asymptotic range as shown by the good power fit
 with an exponent near 1. The fit shows that as the temporal and spatial step
 sizes are reduced, the numerical error approaches zero. The discretization error
 between the original version of CTF is relatively small and is most likely due
-to the small fluctations in the velocity present in the original version of the
+to the small fluctuations in the velocity present in the original version of the
 code. While only the enthalpy is shown here, the mass flow rate and the density
 showed similar trends.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.70\textwidth]{images/Spatial_Study/Difference_h}
-	\caption{Difference Between Succssessive Temporal Refinements}
+	\caption{Difference Between Successive Temporal Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
 
 \subsection{Order of Accuracy}
 
 The order of accuracy for this verification problem is first order as shown by
-the modified equation analysis. This can be considred to be the exponent on
+the modified equation analysis. This can be considered to be the exponent on
 the power fits as seen in figures \ref{fig:Temporal:Diff_h}. However the order
 of accuracy $p$ can be calculated by using equation \ref{eq:OOA} where $f_{1}$,
 $f_{2}$, $f_{3}$ are consecutive levels within the same Richardson extrapolation
-study. The refinement factor, $R$, has the constnat value of 2 for both the
+study. The refinement factor, $R$, has the constant value of 2 for both the
 spatial and temporal studies.
 
 \begin{equation}
@@ -602,7 +602,7 @@ analysis and spatial analysis in figures \ref{fig:Temporal:OOA} and
 \ref{fig:Spatial:OOA} respectively. The temporal order of accuracy is well
 within the asymptotic range for the whole analysis, and moves closer to 1.0 with
 decreasing time step size. The spatial order of accuracy is a little bit outside
-the aysmptotic range, but also approaches an order of accuracy of 1.0 with
+the asymptotic range, but also approaches an order of accuracy of 1.0 with
 decreasing mesh size. 
 
 \begin{figure}[!h]
@@ -612,10 +612,10 @@ decreasing mesh size.
 	\label{fig:Temporal:OOA}
 \end{figure}
 
-The slight differences between the orginal version of CTF and the residual
+The slight differences between the original version of CTF and the residual
 formulation might be due to the different solution methods and back substitution
 of variables. Despite the small differences, both versions of the code exhibit
-order of accuracies very close the the values obtained through the modifed
+order of accuracies very close the the values obtained through the modified
 equation analysis.
 
 \begin{figure}[!h]
@@ -633,9 +633,9 @@ equation analysis.
 %
 %This changes the amplitude of the displacement
 %
-%\subsection{Changes in Frequencey}
+%\subsection{Changes in frequency}
 %
-%This changes the frequencey of the displacement
+%This changes the frequency of the displacement
 %
 %\subsection{Changes in Mass Flow Rate}
 %
@@ -649,15 +649,15 @@ equation analysis.
 The residual formulation of CTF allows for a numerical computation of the
 multivariable Jacobian matrix compared to the original analytical derivation of
 a pressure matrix. The 1-D isokinetic single phase liquid verification problem
-was shown to be a good verificaiton problem through its isolation of the order
+was shown to be a good verification problem through its isolation of the order
 of accuracies through modified equation analysis. The discretization error for
 both versions of the code converged to zero with decreasing time step and axial
 mesh size. The order of accuracy for the temporal and spatial refinements
 matched very closely with the modified equation analysis for both codes. For all
 of these data points, the residual formulation of the code showed discretization
 errors that were very close with the original version of the code. Future work
-might be comparing the resuls with CFL number of 1 to the known soluions of the
-code. This would be a less rigourous study, but would be a quick verificaiton
+might be comparing the results with CFL number of 1 to the known solutions of
+the code. This would be a less rigorous study, but would be a quick verification
 problem that could be easily integrated into the CTF test matrix. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
