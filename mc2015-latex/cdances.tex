@@ -54,7 +54,7 @@ development of the Virtual Environment for Reactor Applications (VERA). The
 sub-channel thermal hydraulic code used in VERA, COBRA-TF (Coolant-Boiling in
 Rod Arrays - Three Fluids), is partially developed at the Pennsylvania State
 University by the Reactor Dynamics and Fuel Management Research Group (RDFMG).
-The RDFMG version COBRA-TF is referred to as CTF.
+The RDFMG of version COBRA-TF is referred to as CTF.
 
 In an effort to help meet the objectives of CASL, a version of CTF has been
 developed that solves the residual formulation of the one dimensional 
@@ -94,11 +94,11 @@ the United States has been focused on light water reactors (LWR). Commercially,
 all nuclear reactors are either boiling water reactors (BWR) or pressurized
 water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to efficient design and accuracy in the safety analysis. A
-popular subchannel code for modelling the hydrodynamics with in the reactor core
+popular subchannel code for modelling the hydrodynamics within the reactor core
 is CTF. This FORTRAN based code solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases in 3-D dimensions \cite{CTF_Theory}. A 1-D
 residual formulation of the code has been created. This paper outlines an
-initial verification of the original verion of code as well as the residual
+initial verification of the original version of code as well as the residual
 version of the code. The verification problem is a single phase 1-D channel with
 transient inlet density and mass flow rate. The problem will undergo a
 Richardson's extrapolation in the temporal and spatial domains to verify the
@@ -127,9 +127,9 @@ Software quality assurance is a set of tools and procedures that helps
 ensure that the software is reliable. CTF is managed by GitHub repository
 setup and maintained by CASL. An extensive test matrix is run before each major
 push to ensure that the code meets the specified requirements. The test matrix
-consists of unit tests, code coverage runs, validation problems, and validation
-problems. The code documentation consists of a theory manual, a users manual, a
-developers manual, and a validation manual. Further work might involve using
+consists of unit tests, code coverage runs, validation problems, and challenge
+problems. The code documentation consists of a theory manual, a user manual, a
+developer manual, and a validation manual. Further work might involve using
 auto documentation tools to keep an up to date developers manual. This paper
 will be the beginning of a verification manual, integrating this verification
 problem directly into the test matrix.
@@ -137,12 +137,12 @@ problem directly into the test matrix.
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
 The finite volume structure in CTF in figure \ref{fig:CTF-Cells} is for a
-one-dimensional channel in the axial direction with n number of cells. The
-first and last cells at 0 and n + 1 are ghost cells and act as the boundary
+one-dimensional channel in the axial direction with $n$ number of cells. The
+first and last cells at 0 and $n+1$ are ghost cells and act as the boundary
 conditions for the problem. Pressure, enthalpy, and density are averaged over
 the cell volume and are located at the center of the cell. Mass flow rate and
 velocity are located at the faces in between cells. The cells  are represented
-with an index i, and the faces with indexes of $i + \frac{1}{2}$ or 
+with an index $i$, and the faces with indexes of $i + \frac{1}{2}$ or 
 $i-\frac{1}{2}$. This project will initially focus on this 1-D configuration.
 Usually the code  is 3-D,  with channels connecting to each other in two more 
 dimensions.
@@ -185,7 +185,7 @@ terms.
 	A residual is simply the difference between the value at some future time
     $n+1$ and the value at the current iteration $k$. This can be applied to
     desired variables and equations. For example, the residual for density,
-    $\delta \rho_{i}$, is difference between iterate levels
+    $\delta \rho_{i}$, is the difference between iterate levels
     $n+1$ and $k$, $\rho^{n+1}_{i} - \rho^{k}_{i}$. The residuals for the
     equations are determined by substituting the residuals into the discretized
     equations, which should effectively change all $n+1$ into $k$. Each cell
@@ -199,7 +199,7 @@ terms.
     The derivative can be calculated numerically as shown by equation
     \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
     CTF the equations are linear, and this numerical approximation
-    of the Jacobian matrix is exact. This should produce the same jacobian
+    of the Jacobian matrix is exact. This should produce the same Jacobian
     matrix that CTF currently generates analytically. 
     
     \begin{equation}
@@ -208,32 +208,30 @@ terms.
     	      \approx \frac{F_{j}(X_{i}+\epsilon)-F_{j}(X)}{\epsilon}
     \end{equation}
     
-	To build the jacobian matrix, an object oriented class was created that
+	To build the Jacobian matrix, an object oriented class was created that
     contains three arrays. An array that points to the residual functions, an
     array that points to the position within a target variable array, and an
     array that has the index that the function is to be evaluated at. These
-    lists can be appended to in any order, but have to be appended all at the
-    same time so that variables and functions must correspond with each other.
-    Then to construct the jacobian matrix, the residual function and residual
-    variable arrays can each be looped over to numerically build the jacobian
-    matrix as seen in figure \ref{fig:Jacobian_Setup}. 
+    lists can be appended in any order, but they have to be appended
+    simultaneously such that variables and functions correspond with each
+    other. Then to construct the Jacobian matrix, the residual function and
+    residual variable arrays can each be looped over to numerically build the
+    Jacobian matrix as seen in figure \ref{fig:Jacobian_Setup}. 
     
     \begin{figure}[!h]
     	\centering
     	\includegraphics[width=0.40\textwidth]{images/Jacobian_Setup}
-    	\caption{Structure of the jacobian matrix for single phase liquid}
+    	\caption{Structure of the Jacobian matrix for single phase liquid}
     	\label{fig:Jacobian_Setup}
     \end{figure}
-
-
 
 \section{Isokinetic Sine Wave Advection}
 
 Code verification is the set of procedures set in place to ensure that the code
 was written properly. The procedures can use the following as code verification
 criteria from least to most rigorous are expert judgement, error quantification,
-consistency / convergence, and order of accuracy \cite{VV_Book}. For this work
-the a Richardson Extrapolation will be used to check for convergence and order
+consistency / convergence, and order of accuracy \cite{VV_Book}. For this work,
+the Richardson Extrapolation will be used to check for convergence and order
 of accuracy of the error in space and time. As shown by the modified equation
 analysis in the previous section, the spatial and temporal order of accuracies
 should be 1. 
@@ -243,17 +241,18 @@ should be 1.
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-The verification problem is defined as a single horizontal channel problem the
-base parameters listed in table \ref{table:parameters}. The problem will have a
-fixed channel area and perimeter across the entire height of the channel with no
-grid spacers. The velocity and pressure are assumed to be constant, but small
-fluctuations may occur due to coding mistakes or numerical noise. The channel
-geometry and operating conditions are taken to be approximate a standard PWR.
-The inlet of the channel has a constant velocity with a fluctuating enthalpy
-that corresponds to a 37.5 $^\circ$C temperature change.  The length
-of the transient was defined to be quadruple the time needed for the liquid at
-the inlet to advect to the outlet.The frequency of the sine wave was defined so
-generate a full period of a spatial wave across the height of the channel. 
+The verification problem is defined as a single horizontal channel with
+base parameters listed in table \ref{table:parameters}. Channel area and
+perimeter are constant across the entire height of the channel. No grid spacers
+are present, and frictional losses are set to zero. Velocity and pressure
+are assumed to be constant, but small fluctuations may occur due to coding
+mistakes or numerical roundoff. The channel geometry and
+operating conditions approximate a standard PWR. The inlet of the channel has a
+constant velocity with a fluctuating enthalpy that corresponds to a 37.5
+$^\circ$C temperature change.  The length of the transient was defined to be
+quadruple the time needed for the liquid at the inlet to advect to the
+outlet.The frequency of the sine wave was defined to generate a full period of a
+spatial wave across the height of the channel.
 
 \begin{table}[h]
 \center
@@ -279,16 +278,17 @@ Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 \end{table}
 
 The lookup table to vary the inlet enthalpy $h$ and inlet mass
-flow rate $\dot{m}$ use smooth trignometric functions given in equations
-\ref{eq:Sine_Wave:h} and \ref{eq:Sine_Wave:m_dot}. The equations assume constant
-axial spacing $\Delta x$ and time step size $\Delta t$ where $i$ and $j$ are
-the spatial and temporal index respectively. These equations should also
+flow rate, $\dot{m}$, are genererated from equations \ref{eq:Sine_Wave:h} and
+\ref{eq:Sine_Wave:m_dot} respectively. The trignometric functions assume
+constant axial spacing, $\Delta x$, and time step size, $\Delta t$, where $i$
+and $j$ are the spatial and temporal indices. These equations should also
 behave as the known solutions throughout the entire domain of the problem. The
-enthalpy and mass flow rate should vary proportionally to the density as to
-create an isokinetic boundary condition at the inlet. However this is dependent
-on the steam tables used. A python script was used to generate the data tables
-according to trignometric equations using lookup tables that mimic the IAPWS-97
-steam tables used by the code \cite{IAPWS}.
+enthalpy and mass flow rate vary proportionally to the density such that an
+isokinetic boundary condition is created at the inlet. However, this is
+dependent on the steam tables used in generating the input and calculating the
+EOS. A python script was used to generate the data tables according to
+trignometric equations using lookup tables that mimic the IAPWS-97 steam tables
+used by the code \cite{IAPWS}.
 
 \begin{equation}
 	\label{eq:Sine_Wave:h}
@@ -311,11 +311,11 @@ steam tables used by the code \cite{IAPWS}.
 
 The comparison between the data table and the output in CTF are shown for
 enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
-\ref{fig:Inlet_m_dot} respectively. The CTF output was read from hdf5 data files
-at each point in time, which omitted the actual ghost cell where these values
+\ref{fig:Inlet_m_dot}, respectively. The CTF output was read from hdf5 data
+files at each point in time, which omitted the actual ghost cell where these values
 were applied. The CTF values are located at the nearest node to the inlet, and
-therefore will be slightly out of phase to the exact values but this effect is
-small in the figure.
+will be slightly out of phase to the exact values. For large mesh sizes this
+small discrepancy is not noticeable.
 
 \begin{figure}[!h]
 	\centering
@@ -331,13 +331,13 @@ small in the figure.
 	\label{fig:Inlet_m_dot}
 \end{figure}
 
-For the original version of CTF there is a small discrepancy in the way the
-density is calculated at the inlet that causes the velocity to be non-constant.
+ For the original version of CTF, there is a small discrepancy in the way the
+ density is calculated at the inlet that causes the velocity to be non-constant.
 %as shown in figure \ref{fig:Inlet_vel}.
  This is considered small for this problem and should not greatly affect the
  order of accuracy. The residual formulation was coded in such a way as to avoid
  this problem and has considerably less fluctuation in the inlet velocity. The
- hdf5 output files allow for a high level of precision of the code, reducing
+ hdf5 output files allow for a high level of precision, reducing
  round off error in the output. 
 
 \subsection{Code Convergence}
@@ -348,19 +348,19 @@ transient and steady state problems as shown in figure
 \ref{fig:Code_Convergence:Original}. For this problem, the solid energy storage
 is zero since there are not any heat structures present. The fluctuating values
 represent differences between the energy and mass entering and leaving the
-system.
+system. 
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
-	\caption{Code Convergence Criteria for the original version of CTF}
+	\caption{Code Convergence Criteria for the Original Version of CTF}
 	\label{fig:Code_Convergence:Original}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
-	\caption{Summation of the residuals for the residual version of CTF}
+	\caption{Summation of the Residuals for the Residual Version of CTF}
 	\label{fig:Residuals_Plot}
 \end{figure}
 
@@ -371,8 +371,6 @@ the code convergence criteria are much smaller for the residual formulation.
 These residuals provide a much better indication as to the level of error present in
 the solution of the system. They can even be expanded to provide convergence
 information at every position, variable, and equation. 
-
-
 
 %\subsection{Error Quantification}
 %
