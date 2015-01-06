@@ -433,6 +433,10 @@ information at every position, variable, and equation.
     followed by the truncation terms. Notice how the terms on the right are
     dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
     on the second derivatives of density with respect to space and time.
+    This means that the mass conservation equation has an order of accuracy
+    of 1. When the energy eqution undergoes a similar modified eqution analysis,
+    the order of accuracy is also 1. The momentum conservation equation should
+    does not apply for this problem since the velocity is constant. 
     
     \begin{equation}
     	\label{eq:MEA_start}
@@ -555,7 +559,7 @@ function of temporal and spatial step size respectively.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{images/Temporal_Study/Difference_h}
+	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Difference_h}
 	\caption{Difference Between Successive Temporal Refinements}
 	\label{fig:Temporal:Diff_h}
 \end{figure} 
@@ -571,7 +575,7 @@ showed similar trends.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{images/Spatial_Study/Difference_h}
+	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Difference_h}
 	\caption{Difference Between Successive Temporal Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
@@ -605,7 +609,7 @@ decreasing mesh size.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}
@@ -618,7 +622,7 @@ equation analysis.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
 	\caption{Spatial Order of Accuracy}
 	\label{fig:Spatial:OOA}
 \end{figure}
