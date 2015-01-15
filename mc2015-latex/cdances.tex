@@ -232,9 +232,9 @@ was written properly. The procedures can use the following as code verification
 criteria from least to most rigorous are expert judgement, error quantification,
 consistency / convergence, and order of accuracy \cite{VV_Book}. For this work,
 the Richardson Extrapolation will be used to check for convergence and order
-of accuracy of the error in space and time. As shown by the modified equation
-analysis in the previous section, the spatial and temporal order of accuracies
-should be 1. 
+of accuracy of the error in space and time. The error should converge to zero,
+and the order of accuracy should converge to the values obtained through the
+modified equation analysis at the end of this section.
  
 \subsection{Problem Setup}
 
@@ -345,10 +345,11 @@ small discrepancy is not noticeable.
 The current version of CTF uses global code convergence criteria that are
 used to estimate the error associated with the solution of the code for
 transient and steady state problems as shown in figure
-\ref{fig:Code_Convergence:Original}. For this problem, the solid energy storage
-is zero since there are not any heat structures present. The fluctuating values
-represent differences between the energy and mass entering and leaving the
-system. 
+\ref{fig:Code_Convergence:Original}. The mass terms are in units of
+$\frac{kg}{s}$, and the energy terms in units of $kW$. For this problem, the
+solid energy storage is zero since there are not any heat structures present.
+The fluctuating values represent differences between the energy and mass
+entering and leaving the system.
 
 \begin{figure}[!h]
 	\centering
@@ -364,13 +365,16 @@ system.
 	\label{fig:Residuals_Plot}
 \end{figure}
 
-The residual formulation prints out the summation of the residuals functions
+The residual formulation prints out the summation of the equation residuals
 across the domain to an output file for each time step and can be seen in
-figure \ref{fig:Residuals_Plot}. The mass balance and energy balances present in
-the code convergence criteria are much smaller for the residual formulation.
-These residuals provide a much better indication as to the level of error present in
-the solution of the system. They can even be expanded to provide convergence
-information at every position, variable, and equation. 
+figure \ref{fig:Residuals_Plot}. The mass equation residual is in units of
+$\frac{kg}{m^{3}s}$. The energy equation residual is in units of
+$\frac{kW}{m^{3}}$. The momentum residual is in units of
+$\frac{kg}{m^{2}s^{2}}$. The mass balance and energy balances present in the
+code convergence criteria are much smaller for the residual formulation.
+These residuals provide a much better indication as to the level of error
+present in the solution of the system. They can even be expanded to provide
+convergence information at every position, variable, and equation. 
 
 %\subsection{Error Quantification}
 %
@@ -390,11 +394,12 @@ information at every position, variable, and equation.
 
 \subsection{Modified Equation Analysis}
     
-    The original mass balance equation can be re-written to 
-    look like equation \ref{eq:isokinetic_start}. Using upwinding, the finite difference
-    can be written to look like equation \ref{eq:mass_isok_fd}. A second order Taylor 
-    series approximation can be used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown 
-    in equations \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space} 
+    Because the velocity is constant, it can be pulled out of the spatial
+    derivative as shown in equation \ref{eq:isokinetic_start}. Using upwinding,
+    the finite difference can be written to look like equation
+    \ref{eq:mass_isok_fd}. A second order Taylor series approximation can be
+    used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown in equations
+    \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space}
     respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
     not taken into account for this approximation. The Taylor series
     approximations can then be substituted into \ref{eq:mass_isok_fd} to yield
@@ -536,7 +541,7 @@ information at every position, variable, and equation.
 The richardson extrapolation was performed by refining the spatial and temporal
 step sizes by a factor of 2 for a set number of times. The spatial and temporal
 studies are refined separately in their own study in order to isolate the
-spatial and temporal affects on the the solution. The generation of the inputs,
+spatial and temporal affects on the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
 script in order to reduce user input errors and increase repeatability. With
 each additional refinement level, the amount of computational resources doubles.
@@ -617,7 +622,7 @@ decreasing mesh size.
 The slight differences between the original version of CTF and the residual
 formulation might be due to the different solution methods and back substitution
 of variables. Despite the small differences, both versions of the code exhibit
-order of accuracies very close the the values obtained through the modified
+order of accuracies very close the values obtained through the modified
 equation analysis.
 
 \begin{figure}[!h]
