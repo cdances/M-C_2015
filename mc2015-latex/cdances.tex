@@ -69,7 +69,7 @@ the velocity within the channel constant. The constant velocity simplifies the m
 equation analysis and the order of accuracy is readily obtained. A Richardson
 extrapolation is performed on the problem on the temporal and spatial step sizes
 to determine the convergence and order of accuracy of the discretization error.
-While extensive valdiation work has been present for CTF, there has been little
+While extensive validation work has been present for CTF, there has been little
 to no verification work previously. 
 
 \emph{Key Words}: CTF, thermal hydraulic, verifiation, residual, Richardson
@@ -435,13 +435,7 @@ convergence information at every position, variable, and equation.
     \ref{eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
     t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
     can the be re-written into equation \ref{eq:MEA_p1}, with the original PDE
-    followed by the truncation terms. Notice how the terms on the right are
-    dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
-    on the second derivatives of density with respect to space and time.
-    This means that the mass conservation equation has an order of accuracy
-    of 1. When the energy eqution undergoes a similar modified eqution analysis,
-    the order of accuracy is also 1. The momentum conservation equation should
-    does not apply for this problem since the velocity is constant. 
+    followed by the truncation terms. 
     
     \begin{equation}
     	\label{eq:MEA_start}
@@ -461,13 +455,23 @@ convergence information at every position, variable, and equation.
     	 = 0
     \end{equation}
     
+    The terms to the right of the original PDE are the first order accurate
+    truncation terms. Notice how the truncation error is  dependent on both the
+    on the second derivatives of density with respect to space and time, and on
+    the numerical spacing $\Delta t$ and $\Delta x$. Since the truncation
+    error is linearly dependent on $\Delta t$ and $\Delta x$, the order of
+    accuracy is 1 with respect to time and space. When the energy equation
+    undergoes a similar modified eqution analysis, the order of accuracy is also
+    1 for time and space. The momentum conservation equation should does not
+    apply for this problem since the velocity is constant.
+    
     \begin{equation}
     	\label{eq:MEA_p1}
     	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} + 
     	 \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t -
     	   U_{0}  \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x  
     	   + O(\Delta x^{2},\Delta t^{2}) = 0 
-    \end{equation} \linebreak
+    \end{equation} 
     
 %    Before we can procede, we need to take the derivative of the original PDE with respect
 %    to space and time as shown in equations \ref{eq:mass_dt} and  \ref{eq:mass_dx} 
@@ -589,7 +593,7 @@ showed similar trends.
 
 The order of accuracy for this verification problem is first order as shown by
 the modified equation analysis. This can be considered to be the exponent on
-the power fits as seen in figures \ref{fig:Temporal:Diff_h}. However the order
+the power fits as seen in figures \ref{fig:Temporal:Diff_rho}. However the order
 of accuracy $p$ can be calculated by using equation \ref{eq:OOA} where $f_{1}$,
 $f_{2}$, $f_{3}$ are consecutive levels within the same Richardson extrapolation
 study. The refinement factor, $R$, has the constant value of 2 for both the
@@ -650,6 +654,8 @@ equation analysis.
 %
 %The computational time of the two methods for different computational sizes.
 %Compare the semi-implicit and fully implicit methods at 0.5 , 1.0, and 2.0 CFL. 
+
+\pagebreak
 
 \section{Conclusions}
 
