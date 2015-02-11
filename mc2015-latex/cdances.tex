@@ -230,13 +230,13 @@ of the terms are steady state spatial terms.
 \section{Isokinetic Sine Wave Advection}
 
 Code verification is the set of procedures set in place to ensure that the code
-was written properly. The procedures can use the following as code verification
-criteria from least to most rigorous are expert judgement, error quantification,
-consistency / convergence, and order of accuracy \cite{VV_Book}. For this work,
-the Richardson Extrapolation will be used to check for convergence and order
-of accuracy of the error in space and time. The error should converge to zero,
-and the order of accuracy should converge to the values obtained through the
-modified equation analysis at the end of this section.
+was written properly. From least to most rigorous, the procedures are expert
+judgement, error quantification, consistency / convergence, and order of
+accuracy \cite{VV_Book}. For this work, the Richardson Extrapolation will be
+used to check for convergence and order of accuracy of the error in space and
+time. The error should converge to zero, and the order of accuracy should
+converge to the values obtained through the modified equation analysis at the
+end of this section.
  
 \subsection{Problem Setup}
 
@@ -250,8 +250,8 @@ are present, and frictional losses are set to zero. Velocity and pressure
 are assumed to be constant, but small fluctuations may occur due to numerical
 roundoff. The channel geometry and operating conditions approximate a standard
 PWR. The inlet of the channel has a constant velocity with a fluctuating
-enthalpy that corresponds to a 37.5 $^\circ$C temperature change.  The length of
-the transient was defined to be quadruple the time needed for the liquid at the
+enthalpy that corresponds to a standard PWR rod bundle coolant channel..  The
+length of the transient was defined to be quadruple the time needed for the liquid at the
 inlet to advect to the outlet.The frequency of the sine wave was defined to
 generate a full period of a spatial wave across the length of the channel.
 
@@ -344,12 +344,11 @@ small discrepancy is not noticeable.
 \subsection{Code Convergence}
 
 The current version of CTF uses global code convergence criteria that are
-used to estimate the error associated with the solution of the code for
-transient and steady state problems. The transient values of these criteria are
-shown in figure \ref{fig:Code_Convergence:Original} for the original version of
-CTF simulating the verification problem. The mass terms are in units of
-$\frac{kg}{s}$, and the energy terms in units of $kW$. The solid energy storage
-is zero since there are not any heat structures present. The fluctuating values
+used to estimate the rate of change of global mass and energy conservation. The
+transient values of these criteria are shown in figure \ref{fig:Code_Convergence:Original} for the original version of
+CTF simulating the verification problem. Mass balance and storage are in units
+of $\frac{kg}{s}$. The energy balance, fluid energy, and solid energy are in units of $kW$.
+The solid energy storage is zero since there are not any heat structures present. The fluctuating values
 represent differences between the energy and mass entering and leaving the
 system. The flat profile for the mass storage term means that the sine wave has
 fully developed spatially through the channel. 
@@ -373,10 +372,8 @@ across the domain to an output file at the end of each time step and can be seen
 in figure \ref{fig:Residuals_Plot}. The mass equation residual is in units of
 $\frac{kg}{m^{3}s}$. The energy equation residual is in units of
 $\frac{kW}{m^{3}}$. The momentum residual is in units of
-$\frac{kg}{m^{2}s^{2}}$. The flat profile of the The residuals could have
-expanded to provide convergence information at every position, variable, and equation. This would be
-useful if any localized phenomenon was causing instabilities are numerical
-error.
+$\frac{kg}{m^{2}s^{2}}$. The flat profile of the mass and energy residuals shows
+that the sine wave has fully developed spatially through the channel.
 
 %\subsection{Error Quantification}
 %
@@ -396,17 +393,20 @@ error.
 
 \subsection{Modified Equation Analysis}
     
-    Because the velocity is constant, it can be pulled out of the spatial
-    derivative as shown in equation \ref{eq:isokinetic_start}. Using upwinding,
-    the finite difference can be written to look like equation
-    \ref{eq:mass_isok_fd}. A second order Taylor series approximation can be
-    used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown in equations
-    \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space}
-    respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
-    not taken into account for this approximation. The Taylor series
-    approximations can then be substituted into \ref{eq:mass_isok_fd} to yield
-    \ref{eq:MEA_start}. This is the beginning of the modified equation analysis.
-    The goal will be to isolate the original PDE and define the truncation error.
+    
+    The order of accuracy in time and space can be analytically determined for
+    this problem through a modified equation analysis. Because the velocity is
+    constant, it can be pulled out of the spatial derivative as shown in
+    equation \ref{eq:isokinetic_start}. Using upwinding, the finite difference
+    can be written to look like equation \ref{eq:mass_isok_fd}.  A second order
+    Taylor series approximation can  be used for $\rho_{i}^{n+1}$  and
+    $\rho_{i-1}^{n}$ as shown in equations \ref{eq:rho_taylor_series_time} and
+    \ref{eq:rho_taylor_series_space} respectively. The higher order terms
+    ($O(\Delta x^{2},\Delta t^{2} )$) are not taken into account for this
+    approximation. The Taylor series approximations can then be substituted into
+    \ref{eq:mass_isok_fd} to yield \ref{eq:MEA_start}. This is the beginning of
+    the modified equation analysis. The goal will be to isolate the original PDE
+    and define the truncation error.
     
     \begin{equation}
     	\label{eq:isokinetic_start}
@@ -436,7 +436,7 @@ error.
     The lengthy equation \ref{eq:MEA_start} can be reduced to equation
     \ref{eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
     t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
-    can the be re-written into equation \ref{eq:MEA_p1}, with the original PDE
+    can be re-written into equation \ref{eq:MEA_p1}, with the original PDE
     followed by the truncation terms. 
     
     \begin{equation}
@@ -561,13 +561,14 @@ compared to the temporal analysis.
 
 \subsection{Convergence of Error}
 
-The relative difference at each point for a particular time step was calculated
-between each iteration for each quantity of interest. For the spatial
-refinement, the lower iterate values were numerically integrated to match the
-shape of the initial domain. The errors were then summed over the entire domain
-to yield a total error for each variable. The total error for density is
-plotted in figures \ref{fig:Temporal:Diff_rho} and \ref{fig:Spatial:Diff_rho} as
-a function of temporal and spatial step size. 
+The difference between iterations was computed at each time step and spatial
+location for each quanitity of interest. This difference is considered as the
+error between each iteration. For the spatial refinement, the lower iterate
+values were numerically integrated to match the shape of the initial domain. The
+errors were then summed over the entire domain to yield a total error for each
+variable. The total error for density is plotted in figures
+\ref{fig:Temporal:Diff_rho} and \ref{fig:Spatial:Diff_rho} as a function of
+temporal and spatial step size.
 
 \begin{figure}[!h]
 	\centering
