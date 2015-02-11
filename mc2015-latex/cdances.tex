@@ -46,10 +46,10 @@
 
 \begin{abstract}
 Nuclear engineering codes are being used to simulate more challenging problems
-and at higher fidelities than they were initially developed for. In order to
-expand the capabilities of these codes, state of the art numerical methods and
-computer science need to be implemented. One of the key players in this effort
-is the Consortium for Advanced Simulation of Light Water Reactors (CASL) through
+and at higher fidelities than for which they were initially developed for. In
+order to expand the capabilities of these codes, state of the art numerical methods and
+software quality measures need to be implemented. One of the key players in this
+effort is the Consortium for Advanced Simulation of Light Water Reactors (CASL) through
 development of the Virtual Environment for Reactor Applications (VERA). The
 sub-channel thermal hydraulic code used in VERA, COBRA-TF (Coolant-Boiling in
 Rod Arrays - Three Fluids), is partially developed at the Pennsylvania State
@@ -90,36 +90,37 @@ extrapolation, CASL
 \section{Introduction}
 
 For the past several decades, the primary focus in nuclear engineering within
-the United States has been focused on light water reactors (LWR). Commercially,
+the United States has been on light water reactors (LWR). Commercially,
 all nuclear reactors are either boiling water reactors (BWR) or pressurized
 water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to efficient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics within the reactor core
-is CTF. This FORTRAN based code solves 8 conservation equations for liquid,
-entrained droplet, and vapor phases in 3-D dimensions \cite{CTF_Theory}. A 1-D
-residual formulation of the code has been created. This paper outlines an
-initial verification of the original version of code as well as the residual
-version of the code. The verification problem is a single phase 1-D channel with
-transient inlet density and mass flow rate. The problem will undergo a
-Richardson's extrapolation in the temporal and spatial domains to verify the
-convergence and order of accuracy of the error. The study of the order of
-accuracy is considered one of the more rigorous verification criteria
-\cite{VV_review}.
+is CTF, which is a subchannel thermal-hydraulics code developed from
+COBRA-TF \cite{CTF_Theory}. This FORTRAN based code solves 8 conservation
+equations for liquid, entrained droplet, and vapor phases phases, plus one
+conservation equation for non-condensable gases. A 1-D residual formulation of
+the code has been created. This paper outlines an initial verification of the
+original version of the code as well as the residual version of the code. The
+verification problem is a single phase 1-D channel with transient inlet density
+and mass flow rate. The problem will undergo a Richardson's extrapolation in the
+temporal and spatial domains to verify the convergence and order of accuracy of
+the error. The study of the order of accuracy is considered one of the more
+rigorous verification criteria \cite{VV_review}.
 
 \section{CTF}
 
 The thermal hydraulics of a LWR core is an important part of nuclear
 reactor design. CTF solves 8 conservation equations for liquid,
 entrained droplet, and vapor phases of water boiling within the rod structure
-of a LWR reactor core \cite{CTF_Theory}. Currently, the conservation
+of a LWR reactor core. Currently, the conservation
 equations analytically reduce into a pressure matrix in a semi-implicit
 method with rod temperatures solved for explicitly. The residual formulation of
 the code currently solves the 1-D single phase liquid conservation equations and
 calculated variables in a residual formulation. While it has the ability to
-solve the code semi-implicitly or implicitly, only the semi-implicit
-solution method is considered in this paper. This residual formulation should
-allow for easier and more in depth verification  analysis. This paper details
-the initial comparison of the residual  formulation to the original code.
+solve the conservation equations semi-implicitly or implicitly, only the
+semi-implicit solution method is considered in this paper. This residual
+formulation should allow for easier and more in depth verification  analysis.
+This paper details the initial comparison of the residual  formulation to the original code.
 
 \subsection{Software Quality Assurance}
 
@@ -157,9 +158,11 @@ dimensions.
 The single phase Euler partial differential equations for mass
 \eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
 \eqref{eq:pde_energy} correspond to the unknown variables density $\rho$,
-velocity $u$, pressure $P$, and enthalpy $h$. The first terms in each of the
-equations are temporal terms. The rest of the terms are steady state spatial
-terms. 
+velocity $u$, pressure $P$, and enthalpy $h$. In the residual formulation, each
+conservation equation has transeint and steady state subfunctions. The transient
+function evaluate the partial derivatives with respect to time, and the steady
+state function evaluate the parital derivatives with respect to space. This
+allows for a direct steady state solution in the residual formulation.
     
     \begin{equation}
     	\label{eq:pde_mass}
@@ -182,17 +185,18 @@ terms.
 
 \subsection{Residual Formulation and Jacobian Construction}
 
-	A residual is simply the difference between the value at some future time
-    $n+1$ and the value at the current iteration $k$. This can be applied to
-    desired variables and equations. For example, the residual for density,
-    $\delta \rho_{i}$, is the difference between iterate levels
-    $n+1$ and $k$, $\rho^{n+1}_{i} - \rho^{k}_{i}$. The residuals for the
-    equations are determined by substituting the residuals into the discretized
-    equations, which should effectively change all $n+1$ into $k$. Each cell
-    will have three residual variables and three residual equations. For the
-    entire solution, we will then have a residual variable array $\delta X$, and
-    a residual function array $F(X)$ which defines a linear system $J \delta X =
-    - F(X)$.
+	A residual is simply the difference between the value at some future iteration
+    $k+1$ and the value at the current iteration $k$. Currently in CTF, the
+    future iteration is taken to be the next time step $n+1$ and the
+    current iteration is the current time $n$. The residual can be expressed for
+    desired variables or conservation equations. For example, the residual for
+    density, $\delta \rho_{i}$, is the difference between iterate levels $k+1$
+    and $k$, $\rho^{k+1}_{i} - \rho^{k}_{i}$. The residuals for the equations
+    are determined by substituting the residuals into the discretized equations,
+    which should effectively change all $n+1$ into $k$. Each cell will have
+    three residual variables and three residual equations. For the entire
+    solution, we will then have a residual variable array $\delta X$, and a
+    residual function array $F(X)$ which defines a linear system $J \delta X = - F(X)$.
     
     The Jacobian matrix is defined as the derivative
     of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
@@ -214,7 +218,7 @@ terms.
     array that has the index that the function is to be evaluated at. These
     lists can be appended in any order, but they have to be appended
     simultaneously such that variables and functions correspond with each
-    other. Then to construct the Jacobian matrix, the residual function and
+    other. To construct the Jacobian matrix, the residual function and
     residual variable arrays can each be looped over to numerically build the
     Jacobian matrix as seen in figure \ref{fig:Jacobian_Setup}. 
     
@@ -243,16 +247,15 @@ should be 1.
 
 The verification problem is defined as a single horizontal channel with
 base parameters listed in table \ref{table:parameters}. Channel area and
-perimeter are constant across the entire height of the channel. No grid spacers
+perimeter are constant across the entire length of the channel. No grid spacers
 are present, and frictional losses are set to zero. Velocity and pressure
-are assumed to be constant, but small fluctuations may occur due to coding
-mistakes or numerical roundoff. The channel geometry and
-operating conditions approximate a standard PWR. The inlet of the channel has a
-constant velocity with a fluctuating enthalpy that corresponds to a 37.5
-$^\circ$C temperature change.  The length of the transient was defined to be
-quadruple the time needed for the liquid at the inlet to advect to the
-outlet.The frequency of the sine wave was defined to generate a full period of a
-spatial wave across the height of the channel.
+are assumed to be constant, but small fluctuations may occur due to numerical
+roundoff. The channel geometry and operating conditions approximate a standard
+PWR. The inlet of the channel has a constant velocity with a fluctuating
+enthalpy that corresponds to a 37.5 $^\circ$C temperature change.  The length of
+the transient was defined to be quadruple the time needed for the liquid at the
+inlet to advect to the outlet.The frequency of the sine wave was defined to
+generate a full period of a spatial wave across the length of the channel.
 
 \begin{table}[h]
 \center
@@ -261,7 +264,7 @@ spatial wave across the height of the channel.
 \begin{tabular}{|c|c|c|c|}
 \hline
 Parameter	&	Symbol	&	Value	&	Unit	\\ \hline
-Axial Height	&	$H$	&	3.6586	&	$m$	\\ \hline
+Axial Length	&	$L$	&	3.6586	&	$m$	\\ \hline
 Channel Area	&	$A_{ch}$	&	4.94E-005	&	$m^{2}$	\\ \hline
 Wetted Perimeter	&	$P_{w}$	&	1.49E-002	&	$m$	\\ \hline
 Velocity	&	$V_{o}$	&	7.35	&	$\frac{m}{s}$	\\ \hline
@@ -331,14 +334,14 @@ small discrepancy is not noticeable.
 	\label{fig:Inlet_m_dot}
 \end{figure}
 
- For the original version of CTF, there is a small discrepancy in the way the
- density is calculated at the inlet that causes the velocity to be non-constant.
+% For the original version of CTF, there is a small discrepancy in the way the
+% density is calculated at the inlet that causes the velocity to be non-constant.
 %as shown in figure \ref{fig:Inlet_vel}.
- This is considered small for this problem and should not greatly affect the
- order of accuracy. The residual formulation was coded in such a way as to avoid
- this problem and has considerably less fluctuation in the inlet velocity. The
+ The pressure and the velocity fluctuate by about $0.5\%$ during the simulation.
+ This is considered small for this problem and should
+ not greatly affect the order of accuracy.  The
  hdf5 output files allow for a high level of precision, reducing
- round off error in the output. 
+ round off error in the output during the post processing.
 
 \subsection{Code Convergence}
 
@@ -536,7 +539,7 @@ information at every position, variable, and equation.
 The richardson extrapolation was performed by refining the spatial and temporal
 step sizes by a factor of 2 for a set number of times. The spatial and temporal
 studies are refined separately in their own study in order to isolate the
-spatial and temporal affects on the the solution. The generation of the inputs,
+spatial and temporal affects on the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
 script in order to reduce user input errors and increase repeatability. With
 each additional refinement level, the amount of computational resources doubles.
@@ -576,7 +579,7 @@ showed similar trends.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Difference_h}
-	\caption{Difference Between Successive Temporal Refinements}
+	\caption{Difference Between Successive Spatial Refinements}
 	\label{fig:Spatial:Diff_h}
 \end{figure} 
 
@@ -617,7 +620,7 @@ decreasing mesh size.
 The slight differences between the original version of CTF and the residual
 formulation might be due to the different solution methods and back substitution
 of variables. Despite the small differences, both versions of the code exhibit
-order of accuracies very close the the values obtained through the modified
+order of accuracies very close the values obtained through the modified
 equation analysis.
 
 \begin{figure}[!h]
