@@ -69,7 +69,7 @@ the velocity within the channel constant. The constant velocity simplifies the m
 equation analysis and the order of accuracy is readily obtained. A Richardson
 extrapolation is performed on the problem on the temporal and spatial step sizes
 to determine the convergence and order of accuracy of the discretization error.
-While extensive valdiation work has been present for CTF, there has been little
+While extensive validation work has been present for CTF, there has been little
 to no verification work previously. 
 
 \emph{Key Words}: CTF, thermal hydraulic, verifiation, residual, Richardson
@@ -157,12 +157,10 @@ dimensions.
 
 The single phase Euler partial differential equations for mass
 \eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
-\eqref{eq:pde_energy} correspond to the unknown variables density $\rho$,
-velocity $u$, pressure $P$, and enthalpy $h$. In the residual formulation, each
-conservation equation has transeint and steady state subfunctions. The transient
-function evaluate the partial derivatives with respect to time, and the steady
-state function evaluate the parital derivatives with respect to space. This
-allows for a direct steady state solution in the residual formulation.
+\eqref{eq:pde_energy} correspond to the unknown variables pressure $P$,
+velocity $u$, and enthalpy $h$. Density $\rho$ is related through the equation
+of state. The first terms in each of the equations are temporal terms. The rest
+of the terms are steady state spatial terms. 
     
     \begin{equation}
     	\label{eq:pde_mass}
@@ -236,9 +234,9 @@ was written properly. The procedures can use the following as code verification
 criteria from least to most rigorous are expert judgement, error quantification,
 consistency / convergence, and order of accuracy \cite{VV_Book}. For this work,
 the Richardson Extrapolation will be used to check for convergence and order
-of accuracy of the error in space and time. As shown by the modified equation
-analysis in the previous section, the spatial and temporal order of accuracies
-should be 1. 
+of accuracy of the error in space and time. The error should converge to zero,
+and the order of accuracy should converge to the values obtained through the
+modified equation analysis at the end of this section.
  
 \subsection{Problem Setup}
 
@@ -347,11 +345,14 @@ small discrepancy is not noticeable.
 
 The current version of CTF uses global code convergence criteria that are
 used to estimate the error associated with the solution of the code for
-transient and steady state problems as shown in figure
-\ref{fig:Code_Convergence:Original}. For this problem, the solid energy storage
+transient and steady state problems. The transient values of these criteria are
+shown in figure \ref{fig:Code_Convergence:Original} for the original version of
+CTF simulating the verification problem. The mass terms are in units of
+$\frac{kg}{s}$, and the energy terms in units of $kW$. The solid energy storage
 is zero since there are not any heat structures present. The fluctuating values
 represent differences between the energy and mass entering and leaving the
-system. 
+system. The flat profile for the mass storage term means that the sine wave has
+fully developed spatially through the channel. 
 
 \begin{figure}[!h]
 	\centering
@@ -367,13 +368,15 @@ system.
 	\label{fig:Residuals_Plot}
 \end{figure}
 
-The residual formulation prints out the summation of the residuals functions
-across the domain to an output file for each time step and can be seen in
-figure \ref{fig:Residuals_Plot}. The mass balance and energy balances present in
-the code convergence criteria are much smaller for the residual formulation.
-These residuals provide a much better indication as to the level of error present in
-the solution of the system. They can even be expanded to provide convergence
-information at every position, variable, and equation. 
+The residual formulation prints out the summation of the equation residuals
+across the domain to an output file at the end of each time step and can be seen
+in figure \ref{fig:Residuals_Plot}. The mass equation residual is in units of
+$\frac{kg}{m^{3}s}$. The energy equation residual is in units of
+$\frac{kW}{m^{3}}$. The momentum residual is in units of
+$\frac{kg}{m^{2}s^{2}}$. The flat profile of the The residuals could have
+expanded to provide convergence information at every position, variable, and equation. This would be
+useful if any localized phenomenon was causing instabilities are numerical
+error.
 
 %\subsection{Error Quantification}
 %
@@ -393,11 +396,12 @@ information at every position, variable, and equation.
 
 \subsection{Modified Equation Analysis}
     
-    The original mass balance equation can be re-written to 
-    look like equation \ref{eq:isokinetic_start}. Using upwinding, the finite difference
-    can be written to look like equation \ref{eq:mass_isok_fd}. A second order Taylor 
-    series approximation can be used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown 
-    in equations \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space} 
+    Because the velocity is constant, it can be pulled out of the spatial
+    derivative as shown in equation \ref{eq:isokinetic_start}. Using upwinding,
+    the finite difference can be written to look like equation
+    \ref{eq:mass_isok_fd}. A second order Taylor series approximation can be
+    used for $\rho_{i}^{n+1}$ and $\rho_{i-1}^{n}$ as shown in equations
+    \ref{eq:rho_taylor_series_time} and \ref{eq:rho_taylor_series_space}
     respectively. The higher order terms ($O(\Delta x^{2},\Delta t^{2} )$) are
     not taken into account for this approximation. The Taylor series
     approximations can then be substituted into \ref{eq:mass_isok_fd} to yield
@@ -433,13 +437,7 @@ information at every position, variable, and equation.
     \ref{eq:MEA_p0} since the $\rho_{i}^{n}$ terms subtract out and the $\Delta
     t$ and $\Delta x$ terms in the denominator cancel out. This reduced equation
     can the be re-written into equation \ref{eq:MEA_p1}, with the original PDE
-    followed by the truncation terms. Notice how the terms on the right are
-    dependent on both the numerical spacing $\Delta t$ and $\Delta x$, but also
-    on the second derivatives of density with respect to space and time.
-    This means that the mass conservation equation has an order of accuracy
-    of 1. When the energy eqution undergoes a similar modified eqution analysis,
-    the order of accuracy is also 1. The momentum conservation equation should
-    does not apply for this problem since the velocity is constant. 
+    followed by the truncation terms. 
     
     \begin{equation}
     	\label{eq:MEA_start}
@@ -459,13 +457,25 @@ information at every position, variable, and equation.
     	 = 0
     \end{equation}
     
+    The terms to the right of the original PDE are the first order accurate
+    truncation terms. Notice how the truncation error is  dependent on both the
+    on the second derivatives of density with respect to space and time, and on
+    the numerical spacing $\Delta t$ and $\Delta x$. Since the truncation
+    error is linearly dependent on $\Delta t$ and $\Delta x$, the order of
+    accuracy is 1 with respect to time and space. 
+    
     \begin{equation}
     	\label{eq:MEA_p1}
     	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} + 
     	 \frac{1}{2} \frac{\partial^2 \rho}{\partial t^2} \Delta t -
     	   U_{0}  \frac{1}{2} \frac{\partial^2 \rho}{\partial x^2} \Delta x  
     	   + O(\Delta x^{2},\Delta t^{2}) = 0 
-    \end{equation} \linebreak
+    \end{equation} 
+    
+    When the energy equation undergoes a similar modified eqution analysis, the
+    order of accuracy is also 1 for time and space. The momentum conservation
+    equation does not apply for this problem since the velocity is
+    constant.
     
 %    Before we can procede, we need to take the derivative of the original PDE with respect
 %    to space and time as shown in equations \ref{eq:mass_dt} and  \ref{eq:mass_dx} 
@@ -536,19 +546,18 @@ information at every position, variable, and equation.
 
 \section{Richardson Extrapolation}
 
-The richardson extrapolation was performed by refining the spatial and temporal
+The Richardson extrapolation was performed by refining the spatial and temporal
 step sizes by a factor of 2 for a set number of times. The spatial and temporal
 studies are refined separately in their own study in order to isolate the
 spatial and temporal affects on the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
-script in order to reduce user input errors and increase repeatability. With
-each additional refinement level, the amount of computational resources doubles.
-For this analysis, a significant amount of information was added to the hdf5
-output files. The spatial refinements require more computational resources
-that the temporal refinements due to the need to keep the study in the
-asymptotic range. In order to keep the computational resources needed to perform
-this analysis reasonable, fewer spatial refinements were performed compared to
-the temporal analysis. 
+script in order to reduce user input errors and increase repeatability.  For
+this analysis, a significant amount of information was added to the hdf5 output
+files, increasing memory usage and run time. The computational resources for the
+spatial study was much higher than the temporal study due to the need to keep
+the courant number below 0.500. To keep the computational resources needed
+to perform this analysis reasonable, fewer spatial refinements were performed
+compared to the temporal analysis.
 
 \subsection{Convergence of Error}
 
@@ -556,38 +565,36 @@ The relative difference at each point for a particular time step was calculated
 between each iteration for each quantity of interest. For the spatial
 refinement, the lower iterate values were numerically integrated to match the
 shape of the initial domain. The errors were then summed over the entire domain
-to yield a total error for each variable. The total error for enthalpy is
-plotted in figures \ref{fig:Temporal:Diff_h} and \ref{fig:Spatial:Diff_h} as a
-function of temporal and spatial step size respectively. 
+to yield a total error for each variable. The total error for density is
+plotted in figures \ref{fig:Temporal:Diff_rho} and \ref{fig:Spatial:Diff_rho} as
+a function of temporal and spatial step size. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Difference_h}
-	\caption{Difference Between Successive Temporal Refinements}
-	\label{fig:Temporal:Diff_h}
+	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Difference_rho}
+	\caption{Difference Between Successive Temporal Refinements for Density}
+	\label{fig:Temporal:Diff_rho}
 \end{figure} 
 
-The data points where
-chosen to be outside of the asymptotic range as shown by the good power fit
-with an exponent near 1. The fit shows that as the temporal and spatial step
-sizes are reduced, the numerical error approaches zero. The discretization error
-between the original version of CTF is relatively small and is most likely due
-to the small fluctuations in the velocity present in the original version of the
-code. While only the enthalpy is shown here, the mass flow rate and the density
-showed similar trends.
+The data points were chosen to be inside of the asymptotic range as shown by
+the good power fit with an exponent near 1. The power fit shows that as the
+temporal and spatial step sizes are reduced, the numerical error approaches
+zero. The discretization error between the original version of CTF is
+relatively small and is most likely due to the small fluctuations in the
+velocity present in the original version of the code. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Difference_h}
-	\caption{Difference Between Successive Spatial Refinements}
-	\label{fig:Spatial:Diff_h}
+	\includegraphics[width=0.55\textwidth]{images/Spatial_Study/Difference_rho}
+	\caption{Difference Between Successive Spatial Refinements for Density}
+	\label{fig:Spatial:Diff_rho}
 \end{figure} 
 
 \subsection{Order of Accuracy}
 
 The order of accuracy for this verification problem is first order as shown by
 the modified equation analysis. This can be considered to be the exponent on
-the power fits as seen in figures \ref{fig:Temporal:Diff_h}. However the order
+the power fits as seen in figures \ref{fig:Temporal:Diff_rho}. However the order
 of accuracy $p$ can be calculated by using equation \ref{eq:OOA} where $f_{1}$,
 $f_{2}$, $f_{3}$ are consecutive levels within the same Richardson extrapolation
 study. The refinement factor, $R$, has the constant value of 2 for both the
@@ -606,13 +613,13 @@ The order of accuracy for all of the variables are presented for the temporal
 analysis and spatial analysis in figures \ref{fig:Temporal:OOA} and
 \ref{fig:Spatial:OOA} respectively. The temporal order of accuracy is well
 within the asymptotic range for the whole analysis, and moves closer to 1.0 with
-decreasing time step size. The spatial order of accuracy is a little bit outside
-the asymptotic range, but also approaches an order of accuracy of 1.0 with
+decreasing time step size. The spatial order of accuracy is a slightly outside
+the asymptotic range, but approaches an order of accuracy of 1.0 with
 decreasing mesh size. 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.55\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}
@@ -625,7 +632,7 @@ equation analysis.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.55\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
 	\caption{Spatial Order of Accuracy}
 	\label{fig:Spatial:OOA}
 \end{figure}
@@ -654,21 +661,22 @@ equation analysis.
 The residual formulation of CTF allows for a numerical computation of the
 multivariable Jacobian matrix compared to the original analytical derivation of
 a pressure matrix. The 1-D isokinetic single phase liquid verification problem
-was shown to be a good verification problem through its isolation of the order
+is a good verification problem through its isolation of the order
 of accuracies through modified equation analysis. The discretization error for
 both versions of the code converged to zero with decreasing time step and axial
 mesh size. The order of accuracy for the temporal and spatial refinements
 matched very closely with the modified equation analysis for both codes. For all
 of these data points, the residual formulation of the code showed discretization
 errors that were very close with the original version of the code. Future work
-might be comparing the results with CFL number of 1 to the known solutions of
-the code. This would be a less rigorous study, but would be a quick verification
-problem that could be easily integrated into the CTF test matrix. 
+might be comparing the numerical error obtained in the code to the analytical
+error predicted by the modified equation analysis using the derivatives of the
+known solutions. While within the assymptotic range, the first order accurate
+analytical error should almost exactly match the error from the code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgments}
 
-Dr. Vince Mosseau, Dr. Maria Avramova, Dr. Kostadin Ivanov, and Nathan Porter.
+Dr. Kostadin Ivanov and everyone in the RDFMG
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\baselineskip}{12pt}
