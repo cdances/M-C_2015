@@ -96,7 +96,7 @@ water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to efficient design and accuracy in the safety analysis. A
 popular subchannel code for modelling the hydrodynamics within the reactor core
 is CTF, which is a subchannel thermal-hydraulics code developed from
-COBRA-TF \cite{CTF_Theory}. This FORTRAN based code solves 8 conservation
+COBRA-TF \cite{Salko2014}. This FORTRAN based code solves 8 conservation
 equations for liquid, entrained droplet, and vapor phases phases, plus one
 conservation equation for non-condensable gases. A 1-D residual formulation of
 the code has been created. This paper outlines an initial verification of the
@@ -105,7 +105,7 @@ verification problem is a single phase 1-D channel with transient inlet density
 and mass flow rate. The problem will undergo a Richardson's extrapolation in the
 temporal and spatial domains to verify the convergence and order of accuracy of
 the error. The study of the order of accuracy is considered one of the more
-rigorous verification criteria \cite{VV_review}.
+rigorous verification criteria \cite{Roache2002}.
 
 \section{CTF}
 
@@ -232,7 +232,7 @@ of the terms are steady state spatial terms.
 Code verification is the set of procedures set in place to ensure that the code
 was written properly. From least to most rigorous, the procedures are expert
 judgement, error quantification, consistency / convergence, and order of
-accuracy \cite{VV_Book}. For this work, the Richardson Extrapolation will be
+accuracy \cite{Oberkampf2008}. For this work, the Richardson Extrapolation will be
 used to check for convergence and order of accuracy of the error in space and
 time. The error should converge to zero, and the order of accuracy should
 converge to the values obtained through the modified equation analysis at the
@@ -289,7 +289,7 @@ isokinetic boundary condition is created at the inlet. However, this is
 dependent on the steam tables used in generating the input and calculating the
 EOS. A python script was used to generate the data tables according to
 trignometric equations using lookup tables that mimic the IAPWS-97 steam tables
-used by the code \cite{IAPWS}.
+used by the code \cite{Cooper2007}.
 
 \begin{equation}
 	\label{eq:Sine_Wave:h}

@@ -1,60 +1,85 @@
-@BOOK{ VV_Book,
-AUTHOR    = "{P. Knupp}, {K. Salari}", 
-TITLE     = "Verification of Computer Codes in Computational Science and Engineering",
-PUBLISHER = "Chapman and Hall/CRC",
-YEAR      = {2003},
-Address   = "Boca Raton, FL"
+@article{Cooper2007,
+abstract = {(The revision only relates to the extension of region 5 to 50 MPa)},
+author = {Cooper, J R and Dooley, R B},
+file = {:home/dances/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Cooper, Dooley - 2007 - The International Association for the Properties of Water and Steam Revised Release on the IAPWS Industrial Form.pdf:pdf},
+title = {{The International Association for the Properties of Water and Steam Revised Release on the IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and Steam}},
+year = {2007}
 }
-
-
-@TechReport{CTF_Theory,
-  author=       {Robert K. Salko},
-  title=        {{CTF Theory Manual}},
-  institution=  {The Pennsylvania State University},
-  year=         {2014},
-  month=        {July},
-  FILE = {references/ctf_theroy_manual}
+@article{Salko,
+abstract = {This paper describes major improvements to the computational infrastructure of the CTF subchannel code so that full-core, pincell-resolved (i.e., one computational subchannel per real bundle flow channel) simulations can now be performed in much shorter run-times, either in stand-alone mode or as part of coupled-code multi-physics calculations. These improvements support the goals of the Department Of Energy Consortium for Advanced Simulation of Light Water Reactors (CASL) Energy Innovation Hub to develop high fidelity multi-physics simulation tools for nuclear energy design and analysis. A set of serial code optimizations—including fixing computational inefficiencies, optimizing the numerical approach, and making smarter data storage choices—are first described and shown to reduce both execution time and memory usage by about a factor of ten. Next, a ''single program multiple data'' parallelization strategy targeting distributed memory ''multiple instruction multiple data'' platforms uti-lizing domain decomposition is presented. In this approach, data communication between processors is accomplished by inserting standard Message-Passing Interface (MPI) calls at strategic points in the code. The domain decomposition approach implemented assigns one MPI process to each fuel assembly, with each domain being represented by its own CTF input file. The creation of CTF input files, both for serial and parallel runs, is also fully automated through use of a pressurized water reactor (PWR) pre-processor utility that uses a greatly simplified set of user input compared with the traditional CTF input. To run CTF in parallel, two additional libraries are currently needed: MPI, for inter-processor message passing, and the Parallel Extensible Toolkit for Scientific Computation (PETSc), which is used to solve the global pressure matrix in parallel. Results presented include a set of testing and verification calculations and performance tests assessing parallel scaling characteristics up to a full-core, pincell-resolved model of a PWR core containing 193 17 \^{A} 17 assemblies under hot full-power conditions. This model, representative of Watts Bar Unit 1 and containing about 56,000 pins, was modeled with roughly 59,000 subchannels, leading to about 2.8 million thermal–hydraulic control volumes in total. Results demonstrate that CTF can now perform full-core analysis of a PWR (not previously possible owing to excessively long runtimes and memory requirements) on the order of 20 min. This new capability not only is useful to stand-alone CTF users, but also is being leveraged in support of coupled code multi-physics calculations being done in the CASL program.},
+author = {Salko, Robert K and Schmidt, Rodney C and Avramova, Maria N},
+doi = {10.1016/j.anucene.2014.11.005},
+file = {:home/dances/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Salko, Schmidt, Avramova - Unknown - Optimization and parallelization of the thermal–hydraulic subchannel code CTF for high-fidelity m.pdf:pdf},
+keywords = {Parallel MPI CTF,Subchannel COBRA-TF},
+title = {{Optimization and parallelization of the thermal–hydraulic subchannel code CTF for high-fidelity multi-physics applications}}
 }
-
-@TECHREPORT {IAPWS,
-    author      = "IAPWS",
-    title       = "Revised Release on the IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and Steam",
-    institution = "The International Association for the Properties of Water and Steam (IAPWS)",
-    year        = "2007"
+@misc{Roache2002,
+abstract = {Verification of Calculations involves error estimation, whereas Verification of Codes involves error evaluation, from known benchmark solutions. The best benchmarks are exact analytical solutions with sufficiently complex solution structure; they need not be realistic since Verification is a purely mathematical exercise. The Method of Manufactured Solutions (\{MMS\}) provides a straightforward and quite general procedure for generating such solutions. For complex codes, the method utilizes Symbolic Manipulation, but here it is illustrated with simple examples. When used with systematic grid refinement studies, which are remarkably sensitive, \{MMS\} produces strong Code Verifications with a theorem-like quality and a clearly defined completion point.},
+author = {Roache, Patrick J.},
+booktitle = {Journal of Fluids Engineering},
+doi = {10.1115/1.1436090},
+file = {:home/dances/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Roache - 2002 - Code Verification by the Method of Manufactured Solutions.pdf:pdf},
+issn = {00982202},
+title = {{Code Verification by the Method of Manufactured Solutions}},
+year = {2002}
 }
-
-@article{VV_review,
- author = {Roy, Christopher J.},
- title = {Review of Code and Solution Verification Procedures for Computational Simulation},
- journal = {J. Comput. Phys.},
- issue_date = {May 2005},
- volume = {205},
- number = {1},
- month = may,
- year = {2005},
- issn = {0021-9991},
- pages = {131--156},
- numpages = {26},
- url = {http://dx.doi.org/10.1016/j.jcp.2004.10.036},
- doi = {10.1016/j.jcp.2004.10.036},
- acmid = {1082899},
- publisher = {Academic Press Professional, Inc.},
- address = {San Diego, CA, USA},
- FILE = {references/CRoy_Verification_Review.pdf}
+@article{Frepoli2003,
+abstract = {The development of a fully-implicit scheme to model the two-phase three-field flow and heat transfer problem is presented here. The model was originally developed to simulate the complex phenomena occurring in proximity of the quench front of a nuclear reactor core during the reflood phase of a postulated LOCA. The fully-implicit method allows relative large time steps to be used even on very fine spatial grids which can not be considered when a semi-implicit scheme is applied to solve the conservation equation. The objective of this paper is to capture as much as possible, the lessons learned during the development and coding of the fully-implicit two-phase three-field model. The implementation of the model is one of the most time consuming and a challenging task. The literature on numerical models generally concentrates on the theoretical aspects of the numerical method but available information on the problems encountered during the implementation of such methods for real applications is scarce. The reason is that many of these methods are tailored to specific applications and sometimes are rather empirical. These techniques are the result of a long and tedious trial and error process from the developer. The article presented here attempts to provide some insights and guidelines for future development of this or similar models. ?? 2003 Elsevier B.V. All rights reserved.},
+author = {Frepoli, Cesare and Mahaffy, John H. and Ohkawa, Katsuhiro},
+doi = {10.1016/S0029-5493(03)00159-6},
+file = {:home/dances/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Frepoli, Mahaffy, Ohkawa - 2003 - Notes on the implementation of a fully-implicit numerical scheme for a two-phase three-field flow mode.pdf:pdf},
+isbn = {0029-5493},
+issn = {00295493},
+journal = {Nuclear Engineering and Design},
+title = {{Notes on the implementation of a fully-implicit numerical scheme for a two-phase three-field flow model}},
+year = {2003}
 }
-
-@TECHREPORT{SAND2000-1444,
-  AUTHOR =        {Kambiz Salari and Patrick Knupp},
-  TITLE =         {Code Verification by the Method of Manufactured Solutions},
-  NUMBER =        {SAND2000-1444},
-  INSTITUTION =   {Aerosciences and Compressible Fluid Mechanics Department, Parallel Computing Sciences Department at Sandia National Laboratories},
-  ADDRESS =       {P.O. Box 5800, Albuquerque, NM 87185-0825},
-  ABSTRACT =      {A procedure for code Verification by the Method of Manufactured Solutions (MMS) is presented. Although the procedure requires a certain amount of creativity and skill, we show that MMS can be applied to a variety of engineering codes which numerically solve partial differentialequations. This is illustrated by detailed examples from computational fluid dynamics. The strength of the MMS procedure is that it can identify any coding mistake that affects the order-of-accuracy of the numerical method. A set of examples which use a blind-test protocol demonstrates the kinds of
-coding mistakes that can (and cannot) be exposed via the MMS code Verification procedure.The principle advantage of the MMS procedure over traditional methods of code Verification is that code capabilities are tested in full generality. The procedure thus results in a high degree of confidence that all coding mistakes which prevent the equations from being solved correctly have been identified. },
-  KEYWORDS =      {},
-  NOTE =          {},
-  MONTH =         {June},
-  YEAR  =         {2000},
-  PAGES =         {},
-  FILE  =         {references/Sandia_MMS.pdf }
+@misc{Villatoro1999,
+abstract = {The method of modified equations is studied as a technique for the analysis of finite difference equations. The non-uniqueness of the modified equation of a difference method is stressed and three kinds of modified equations are introduced. The first modified or equivalent equation is the natural pseudo-differential operator associated to the original numerical method. Linear and nonlinear combinations of the equivalent equation and their derivatives yield the second modified or second equivalent equation and the third modified or (simply) modified equation, respectively. For linear problems with constant coefficients, the three kinds of modified equations are equivalent among them and to the original difference scheme. For nonlinear problems, the three kinds of modified equations are asymptotically equivalent in the sense that an asymptotic analysis of these equations with the time step as small parameter yields exactly the same results. In this paper, both regular and multiple scales asymptotic techniques are used for the analysis of the Euler forward difference method, and the resulting asymptotic expansions are verified for several nonlinear, autonomous, ordinary differential equations. It is shown that, when the resulting asymptotic expansion is uniformly valid, the asymptotic method yields very accurate results if the solution of the leading order equation is smooth and does not blow up, even for large step sizes.},
+author = {Villatoro, F.R. and Ramos, J.I.},
+booktitle = {Applied Mathematics and Computation},
+doi = {10.1016/S0096-3003(98)10031-0},
+file = {:home/dances/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Villatoro, Ramos - 1999 - On the method of modified equations. I Asymptotic analysis of the Euler forward difference method.pdf:pdf},
+issn = {00963003},
+title = {{On the method of modified equations. I: Asymptotic analysis of the Euler forward difference method}},
+year = {1999}
+}
+@article{Roy2005,
+abstract = {Computational simulation can be defined as any computer application which involves the numerical solution to a system of partial differential equations. In this paper, a broad overview is given of verification procedures for computational simulation. The two aspects of verification examined are code verification and solution verification. Code verification is a set of procedures developed to find coding mistakes that affect the numerical discretization. The method of manufactured solutions combined with order of accuracy verification is recommended for code verification, and this procedure is described in detail. Solution verification is used to estimate the numerical errors that occur in every computational simulation. Both round-off and iterative convergence errors are discussed, and a posteriori methods for estimating the discretization error are examined. Emphasis is placed on discretization error estimation methods based on Richardson extrapolation as they are equally applicable to any numerical method. Additional topics covered include calculating the observed order of accuracy, error bands, and practical aspects of mesh refinement. ?? 2004 Elsevier Inc. All rights reserved.},
+author = {Roy, Christopher J.},
+doi = {10.1016/j.jcp.2004.10.036},
+file = {:home/dances/Github/M-C\_2015/mc2015-latex/references/CRoy\_Verification\_Review.pdf:pdf},
+isbn = {0021-9991},
+issn = {00219991},
+journal = {Journal of Computational Physics},
+pages = {131--156},
+title = {{Review of code and solution verification procedures for computational simulation}},
+volume = {205},
+year = {2005}
+}
+@article{Salko2014,
+author = {Salko, Robert K},
+file = {:home/dances/Github/M-C\_2015/mc2015-latex/references/ctf\_theory\_manual.pdf:pdf},
+number = {814},
+title = {{CTF Theory Manual}},
+year = {2014}
+}
+@article{Lloyd2014,
+author = {Lloyd, Lewis John},
+file = {:home/dances/Github/M-C\_2015/mc2015-latex/references/lloyd-dissertation.pdf:pdf},
+title = {{Acknowledgments}},
+year = {2014}
+}
+@article{Oberkampf2008,
+abstract = {Verification and validation (V\&V) are the primary means to assess the accuracy and reliability of computational simulations. V\&V methods and procedures have fundamentally improved the credibility of simulations in several high-consequence fields, such as nuclear reactor safety, underground nuclear waste storage, and nuclear weapon safety. Although the terminology is not uniform across engineering disciplines, code verification deals with assessing the reliability of the software coding, and solution verification deals with assessing the numerical accuracy of the solution to a computational model. Validation addresses the physics modeling accuracy of a computational simulation by comparing the computational results with experimental data. Code verification benchmarks and validation benchmarks have been constructed for a number of years in every field of computational simulation. However, no comprehensive guidelines have been proposed for the construction and use of V\&V benchmarks. For example, the field of nuclear reactor safety has not focused on code verification benchmarks, but it has placed great emphasis on developing validation benchmarks. Many of these validation benchmarks are closely related to the operations of actual reactors at near-safety-critical conditions, as opposed to being more fundamental-physics benchmarks. This paper presents recommendations for the effective design and use of code verification benchmarks based on manufactured solutions, classical analytical solutions, and highly accurate numerical solutions. In addition, this paper presents recommendations for the design and use of validation benchmarks, highlighting the careful design of building-block experiments, the estimation of experimental measurement uncertainty for both inputs and outputs to the code, validation metrics, and the role of model calibration in validation. It is argued that the understanding of predictive capability of a computational model is built on the level of achievement in V\&V activities, how closely related the V\&V benchmarks are to the actual application of interest, and the quantification of uncertainties related to the application of interest. ?? 2007 Elsevier B.V. All rights reserved.},
+author = {Oberkampf, William L. and Trucano, Timothy G.},
+doi = {10.1016/j.nucengdes.2007.02.032},
+file = {:home/dances/Github/M-C\_2015/mc2015-latex/references/Verifiaction\_Validation\_Benchmarks.pdf:pdf},
+isbn = {0029-5493},
+issn = {00295493},
+journal = {Nuclear Engineering and Design},
+pages = {716--743},
+title = {{Verification and validation benchmarks}},
+volume = {238},
+year = {2008}
 }
