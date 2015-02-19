@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.8)  11 FEB 2015 16:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.8)  18 FEB 2015 14:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1290,19 +1290,19 @@ Underfull \vbox (badness 2158) has occurred while \output is active []
 Study/Order_Of_Accuracy_Summary.jpg>] (build/cdances.bbl) 
 AED: lastpage setting LastPage
 [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 694.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 694.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 703.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 703.
  (build/cdances.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 694.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 694.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 703.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 703.
 Package rerunfilecheck Info: File `cdances.out' has not changed.
 (rerunfilecheck)             Checksum: 7F985C80FEBEDAB6C70E0BA8CC761824;503.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 694.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 703.
  ) 
 Here is how much of TeX's memory you used:
  18109 strings out of 495028
- 343603 string characters out of 6181498
- 493914 words of memory out of 5000000
+ 343625 string characters out of 6181498
+ 493925 words of memory out of 5000000
  20818 multiletter control sequences out of 15000+600000
  40879 words of font info for 154 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1318,7 +1318,7 @@ m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on build/cdances.pdf (12 pages, 769940 bytes).
+Output written on build/cdances.pdf (12 pages, 769679 bytes).
 PDF statistics:
  266 PDF objects out of 1000 (max. 8388607)
  224 compressed objects within 3 object streams

@@ -1,27 +1,25 @@
 \begin{thebibliography}{1}
 
-\bibitem{CTF_Theory}
+\bibitem{Salko2014}
 R.~K. Salko,
 \newblock ``{CTF Theory Manual},''
-\newblock The Pennsylvania State University (2014).
+\newblock (2014).
 
-\bibitem{VV_review}
-C.~J. Roy,
-\newblock ``Review of Code and Solution Verification Procedures for
-  Computational Simulation,''
-\newblock {\em J. Comput. Phys.}, {\bf 205}, {\em 1}, pp. 131--156 (2005).
+\bibitem{Roache2002}
+P.~J. Roache,
+\newblock ``{Code Verification by the Method of Manufactured Solutions},''
+  2002.
 
-\bibitem{VV_Book}
-K.~{P. Knupp},
-\newblock {\em Verification of Computer Codes in Computational Science and
-  Engineering},
-\newblock Chapman and Hall/CRC, Boca Raton, FL (2003).
+\bibitem{Oberkampf2008}
+W.~L. Oberkampf and T.~G. Trucano,
+\newblock ``{Verification and validation benchmarks},''
+\newblock {\em Nuclear Engineering and Design}, {\bf 238}, pp. 716--743 (2008).
 
-\bibitem{IAPWS}
-IAPWS,
-\newblock ``Revised Release on the IAPWS Industrial Formulation 1997 for the
-  Thermodynamic Properties of Water and Steam,''
-\newblock The International Association for the Properties of Water and Steam
-  (IAPWS) (2007).
+\bibitem{Cooper2007}
+J.~R. Cooper and R.~B. Dooley,
+\newblock ``{The International Association for the Properties of Water and
+  Steam Revised Release on the IAPWS Industrial Formulation 1997 for the
+  Thermodynamic Properties of Water and Steam},''
+\newblock (2007).
 
 \end{thebibliography}
