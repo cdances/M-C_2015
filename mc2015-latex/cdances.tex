@@ -291,6 +291,19 @@ EOS. A python script was used to generate the data tables according to
 trignometric equations using lookup tables that mimic the IAPWS-97 steam tables
 used by the code \cite{Cooper2007}.
 
+%$ \frac{\partial ^{2} h}{\partial t^{2}} = - \frac{1}{2}  \omega^{2}
+%(h_{1}-h_{2}) cos ( \omega ( t - \frac{x}{V_{o}} ))) $
+%
+%$ \frac{\partial ^{2} h}{\partial x^{2}} = - \frac{1}{2} 
+%\frac{\omega^{2}}{V^{2}_{o}} (h_{1}-h_{2}) cos ( \omega ( t - \frac{x}{V_{o}}
+%))) $
+%
+%$ -\frac{\omega^{2}}{4} (h_{1}-h_{2})( \Delta t  - \frac{ \Delta x }{V_{o}} )
+%(cos ( \omega ( t + \frac{x}{V_{o}} )))  $
+%
+%$ -\frac{x}{L} \frac{\omega^{2}}{4} (h_{1}-h_{2})( \Delta t  - \frac{ \Delta x
+%}{V_{o}} ) (cos ( \omega ( t + \frac{x}{V_{o}} )))  $
+
 \begin{equation}
 	\label{eq:Sine_Wave:h}
 	h(i,j) = \frac{1}{2} \left( 
@@ -315,8 +328,8 @@ enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
 \ref{fig:Inlet_m_dot}, respectively. The CTF output was read from hdf5 data
 files at each point in time, which omitted the actual ghost cell where these values
 were applied. The CTF values are located at the nearest node to the inlet, and
-will be slightly out of phase to the exact values. For large mesh sizes this
-small discrepancy is not noticeable.
+will have small amounts of numerical error. For large mesh sizes this small
+discrepancy is not noticeable.
 
 \begin{figure}[!h]
 	\centering
@@ -335,10 +348,10 @@ small discrepancy is not noticeable.
 % For the original version of CTF, there is a small discrepancy in the way the
 % density is calculated at the inlet that causes the velocity to be non-constant.
 %as shown in figure \ref{fig:Inlet_vel}.
- The pressure and the velocity fluctuate by about $0.5\%$ during the simulation.
- This is considered small for this problem and should
- not greatly affect the order of accuracy.  The
- hdf5 output files allow for a high level of precision, reducing
+ The pressure and the velocity fluctuate by about $0.5\%$ during the simulation
+ due to approximating the EOS as a linear function. This is considered small for
+ this problem and should not greatly affect the order of accuracy of the error. 
+ The hdf5 output files allow for a high level of precision, reducing
  round off error in the output during the post processing.
 
 \subsection{Code Convergence}
