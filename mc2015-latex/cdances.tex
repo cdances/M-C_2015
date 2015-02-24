@@ -105,7 +105,7 @@ into the CASL version of CTF. This paper outlines an initial verification of the
 version of the code as well as the residual version of the code. The verification problem is a single phase 1-D channel with transient inlet density and mass flow rate. The problem will undergo a Richardson's extrapolation in the
 temporal and spatial domains to verify the convergence and order of accuracy of
 the error. The study of the order of accuracy is considered one of the more
-rigorous verification criteria \cite{Roache2002}.
+rigorous verification criteria \cite{Roy2005}.
 
 \section{CTF}
 
@@ -229,8 +229,6 @@ observed during the verification problem.
     	\caption{Structure of the Jacobian matrix for single phase liquid}
     	\label{fig:Jacobian_Setup}
     \end{figure}
-    
-    
 
 \section{Isokinetic Sine Wave Advection}
 
@@ -272,12 +270,12 @@ Channel Area	&	$A_{ch}$	&	4.94E-005	&	$m^{2}$	\\ \hline
 Wetted Perimeter	&	$P_{w}$	&	1.49E-002	&	$m$	\\ \hline
 Velocity	&	$V_{o}$	&	7.35	&	$\frac{m}{s}$	\\ \hline
 Pressure	&	$P_{o}$	&	155.00	&	bar	\\ \hline
-Temperature 1	&	$T_{1}$	&	289.500	&	$^{\circ}$C	\\ \hline
-Temperature 2	&	$T_{2}$	&	327.00	&	$^{\circ}$C	\\ \hline
-Enthalpy 1	&	$h_{1}$	&	1281.55	&	$\frac{kJ}{kg}$	\\ \hline
-Enthalpy 2	&	$h_{2}$	&	1497.21	&	$\frac{kJ}{kg}$	\\ \hline
-Mass Flow Rate 1	&	$\dot{m}_{1}$	&	0.2713	&	$\frac{kg}{s}$	\\ \hline
-Mass Flow Rate 2	&	$\dot{m}_{2}$	&	0.2399	&	$\frac{kg}{s}$	\\ \hline
+Temperature 1	&	$T_{1}$	&	290.00	&	$^{\circ}$C	\\ \hline
+Temperature 2	&	$T_{2}$	&	295.00	&	$^{\circ}$C	\\ \hline
+Enthalpy 1	&	$h_{1}$	&	1306.3	&	$\frac{kJ}{kg}$	\\ \hline
+Enthalpy 2	&	$h_{2}$	&	1310.9	&	$\frac{kJ}{kg}$	\\ \hline
+Mass Flow Rate 1	&	$\dot{m}_{1}$	&	0.2707	&	$\frac{kg}{s}$	\\ \hline
+Mass Flow Rate 2	&	$\dot{m}_{2}$	&	0.2672	&	$\frac{kg}{s}$	\\ \hline
 Final Time	&	$t_{f}$	&	2.00	&	sec	\\ \hline
 Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 \end{tabular}
@@ -285,15 +283,12 @@ Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 
 The lookup table to vary the inlet enthalpy $h$ and inlet mass
 flow rate, $\dot{m}$, are genererated from equations \ref{eq:Sine_Wave:h} and
-\ref{eq:Sine_Wave:m_dot} respectively. The trignometric functions assume
-constant axial spacing, $\Delta x$, and time step size, $\Delta t$, where $i$
-and $j$ are the spatial and temporal indices. These equations should also
-behave as the known solutions throughout the entire domain of the problem. The
-enthalpy and mass flow rate vary proportionally to the density such that an
-isokinetic boundary condition is created at the inlet. However, this is
-dependent on the steam tables used in generating the input and calculating the
-EOS. A python script was used to generate the data tables according to
-trignometric equations the same density EOS as CTF.
+\ref{eq:Sine_Wave:m_dot} where $x$ is the length from the inlet and $t$ is the
+simulated time. The trignometric functions assume constant axial spacing, time
+step size, and velocity. These equations should also behave as the known
+solutions throughout the entire domain of the problem. The enthalpy and mass
+flow rate vary proportionally to the density such that an isokinetic boundary
+condition is created at the inlet. 
 
 %$ \frac{\partial ^{2} h}{\partial t^{2}} = - \frac{1}{2}  \omega^{2}
 %(h_{1}-h_{2}) cos ( \omega ( t - \frac{x}{V_{o}} ))) $
@@ -312,7 +307,7 @@ trignometric equations the same density EOS as CTF.
 	\label{eq:Sine_Wave:h}
 	h(x,t) = \frac{1}{2} \left( 
 			(h_{1}+h_{2}) + (h_{1}-h_{2}) cos\left(
-				\omega \left( t + \frac{x}{V_{o}} \right)
+				\omega \left( t - \frac{x}{V_{o}} \right)
 				\right)
 			\right)
 \end{equation}
@@ -321,7 +316,7 @@ trignometric equations the same density EOS as CTF.
 	\label{eq:Sine_Wave:m_dot}
 	\dot{m}(x,t) = \frac{1}{2} \left( 
 			(\dot{m}_{1}+\dot{m}_{2}) + (\dot{m}_{1}-\dot{m}_{2}) cos\left(
-				\omega \left( t + \frac{x}{V_{o}} \right)
+				\omega \left( t - \frac{x}{V_{o}} \right)
 				\right)
 			\right)
 \end{equation}
