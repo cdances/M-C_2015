@@ -306,18 +306,18 @@ used by the code \cite{Cooper2007}.
 
 \begin{equation}
 	\label{eq:Sine_Wave:h}
-	h(i,j) = \frac{1}{2} \left( 
+	h(x,t) = \frac{1}{2} \left( 
 			(h_{1}+h_{2}) + (h_{1}-h_{2}) cos\left(
-				\omega \left( j \Delta t + \frac{i \Delta x}{V_{o}} \right)
+				\omega \left( t + \frac{x}{V_{o}} \right)
 				\right)
 			\right)
 \end{equation}
 
 \begin{equation}
 	\label{eq:Sine_Wave:m_dot}
-	\dot{m}(i,j) = \frac{1}{2} \left( 
+	\dot{m}(x,t) = \frac{1}{2} \left( 
 			(\dot{m}_{1}+\dot{m}_{2}) + (\dot{m}_{1}-\dot{m}_{2}) cos\left(
-				\omega \left( j \Delta t + \frac{i \Delta x}{V_{o}} \right)
+				\omega \left( t + \frac{x}{V_{o}} \right)
 				\right)
 			\right)
 \end{equation}
@@ -328,8 +328,9 @@ enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
 \ref{fig:Inlet_m_dot}, respectively. The CTF output was read from hdf5 data
 files at each point in time, which omitted the actual ghost cell where these values
 were applied. The CTF values are located at the nearest node to the inlet, and
-will have small amounts of numerical error. For large mesh sizes this small
-discrepancy is not noticeable.
+will experience small amounts of numerical diffusion. For large mesh sizes this
+small discrepancy is quite small as can be seen by figures \ref{fig:Inlet_h}
+and \ref{fig:Inlet_m_dot}.
 
 \begin{figure}[!h]
 	\centering
@@ -490,72 +491,6 @@ that the sine wave has fully developed spatially through the channel.
     equation does not apply for this problem since the velocity is
     constant.
     
-%    Before we can procede, we need to take the derivative of the original PDE with respect
-%    to space and time as shown in equations \ref{eq:mass_dt} and  \ref{eq:mass_dx} 
-%    respectively. These two derivatives can substitute into each other using the common 
-%    term $\frac{\partial^2 \rho}{\partial x \partial t}$. The second derivatives of density with 
-%    respect to space and time are therefore related by the velocity squared as
-%    shown by equation \ref{eq:mass_second_derivatives}.
-%    
-%    \begin{equation}
-%    \label{eq:mass_dt}
-%    	 \frac{\partial^2 \rho}{\partial t^2} + U_{0} \frac{\partial^2 \rho}{\partial x \partial t} = 0
-%    \end{equation}
-%    
-%    \begin{equation}
-%    \label{eq:mass_dx}
-%    	 \frac{\partial^2 \rho}{\partial t \partial x} + U_{0} \frac{\partial^2 \rho}{\partial x^2} = 0
-%    \end{equation}
-%    
-%    \begin{equation}
-%    \label{eq:mass_second_derivatives}
-%    	 \frac{\partial^2 \rho}{\partial t^2} =  U_{0}^2 \frac{\partial^2 \rho}{\partial x^2}
-%    \end{equation} \linebreak
-%    
-%    This relationship can then be substituted back into equation \ref{eq:MEA_p1}, 
-%    which can be reduced to equation \ref{eq:MEA_result} after igonoring the higher
-%    order terms. The error depends on the CFL number, the axial spacing, and the
-%    second order derivative of density with respect to space. This derivative is
-%    what gives the error the characterisitcs of diffusion. When the CFL number is
-%    less than one, the error term is negative and the diffusion is dampening. When
-%    the CFL number is greater than one, the error term becomes positive, and the
-%    accumulation of the error destabilizes the solution. 
-%    
-%    \begin{equation}
-%    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
-%    	  \frac{1}{2}  \left(  \Delta x U_{0} \frac{\partial^2 \rho}{\partial
-%    	  x^2} -   U_{0}^2 \frac{\partial^2 \rho}{\partial x^2} \Delta t  \right) 
-%    	   + O(\Delta x^{2},\Delta t^{2}) = 0
-%    \end{equation}
-%    
-%    \begin{equation}
-%    \label{eq:MEA_result}
-%    	 \frac{\partial \rho}{\partial t}  +  U_{0} \frac{\partial \rho}{\partial x} - 
-%    	 \frac{\Delta x U_{0}}{2} \frac{\partial^2 \rho}{\partial x^2}  
-%    	 \left(  1 - CFL  \right) 
-%    	 + O(\Delta x^{2},\Delta t^{2})  = 0
-%    \end{equation}
-%    
-%    Modified eqauation analysis can be applied to the energy balance equation
-%    presented in equation \ref{eq:MEA_energy}. The energy equation is presented in a form where
-%    the momentum equation was substituted in as zero and then divided through by
-%    density. The result presented in equation \ref{eq:MEA_ene_result} is similar in
-%    form to the result for the mass balance equation \ref{eq:MEA_result}.
-%    
-%    \begin{equation}
-%    	\label{eq:MEA_energy}
-%    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
-%    	U_{0} \frac{\partial h}{\partial x} = 0
-%    \end{equation}
-%    
-%    \begin{equation}
-%    \label{eq:MEA_ene_result}
-%    	\frac{\partial h}{\partial t} - \frac{1}{\rho} \frac{\partial P}{\partial t} +
-%    	U_{0} \frac{\partial h}{\partial x} - 
-%    	\frac{\Delta x U_{0}}{2} \frac{\partial^2 h}{\partial x^2}
-%    	\left( 1 - CFL \right)
-%    	= 0
-%    \end{equation}
 
 \section{Richardson Extrapolation}
 
@@ -690,16 +625,8 @@ analytical error should almost exactly match the error from the code.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgments}
 
-This research used resources of the Oak Ridge Leadership Computing
-Facility at the Oak Ridge National Laboratory, which is supported
-by the Office of Science of the U.S. Department of Energy
-under Contract No. DE-AC05-00OR22725.
-
-Sandia National Laboratories is a multi-program laboratory
-managed and operated by Sandia Corporation, a wholly owned
-subsidiary of Lockheed Martin Corporation, for the U.S. Department
-of Energy’s National Nuclear Security Administration under
-contract DE-AC04-94AL85000.
+Through CASL, this research used resources at the Oak Ridge National Laboratory
+and Sandia National Laboratories.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\baselineskip}{12pt}
