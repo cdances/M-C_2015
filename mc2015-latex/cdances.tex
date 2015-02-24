@@ -99,10 +99,10 @@ is CTF, which is a subchannel thermal-hydraulics code developed from
 COBRA-TF \cite{Salko2014}. This FORTRAN based code solves 8 conservation
 equations for liquid, entrained droplet, and vapor phases phases, plus one
 conservation equation for non-condensable gases. A 1-D residual formulation of
-the code has been created. This paper outlines an initial verification of the
-original version of the code as well as the residual version of the code. The
-verification problem is a single phase 1-D channel with transient inlet density
-and mass flow rate. The problem will undergo a Richardson's extrapolation in the
+the code has been created. While other residual formulations have been
+formed for other versions of CTF \cite{Lloyd2014}, none have been integrated
+into the CASL version of CTF. This paper outlines an initial verification of the original
+version of the code as well as the residual version of the code. The verification problem is a single phase 1-D channel with transient inlet density and mass flow rate. The problem will undergo a Richardson's extrapolation in the
 temporal and spatial domains to verify the convergence and order of accuracy of
 the error. The study of the order of accuracy is considered one of the more
 rigorous verification criteria \cite{Roache2002}.
@@ -110,9 +110,9 @@ rigorous verification criteria \cite{Roache2002}.
 \section{CTF}
 
 The thermal hydraulics of a LWR core is an important part of nuclear
-reactor design. CTF solves 8 conservation equations for liquid,
-entrained droplet, and vapor phases of water boiling within the rod structure
-of a LWR reactor core. Currently, the conservation
+reactor design. CTF solves 9 conservation equations for liquid,
+entrained droplet, non-condensable gases, and vapor phases of water boiling
+within the rod structure of a LWR reactor core. Currently, the conservation
 equations analytically reduce into a pressure matrix in a semi-implicit
 method with rod temperatures solved for explicitly. The residual formulation of
 the code currently solves the 1-D single phase liquid conservation equations and
@@ -130,8 +130,7 @@ setup and maintained by CASL. An extensive test matrix is run before each major
 push to ensure that the code meets the specified requirements. The test matrix
 consists of unit tests, code coverage runs, validation problems, and challenge
 problems. The code documentation consists of a theory manual, a user manual, a
-developer manual, and a validation manual. Further work might involve using
-auto documentation tools to keep an up to date developers manual. This paper
+developer manual, a validation manual, and a developers manual. This paper
 will be the beginning of a verification manual, integrating this verification
 problem directly into the test matrix.
 
@@ -158,9 +157,11 @@ dimensions.
 The single phase Euler partial differential equations for mass
 \eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
 \eqref{eq:pde_energy} correspond to the unknown variables pressure $P$,
-velocity $u$, and enthalpy $h$. Density $\rho$ is related through the equation
-of state. The first terms in each of the equations are temporal terms. The rest
-of the terms are steady state spatial terms. 
+velocity $u$, and enthalpy $h$. Density $\rho$ is related through an equation
+of state \cite{Cooper2007} as a function of enthalpy and pressure. For this
+work, the equation of state will be assumed to be approximately linear. This
+assumption should be valid due to the small changes in pressure and enthalpy
+observed during the verification problem.
     
     \begin{equation}
     	\label{eq:pde_mass}
@@ -194,15 +195,17 @@ of the terms are steady state spatial terms.
     which should effectively change all $n+1$ into $k$. Each cell will have
     three residual variables and three residual equations. For the entire
     solution, we will then have a residual variable array $\delta X$, and a
-    residual function array $F(X)$ which defines a linear system $J \delta X = - F(X)$.
-    
-    The Jacobian matrix is defined as the derivative
-    of each response of the function $F_{j}$ with respect to each variable $X_{i}$.
+    residual function array $F(X)$ which defines a linear system $J \delta X = -
+    F(X)$. The Jacobian matrix is defined as the derivative of each response of
+    the function $F_{j}$ with respect to each variable $X_{i}$.
     The derivative can be calculated numerically as shown by equation
-    \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value. For
-    CTF the equations are linear, and this numerical approximation
-    of the Jacobian matrix is exact. This should produce the same Jacobian
-    matrix that CTF currently generates analytically. 
+    \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value.
+    Since the sytem is assumed to be linear, the approximation of the Jacobian
+    matrix in this manner is also assumed to be accurate. As a check, the
+    numerically computed Jacobian matrix was reduced to a pressure matrix using
+    guassian simulation and compared to the analytical pressure matrix from CTF.
+    Each of the entries of the jacobian matrix appeared to match to nearly
+    within machine precision.
     
     \begin{equation}
     	\label{eq:jac_numerical}
@@ -226,6 +229,8 @@ of the terms are steady state spatial terms.
     	\caption{Structure of the Jacobian matrix for single phase liquid}
     	\label{fig:Jacobian_Setup}
     \end{figure}
+    
+    
 
 \section{Isokinetic Sine Wave Advection}
 
@@ -252,7 +257,7 @@ roundoff. The channel geometry and operating conditions approximate a standard
 PWR. The inlet of the channel has a constant velocity with a fluctuating
 enthalpy that corresponds to a standard PWR rod bundle coolant channel..  The
 length of the transient was defined to be quadruple the time needed for the liquid at the
-inlet to advect to the outlet.The frequency of the sine wave was defined to
+inlet to advect to the outlet. The frequency of the sine wave was defined to
 generate a full period of a spatial wave across the length of the channel.
 
 \begin{table}[h]
@@ -288,8 +293,7 @@ enthalpy and mass flow rate vary proportionally to the density such that an
 isokinetic boundary condition is created at the inlet. However, this is
 dependent on the steam tables used in generating the input and calculating the
 EOS. A python script was used to generate the data tables according to
-trignometric equations using lookup tables that mimic the IAPWS-97 steam tables
-used by the code \cite{Cooper2007}.
+trignometric equations the same density EOS as CTF.
 
 %$ \frac{\partial ^{2} h}{\partial t^{2}} = - \frac{1}{2}  \omega^{2}
 %(h_{1}-h_{2}) cos ( \omega ( t - \frac{x}{V_{o}} ))) $
