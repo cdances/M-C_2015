@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  25 FEB 2015 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  25 FEB 2015 12:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1163,7 +1163,7 @@ ile (type png)
 <use images/Code_Verification/run_00_00/residual/results/Inlet_h.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
 let_h.png used on input line 349.
-(pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 <images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png, id=131, 5
 78.16pt x 433.62pt>
@@ -1173,37 +1173,33 @@ ic file (type png)
 <use images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>
 Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
 let_m_dot.png used on input line 356.
-(pdftex.def)             Requested size: 258.36667pt x 193.77081pt.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6 <./images/Code_Verification/run_00_00/residual/results/Inlet_h.png>]
 [7 <./images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>]
-<images/Temporal_Study/Difference_rho.jpg, id=169, 803.0pt x 602.25pt>
+<images/Temporal_Study/Difference_rho.jpg, id=168, 803.0pt x 602.25pt>
 File: images/Temporal_Study/Difference_rho.jpg Graphic file (type jpg)
 
 <use images/Temporal_Study/Difference_rho.jpg>
 Package pdftex.def Info: images/Temporal_Study/Difference_rho.jpg used on input
  line 543.
-(pdftex.def)             Requested size: 258.36667pt x 193.78073pt.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/Spatial_Study/Difference_rho.jpg, id=170, 803.0pt x 602.25pt>
+[8] <images/Spatial_Study/Difference_rho.jpg, id=178, 803.0pt x 602.25pt>
 File: images/Spatial_Study/Difference_rho.jpg Graphic file (type jpg)
 
 <use images/Spatial_Study/Difference_rho.jpg>
 Package pdftex.def Info: images/Spatial_Study/Difference_rho.jpg used on input 
 line 556.
-(pdftex.def)             Requested size: 258.36667pt x 193.78073pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[8] [9 <./images/Temporal_Study/Difference_rho.jpg> <./images/Spatial_Study/Dif
-ference_rho.jpg>]
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+ [9 <./images/Temporal_Study/Difference_rho.jpg> <./images/Spatial_Study/Differ
+ence_rho.jpg>]
 <images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=189, 803.0pt x 602.25p
 t>
 File: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jp
@@ -1211,7 +1207,7 @@ g)
  <use images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>
 Package pdftex.def Info: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg us
 ed on input line 590.
-(pdftex.def)             Requested size: 258.36667pt x 193.78073pt.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
 
 <images/Spatial_Study/Order_Of_Accuracy_Summary.jpg, id=190, 803.0pt x 602.25pt
 >
@@ -1220,14 +1216,16 @@ File: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jpg
  <use images/Spatial_Study/Order_Of_Accuracy_Summary.jpg>
 Package pdftex.def Info: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg use
 d on input line 597.
-(pdftex.def)             Requested size: 258.36667pt x 193.78073pt.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
 
-Underfull \vbox (badness 2582) has occurred while \output is active []
 
- [10 <./images/Temporal_Study/Order_Of_Accuracy_Summary.jpg> <./images/Spatial_
-Study/Order_Of_Accuracy_Summary.jpg>] (build/cdances.bbl) 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <./images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>] (build/cdances.bbl
+[11 <./images/Spatial_Study/Order_Of_Accuracy_Summary.jpg>])
+
 AED: lastpage setting LastPage
-[11]
+[12]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 664.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 664.
  (build/cdances.aux)
@@ -1238,13 +1236,13 @@ Package rerunfilecheck Info: File `cdances.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 664.
  ) 
 Here is how much of TeX's memory you used:
- 17990 strings out of 493117
- 340620 string characters out of 6135433
- 497213 words of memory out of 5000000
+ 17991 strings out of 493117
+ 340627 string characters out of 6135433
+ 497214 words of memory out of 5000000
  21023 multiletter control sequences out of 15000+600000
  40749 words of font info for 152 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,14n,45p,10414b,751s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,14n,45p,10414b,899s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/tex
@@ -1257,10 +1255,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/tex
 mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on build/cdances.pdf (11 pages, 652030 bytes).
+Output written on build/cdances.pdf (12 pages, 652479 bytes).
 PDF statistics:
- 255 PDF objects out of 1000 (max. 8388607)
- 218 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
+ 260 PDF objects out of 1000 (max. 8388607)
+ 222 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 500000)
  26777 words of extra memory for PDF output out of 29859 (max. 10000000)
 
