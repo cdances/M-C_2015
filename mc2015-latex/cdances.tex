@@ -324,9 +324,9 @@ condition is created at the inlet.
 
 The comparison between the data table and the output in CTF are shown for
 enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
-\ref{fig:Inlet_m_dot}, respectively. The CTF output was read from hdf5 data
-files at each point in time, which omitted the actual ghost cell where these values
-were applied. The CTF values are located at the nearest node to the inlet, and
+\ref{fig:Inlet_m_dot}, respectively. The CTF output was read from the high
+precision VTK data files at each point in time, which omitted the actual ghost
+cell where these values were applied. The CTF values are located at the nearest node to the inlet, and
 will experience small amounts of numerical diffusion. For large mesh sizes, this
 discrepancy is negligible as can be seen by the overlapping profiles in figures
 \ref{fig:Inlet_h} and \ref{fig:Inlet_m_dot}.
@@ -348,10 +348,10 @@ discrepancy is negligible as can be seen by the overlapping profiles in figures
 % For the original version of CTF, there is a small discrepancy in the way the
 % density is calculated at the inlet that causes the velocity to be non-constant.
 %as shown in figure \ref{fig:Inlet_vel}.
- The pressure and the velocity fluctuate by about $0.5\%$ during the simulation
- due to approximating the EOS as a linear function. This is considered small for
+ The pressure and the velocity fluctuate by less than $0.01\%$ during the
+ simulation due to approximating the EOS as a linear function. This is considered small for
  this problem and should not greatly affect the order of accuracy of the error. 
- The hdf5 output files allow for a high level of precision, reducing
+ The VTK output files allow for a high level of precision, reducing
  round off error in the output during the post processing.
 
 \subsection{Code Convergence}
@@ -498,13 +498,11 @@ step sizes by a factor of 2 for a set number of times. The spatial and temporal
 studies are refined separately in their own study in order to isolate the
 spatial and temporal affects on the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
-script in order to reduce user input errors and increase repeatability.  For
-this analysis, a significant amount of information was added to the hdf5 output
-files, increasing memory usage and run time. The computational resources for the
-spatial study was much higher than the temporal study due to the need to keep
-the courant number below 0.500. To keep the computational resources needed
-to perform this analysis reasonable, fewer spatial refinements were performed
-compared to the temporal analysis.
+script in order to reduce user input errors and increase repeatability. The
+computational resources for the spatial study was much higher than the temporal
+study due to the need to keep the courant number below 0.500. To keep the
+computational resources needed to perform this analysis reasonable, fewer
+spatial refinements were performed compared to the temporal analysis.
 
 \subsection{Convergence of Error}
 
