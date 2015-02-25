@@ -63,7 +63,7 @@ residuals allows the for the isoloation of different sources of error and is a
 good tool for verification purposes. This paper outlines the initial
 verification work of both the original version of CTF and its residual
 formulation. The verification problem is a simple 1-D single phase liquid
-channel with no heat conduction, friction, and gravity. A transient boundary
+channel with no heat conduction, friction, or gravity. A transient boundary
 condition is applied that alters the inlet density and temperature while keeping
 the velocity within the channel constant. The constant velocity simplifies the modified
 equation analysis and the order of accuracy is readily obtained. A Richardson
@@ -110,9 +110,8 @@ rigorous verification criteria \cite{Roy2005}.
 \section{CTF}
 
 The thermal hydraulics of a LWR core is an important part of nuclear
-reactor design. CTF solves 9 conservation equations for liquid,
-entrained droplet, non-condensable gases, and vapor phases of water boiling
-within the rod structure of a LWR reactor core. Currently, the conservation
+reactor design. CTF has the ability to solve for the temperature and pressure
+of water within the rod structure of a LWR reactor core. Currently, the conservation
 equations analytically reduce into a pressure matrix in a semi-implicit
 method with rod temperatures solved for explicitly. The residual formulation of
 the code currently solves the 1-D single phase liquid conservation equations and
@@ -120,7 +119,8 @@ calculated variables in a residual formulation. While it has the ability to
 solve the conservation equations semi-implicitly or implicitly, only the
 semi-implicit solution method is considered in this paper. This residual
 formulation should allow for easier and more in depth verification  analysis.
-This paper details the initial comparison of the residual  formulation to the original code.
+This paper details the initial comparison of the residual formulation to the
+original code.
 
 \subsection{Software Quality Assurance}
 
@@ -128,11 +128,9 @@ Software quality assurance is a set of tools and procedures that helps
 ensure that the software is reliable. CTF is managed by GitHub repository
 setup and maintained by CASL. An extensive test matrix is run before each major
 push to ensure that the code meets the specified requirements. The test matrix
-consists of unit tests, code coverage runs, validation problems, and challenge
-problems. The code documentation consists of a theory manual, a user manual, a
-developer manual, a validation manual, and a developers manual. This paper
-will be the beginning of a verification manual, integrating this verification
-problem directly into the test matrix.
+consists of a fully automated suite of regression tests that include unit and
+validation tests. This paper will be the beginning of a verification manual,
+integrating this verification problem directly into the test suite.
 
 \subsection{1-D Single Phase Liquid Conservation Equations}
 
