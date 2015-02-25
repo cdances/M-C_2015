@@ -5,15 +5,18 @@ R.~K. Salko,
 \newblock ``{CTF Theory Manual},''
 \newblock (2014).
 
-\bibitem{Roache2002}
-P.~J. Roache,
-\newblock ``{Code Verification by the Method of Manufactured Solutions},''
-  2002.
+\bibitem{Lloyd2014}
+L.~J. Lloyd,
+\newblock ``{Development of a Spatially-Selective, Nonlinear Refinement
+  Algorithm for Thermal-Hydraulic Safety Analysis},''
+\newblock (2014).
 
-\bibitem{Oberkampf2008}
-W.~L. Oberkampf and T.~G. Trucano,
-\newblock ``{Verification and validation benchmarks},''
-\newblock {\em Nuclear Engineering and Design}, {\bf 238}, pp. 716--743 (2008).
+\bibitem{Roy2005}
+C.~J. Roy,
+\newblock ``{Review of code and solution verification procedures for
+  computational simulation},''
+\newblock {\em Journal of Computational Physics}, {\bf 205}, pp. 131--156
+  (2005).
 
 \bibitem{Cooper2007}
 J.~R. Cooper and R.~B. Dooley,
@@ -21,5 +24,10 @@ J.~R. Cooper and R.~B. Dooley,
   Steam Revised Release on the IAPWS Industrial Formulation 1997 for the
   Thermodynamic Properties of Water and Steam},''
 \newblock (2007).
+
+\bibitem{Oberkampf2008}
+W.~L. Oberkampf and T.~G. Trucano,
+\newblock ``{Verification and validation benchmarks},''
+\newblock {\em Nuclear Engineering and Design}, {\bf 238}, pp. 716--743 (2008).
 
 \end{thebibliography}

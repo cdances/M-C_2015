@@ -327,9 +327,9 @@ enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
 \ref{fig:Inlet_m_dot}, respectively. The CTF output was read from hdf5 data
 files at each point in time, which omitted the actual ghost cell where these values
 were applied. The CTF values are located at the nearest node to the inlet, and
-will experience small amounts of numerical diffusion. For large mesh sizes this
-small discrepancy is quite small as can be seen by figures \ref{fig:Inlet_h}
-and \ref{fig:Inlet_m_dot}.
+will experience small amounts of numerical diffusion. For large mesh sizes, this
+discrepancy is negligible as can be seen by the overlapping profiles in figures
+\ref{fig:Inlet_h} and \ref{fig:Inlet_m_dot}.
 
 \begin{figure}[!h]
 	\centering
@@ -527,9 +527,8 @@ temporal and spatial step size.
 The data points were chosen to be inside of the asymptotic range as shown by
 the good power fit with an exponent near 1. The power fit shows that as the
 temporal and spatial step sizes are reduced, the numerical error approaches
-zero. The discretization error between the original version of CTF is
-relatively small and is most likely due to the small fluctuations in the
-velocity present in the original version of the code. 
+zero. The residual formulation and original versions of CTF show good agreement
+with eachother.
 
 \begin{figure}[!h]
 	\centering
@@ -572,18 +571,20 @@ decreasing mesh size.
 	\label{fig:Temporal:OOA}
 \end{figure}
 
-The slight differences between the original version of CTF and the residual
-formulation might be due to the different solution methods and back substitution
-of variables. Despite the small differences, both versions of the code exhibit
-order of accuracies very close the values obtained through the modified
-equation analysis.
-
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.55\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
 	\caption{Spatial Order of Accuracy}
 	\label{fig:Spatial:OOA}
 \end{figure}
+
+The slight differences between the original version of CTF and the residual
+formulation might be due to the different solution methods and back substitution
+of variables. Despite the small differences, both versions of the code exhibit
+order of accuracies very close the values obtained through the modified
+equation analysis.
+
+
 
 %\section{Parameter Study}
 %
