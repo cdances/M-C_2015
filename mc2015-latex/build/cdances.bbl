@@ -18,9 +18,21 @@ C.~J. Roy,
 \newblock {\em Journal of Computational Physics}, {\bf 205}, pp. 131--156
   (2005).
 
+\bibitem{Cooper2007}
+J.~R. Cooper and R.~B. Dooley,
+\newblock ``{The International Association for the Properties of Water and
+  Steam Revised Release on the IAPWS Industrial Formulation 1997 for the
+  Thermodynamic Properties of Water and Steam},''
+\newblock (2007).
+
 \bibitem{Oberkampf2008}
 W.~L. Oberkampf and T.~G. Trucano,
 \newblock ``{Verification and validation benchmarks},''
 \newblock {\em Nuclear Engineering and Design}, {\bf 238}, pp. 716--743 (2008).
+
+\bibitem{Villatoro1999}
+F.~Villatoro and J.~Ramos,
+\newblock ``{On the method of modified equations. I: Asymptotic analysis of the
+  Euler forward difference method},'' 1999.
 
 \end{thebibliography}

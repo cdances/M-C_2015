@@ -59,7 +59,7 @@ The RDFMG of version COBRA-TF is referred to as CTF.
 In an effort to help meet the objectives of CASL, a version of CTF has been
 developed that solves the residual formulation of the one dimensional 
 single-phase conservation equations. The formulation of the base equations as
-residuals allows the for the isoloation of different sources of error and is a
+residuals allows for the isolation of different sources of error and is a
 good tool for verification purposes. This paper outlines the initial
 verification work of both the original version of CTF and its residual
 formulation. The verification problem is a simple 1-D single phase liquid
@@ -94,7 +94,7 @@ the United States has been on light water reactors (LWR). Commercially,
 all nuclear reactors are either boiling water reactors (BWR) or pressurized
 water reactors (PWR). Correct computation of the thermal hydraulics within the
 reactor core leads to efficient design and accuracy in the safety analysis. A
-popular subchannel code for modelling the hydrodynamics within the reactor core
+popular subchannel code for modeling the hydrodynamics within the reactor core
 is CTF, which is a subchannel thermal-hydraulics code developed from
 COBRA-TF \cite{Salko2014}. This FORTRAN based code solves 8 conservation
 equations for liquid, entrained droplet, and vapor phases phases, plus one
@@ -124,7 +124,7 @@ original code.
 
 \subsection{Software Quality Assurance}
 
-Software quality assurance is a set of tools and procedures that helps
+Software quality assurance is a set of tools and procedures that help
 ensure that the software is reliable. CTF is managed by GitHub repository
 setup and maintained by CASL. An extensive test matrix is run before each major
 push to ensure that the code meets the specified requirements. The test matrix
@@ -158,21 +158,20 @@ dimensions.
 %velocity $u$, and enthalpy $h$. Density $\rho$ is related through an equation
 %of state \cite{Cooper2007}. The time rate of change of density $\partial
 %\rho}{\partial t}$
-For the single phase formulation of the Euler equations, the unkown variables
+For the single phase formulation of the Euler equations, the unknown variables
 are pressure $P$, velocity $u$, enthalpy $h$, and density $\rho$. To solve for
 these variables, three conservation equations and one equation of state are
-used. The conservation of mass given in equation \ref{eq:pde_mass} is the most
-basic with the rate of change in density equal to the advection from the
-upwinded cell. The conservation of momentum in equation \ref{eq:pde_momentum}
-has the time rate of change of velocity, the advection of momentum from adjacent
-cells, the gradient of pressure and body forces. The conservation of energy
-equation \ref{eq:pde_energy} has two temporal terms. Both the time rate of
-change of the enthalpy minus the time rate of change of the pressure.
-
-%For this
-%work, the equation of state will be assumed to be approximately linear. This
-%assumption should be valid due to the small changes in pressure and enthalpy
-%observed during the verification problem.
+used \cite{Cooper2007}. The conservation of mass given in equation
+\ref{eq:pde_mass} is the most basic with the rate of change in density equal to
+the advection from the upwinded cell. The conservation of momentum in equation \ref{eq:pde_momentum}
+balances the time rate of change of momentum, the advection of momentum from
+adjacent cells, the gradient of pressure, and body forces. The conservation of
+energy equation \ref{eq:pde_energy} contains two temporal terms; the time
+rate of change of the enthalpy, and the time rate of change of the pressure.
+These temporal terms are balanced against the advection of the enthalpy. 
+For this work, the equation of state will be assumed to be approximately linear.
+This assumption proves valid due to the small changes in pressure and
+enthalpy as described later.
     
     \begin{equation}
     	\label{eq:pde_mass}
@@ -211,11 +210,11 @@ change of the enthalpy minus the time rate of change of the pressure.
     the function $F_{j}$ with respect to each variable $X_{i}$.
     The derivative can be calculated numerically as shown by equation
     \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value.
-    Since the sytem is assumed to be linear, the approximation of the Jacobian
+    Since the system is assumed to be linear, the approximation of the Jacobian
     matrix in this manner is also assumed to be accurate. As a check, the
     numerically computed Jacobian matrix was reduced to a pressure matrix using
     guassian simulation and compared to the analytical pressure matrix from CTF.
-    Each of the entries of the jacobian matrix appeared to match to nearly
+    Each of the entries of the Jacobian matrix appeared to match to nearly
     within machine precision.
     
     \begin{equation}
@@ -244,29 +243,32 @@ change of the enthalpy minus the time rate of change of the pressure.
 \section{Isokinetic Sine Wave Advection}
 
 The procedures that can be used for code verification, from least to most
-rigorous, include: expert judgement, error quantification,
+rigorous, include: expert judgment, error quantification,
 consistency/convergence, and order of accuracy \cite{Oberkampf2008}. For this
 work, the Richardson extrapolation will be used to check for convergence and
 order of accuracy of the error in space and time. The error should converge to
 zero, and the order of accuracy should converge to the values obtained through
-the modified equation analysis at the end of this section.
+the modified equation analysis \cite{Villatoro1999} at the end of this section.
  
 \subsection{Problem Setup}
 
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-The verification problem is defined as a single horizontal channel with
-base parameters listed in table \ref{table:parameters}. Channel area and
-perimeter are constant across the entire length of the channel. No grid spacers
-are present, and frictional losses are set to zero. Velocity and pressure
-are assumed to be constant, but small fluctuations may occur due to numerical
-roundoff. The channel geometry and operating conditions approximate a standard
-PWR. The inlet of the channel has a constant velocity with a fluctuating
-enthalpy that corresponds to a standard PWR rod bundle coolant channel..  The
-length of the transient was defined to be quadruple the time needed for the liquid at the
-inlet to advect to the outlet. The frequency of the sine wave was defined to
-generate a full period of a spatial wave across the length of the channel.
+To readily obtain an analytical solution and isolate only the mass and energy
+conservation equations, several simplifications to the verification problem
+are made. Only one channel is considred to make the problem 1-D. In order to
+make the problem perfectly isobaric and isokinetic, grid spacers losses,
+frictional losses, and gravity head losses are set to zero representing
+a smooth horizontal pipe. Small fluctuations in pressure and velocity may still
+occur due to the assumption that the EOS is linear. The channel geometry and
+operating conditions approximate a standard PWR as shown in table
+\ref{table:parameters}. The inlet of the channel has a constant velocity with a
+fluctuating enthalpy that corresponds to a standard PWR rod bundle coolant
+channel. The length of the transient was defined to be quadruple the time needed
+for the liquid at the inlet to advect to the outlet. The frequency of the sine
+wave was defined to generate a full period of a spatial wave across the length
+of the channel.
 
 \begin{table}[h]
 \center
@@ -292,13 +294,14 @@ Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 \end{table}
 
 The lookup table to vary the inlet enthalpy $h$ and inlet mass
-flow rate, $\dot{m}$, are genererated from equations \ref{eq:Sine_Wave:h} and
+flow rate, $\dot{m}$, are generated from equations \ref{eq:Sine_Wave:h} and
 \ref{eq:Sine_Wave:m_dot} where $x$ is the length from the inlet and $t$ is the
-simulated time. The trignometric functions assume constant axial spacing, time
-step size, and velocity. These equations should also behave as the known
-solutions throughout the entire domain of the problem. The enthalpy and mass
-flow rate vary proportionally to the density such that an isokinetic boundary
-condition is created at the inlet. 
+simulated time. The trigonometric functions assume constant axial spacing, time
+step size, and velocity. The functions smoothly transition to the initial
+condition of a straight line across the domain. These equations should also
+behave as the known solutions throughout the entire domain of the problem. The
+enthalpy and mass flow rate vary proportionally to the density such that an
+isokinetic boundary condition is created at the inlet.
 
 %$ \frac{\partial ^{2} h}{\partial t^{2}} = - \frac{1}{2}  \omega^{2}
 %(h_{1}-h_{2}) cos ( \omega ( t - \frac{x}{V_{o}} ))) $
@@ -373,7 +376,7 @@ discrepancy is negligible as can be seen by the overlapping profiles in figures
 %energy stored in the fluid during one time step. The mass storage is the
 %percentage of mass stored in the model during one time step. The global energy
 %balance is the percent difference between the energy leaving and entering the
-%sytem relative to the energy entering the system. The global mass balance is the
+%system relative to the energy entering the system. The global mass balance is the
 %percent difference between the mas leaving and entering the system relative to
 %the energy entering the sytem. The flat profile for the mass storage term means
 %that the fluid that was initially at the inlet as advected out of the system.
@@ -505,7 +508,7 @@ discrepancy is negligible as can be seen by the overlapping profiles in figures
     	   + O(\Delta x^{2},\Delta t^{2}) = 0 
     \end{equation} 
     
-    When the energy equation undergoes a similar modified eqution analysis, the
+    When the energy equation undergoes a similar modified equation analysis, the
     order of accuracy is also 1 for time and space. The momentum conservation
     equation does not apply for this problem since the velocity is
     constant.
@@ -519,7 +522,7 @@ studies are refined separately in their own study in order to isolate the
 spatial and temporal affects on the solution. The generation of the inputs,
 running of the codes, and analysis of the output were automated with a python
 script in order to reduce user input errors and increase repeatability. The
-computational resources for the spatial study was much higher than the temporal
+computational resources for the spatial study were much higher than the temporal
 study due to the need to keep the courant number below 0.500. To keep the
 computational resources needed to perform this analysis reasonable, fewer
 spatial refinements were performed compared to the temporal analysis.
@@ -527,7 +530,7 @@ spatial refinements were performed compared to the temporal analysis.
 \subsection{Convergence of Error}
 
 The difference between iterations was computed at each time step and spatial
-location for each quanitity of interest. This difference is considered as the
+location for each quantity of interest. This difference is considered as the
 error between each iteration. For the spatial refinement, the lower iterate
 values were numerically integrated to match the shape of the initial domain. The
 errors were then summed over the entire domain to yield a total error for each
@@ -546,7 +549,7 @@ The data points were chosen to be inside of the asymptotic range as shown by
 the good power fit with an exponent near 1. The power fit shows that as the
 temporal and spatial step sizes are reduced, the numerical error approaches
 zero. The residual formulation and original versions of CTF show good agreement
-with eachother.
+with each other.
 
 \begin{figure}[!h]
 	\centering
@@ -574,7 +577,7 @@ spatial and temporal studies.
 	    }{ln(R)}
 \end{equation}
 
-The order of accuracy for all of the variables are presented for the temporal
+The order of accuracy for density and enthalpy are presented for the temporal
 analysis and spatial analysis in figures \ref{fig:Temporal:OOA} and
 \ref{fig:Spatial:OOA} respectively. The temporal order of accuracy is well
 within the asymptotic range for the whole analysis, and moves closer to 1.0 with
@@ -601,8 +604,6 @@ formulation might be due to the different solution methods and back substitution
 of variables. Despite the small differences, both versions of the code exhibit
 order of accuracies very close the values obtained through the modified
 equation analysis.
-
-
 
 %\section{Parameter Study}
 %
@@ -635,9 +636,9 @@ mesh size. The order of accuracy for the temporal and spatial refinements
 matched very closely with the modified equation analysis for both codes. For all
 of these data points, the residual formulation of the code showed discretization
 errors that were very close with the original version of the code. Future work
-might be comparing the numerical error obtained in the code to the analytical
+should compare the numerical error obtained in the code to the analytical
 error predicted by the modified equation analysis using the derivatives of the
-known solutions. While within the assymptotic range, the first order accurate
+known solutions. While within the asymptotic range, the first order accurate
 analytical error should almost exactly match the error from the code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
