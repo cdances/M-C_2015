@@ -152,14 +152,27 @@ dimensions.
 	\label{fig:CTF-Cells}
 \end{figure}
 
-The single phase Euler partial differential equations for mass
-\eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
-\eqref{eq:pde_energy} correspond to the unknown variables pressure $P$,
-velocity $u$, and enthalpy $h$. Density $\rho$ is related through an equation
-of state \cite{Cooper2007} as a function of enthalpy and pressure. For this
-work, the equation of state will be assumed to be approximately linear. This
-assumption should be valid due to the small changes in pressure and enthalpy
-observed during the verification problem.
+%The single phase Euler partial differential equations for mass
+%\eqref{eq:pde_mass}, momentum \eqref{eq:pde_momentum}, and energy
+%\eqref{eq:pde_energy} correspond to the unknown variables pressure $P$,
+%velocity $u$, and enthalpy $h$. Density $\rho$ is related through an equation
+%of state \cite{Cooper2007}. The time rate of change of density $\partial
+%\rho}{\partial t}$
+For the single phase formulation of the Euler equations, the unkown variables
+are pressure $P$, velocity $u$, enthalpy $h$, and density $\rho$. To solve for
+these variables, three conservation equations and one equation of state are
+used. The conservation of mass given in equation \ref{eq:pde_mass} is the most
+basic with the rate of change in density equal to the advection from the
+upwinded cell. The conservation of momentum in equation \ref{eq:pde_momentum}
+has the time rate of change of velocity, the advection of momentum from adjacent
+cells, the gradient of pressure and body forces. The conservation of energy
+equation \ref{eq:pde_energy} has two temporal terms. Both the time rate of
+change of the enthalpy minus the time rate of change of the pressure.
+
+%For this
+%work, the equation of state will be assumed to be approximately linear. This
+%assumption should be valid due to the small changes in pressure and enthalpy
+%observed during the verification problem.
     
     \begin{equation}
     	\label{eq:pde_mass}
@@ -212,7 +225,7 @@ observed during the verification problem.
     \end{equation}
     
 	To build the Jacobian matrix, an object oriented class was created that
-    contains three arrays. An array that points to the residual functions, an
+    contains three arrays; an array that points to the residual functions, an
     array that points to the position within a target variable array, and an
     array that has the index that the function is to be evaluated at. These
     lists can be appended in any order, but they have to be appended
@@ -230,14 +243,13 @@ observed during the verification problem.
 
 \section{Isokinetic Sine Wave Advection}
 
-Code verification is the set of procedures set in place to ensure that the code
-was written properly. From least to most rigorous, the procedures are expert
-judgement, error quantification, consistency / convergence, and order of
-accuracy \cite{Oberkampf2008}. For this work, the Richardson Extrapolation will be
-used to check for convergence and order of accuracy of the error in space and
-time. The error should converge to zero, and the order of accuracy should
-converge to the values obtained through the modified equation analysis at the
-end of this section.
+The procedures that can be used for code verification, from least to most
+rigorous, include: expert judgement, error quantification,
+consistency/convergence, and order of accuracy \cite{Oberkampf2008}. For this
+work, the Richardson extrapolation will be used to check for convergence and
+order of accuracy of the error in space and time. The error should converge to
+zero, and the order of accuracy should converge to the values obtained through
+the modified equation analysis at the end of this section.
  
 \subsection{Problem Setup}
 
@@ -346,45 +358,55 @@ discrepancy is negligible as can be seen by the overlapping profiles in figures
 % For the original version of CTF, there is a small discrepancy in the way the
 % density is calculated at the inlet that causes the velocity to be non-constant.
 %as shown in figure \ref{fig:Inlet_vel}.
- The pressure and the velocity fluctuate by less than $0.5\%$ during the
+ The pressure and the velocity fluctuate by less than $0.25\%$ during the
  simulation due to approximating the EOS as a linear function. This is considered small for
  this problem and should not greatly affect the order of accuracy of the error. 
  The VTK output files allow for a high level of precision, reducing
  round off error in the output during the post processing.
 
-\subsection{Code Convergence}
-
-The current version of CTF uses global code convergence criteria that are
-used to estimate the rate of change of global mass and energy conservation. The
-transient values of these criteria are shown in figure \ref{fig:Code_Convergence:Original} for the original version of
-CTF simulating the verification problem. Mass balance and storage are in units
-of $\frac{kg}{s}$. The energy balance, fluid energy, and solid energy are in units of $kW$.
-The solid energy storage is zero since there are not any heat structures present. The fluctuating values
-represent differences between the energy and mass entering and leaving the
-system. The flat profile for the mass storage term means that the sine wave has
-fully developed spatially through the channel. 
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
-	\caption{Code Convergence Criteria for the Original Version of CTF}
-	\label{fig:Code_Convergence:Original}
-\end{figure}
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
-	\caption{Summation of the Residuals for the Residual Version of CTF}
-	\label{fig:Residuals_Plot}
-\end{figure}
-
-The residual formulation prints out the summation of the equation residuals
-across the domain to an output file at the end of each time step and can be seen
-in figure \ref{fig:Residuals_Plot}. The mass equation residual is in units of
-$\frac{kg}{m^{3}s}$. The energy equation residual is in units of
-$\frac{kW}{m^{3}}$. The momentum residual is in units of
-$\frac{kg}{m^{2}s^{2}}$. The flat profile of the mass and energy residuals shows
-that the sine wave has fully developed spatially through the channel.
+%\subsection{Code Convergence}
+%
+%The current version of CTF uses global code convergence criteria that are
+%used to estimate that are used to estimate the storage of mass and energy in the system. The
+%transient values of these criteria are shown in figure \ref{fig:Code_Convergence:Original} for the original version of
+%CTF simulating the verification problem. The fluid energy storage is the percent
+%energy stored in the fluid during one time step. The mass storage is the
+%percentage of mass stored in the model during one time step. The global energy
+%balance is the percent difference between the energy leaving and entering the
+%sytem relative to the energy entering the system. The global mass balance is the
+%percent difference between the mas leaving and entering the system relative to
+%the energy entering the sytem. The flat profile for the mass storage term means
+%that the fluid that was initially at the inlet as advected out of the system.
+%After this point the sine wave can be considered to be fully developed, and
+%numerical analysis should only be done after this point in time for the
+%original version of the code.
+%
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/original/results/Convergence_Plot}
+%	\caption{Code Convergence Criteria for the Original Version of CTF}
+%	\label{fig:Code_Convergence:Original}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.50\textwidth]{images/Code_Verification/run_00_00/residual/results/Residuals_Plot}
+%	\caption{Summation of the Residuals for the Residual Version of CTF}
+%	\label{fig:Residuals_Plot}
+%\end{figure}
+%
+%The residual formulation prints out the summation of the equation residuals
+%across the domain to an output file at the end of each time step and can be seen
+%in figure \ref{fig:Residuals_Plot}. Unlike the previous convergence criteria,
+%these are not relative values but the l2 normaliztion of each of the fluid
+%conservation equations across the domain. The mass equation residual is in units
+%of $\frac{kg}{m^{3}s}$. The energy equation residual is in units of
+%$\frac{kW}{m^{3}}$. The momentum residual is in units of
+%$\frac{kg}{m^{2}s^{2}}$. The flat profile of the mass and energy residuals shows
+%that the fluid that was initially at the inlet as advected out of the system.
+%After this point the sine wave can be considered to be fully developed, and
+%numerical analysis should only be done after this point in time for the residual
+%formulation. The 
 
 %\subsection{Error Quantification}
 %
@@ -621,8 +643,10 @@ analytical error should almost exactly match the error from the code.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgments}
 
-Through CASL, this research used resources at the Oak Ridge National Laboratory
-and Sandia National Laboratories.
+This work has been supported by the Consortium for Advanced Simulation of Light
+water reactors, an Energy Innovation Hub for Modeling and
+Simulation of Nuclear Reactors under U.S. Department of Energy Contract No.
+DE-AC05-00OR22725.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\baselineskip}{12pt}

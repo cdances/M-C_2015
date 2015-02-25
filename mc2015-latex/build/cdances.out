@@ -5,11 +5,10 @@
 \BOOKMARK [2][-]{subsection.2.3}{Residual Formulation and Jacobian Construction}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{Isokinetic Sine Wave Advection}{}% 6
 \BOOKMARK [2][-]{subsection.3.1}{Problem Setup}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.2}{Code Convergence}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.3}{Modified Equation Analysis}{section.3}% 9
-\BOOKMARK [1][-]{section.4}{Richardson Extrapolation}{}% 10
-\BOOKMARK [2][-]{subsection.4.1}{Convergence of Error}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.2}{Order of Accuracy}{section.4}% 12
-\BOOKMARK [1][-]{section.5}{Conclusions}{}% 13
-\BOOKMARK [1][-]{section.6}{Acknowledgments}{}% 14
-\BOOKMARK [1][-]{section.7}{References}{}% 15
+\BOOKMARK [2][-]{subsection.3.2}{Modified Equation Analysis}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Richardson Extrapolation}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Convergence of Error}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Order of Accuracy}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Conclusions}{}% 12
+\BOOKMARK [1][-]{section.6}{Acknowledgments}{}% 13
+\BOOKMARK [1][-]{section.7}{References}{}% 14
