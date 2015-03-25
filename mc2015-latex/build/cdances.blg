@@ -1,46 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2014)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: build/cdances.aux
 The style file: mc2015.bst
 Database file #1: references.bib
-You've used 7 entries,
+You've used 10 entries,
             2062 wiz_defined-function locations,
-            495 strings with 4087 characters,
-and the built_in function-call counts, 6592 in all, are:
-= -- 972
-> -- 64
-< -- 2
-+ -- 839
-- -- 41
-* -- 95
-:= -- 1040
-add.period$ -- 7
-call.type$ -- 7
+            514 strings with 4735 characters,
+and the built_in function-call counts, 9924 in all, are:
+= -- 1458
+> -- 106
+< -- 3
++ -- 1270
+- -- 63
+* -- 159
+:= -- 1567
+add.period$ -- 10
+call.type$ -- 10
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 945
-empty$ -- 147
-format.name$ -- 20
-if$ -- 1193
+cite$ -- 10
+duplicate$ -- 1422
+empty$ -- 215
+format.name$ -- 33
+if$ -- 1795
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 6
-newline$ -- 37
-num.names$ -- 7
-pop$ -- 39
+int.to.str$ -- 10
+missing$ -- 9
+newline$ -- 52
+num.names$ -- 10
+pop$ -- 48
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 65
+skip$ -- 99
 stack$ -- 0
-substring$ -- 911
-swap$ -- 39
-text.length$ -- 2
+substring$ -- 1369
+swap$ -- 61
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 27
-width$ -- 8
-write$ -- 64
+while$ -- 38
+width$ -- 12
+write$ -- 91

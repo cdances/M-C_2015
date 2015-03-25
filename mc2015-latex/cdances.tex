@@ -100,17 +100,21 @@ COBRA-TF \cite{Salko2014}. This FORTRAN based code solves 8 conservation
 equations for liquid, entrained droplet, and vapor phases phases, plus one
 conservation equation for non-condensable gases. A 1-D residual formulation of
 the code has been created. While other residual formulations have been
-formed for other versions of CTF \cite{Lloyd2014}, none have been integrated
-into the CASL version of CTF. The current version of CTF has standard
-verification practices similar to those in other versions of CTF
-\cite{Aumiller2013}, but it still lacks an in depth verification document. This
-paper outlines an initial verification of the original version of the code as
-well as the residual version of the code. The verification problem is a single
-phase 1-D channel with transient inlet density and mass flow rate. The problem
-will undergo a Richardson's extrapolation in the temporal and spatial domains to
-verify the convergence and order of accuracy of the error. The study of the
-order of accuracy is considered one of the more rigorous verification criteria
-\cite{Roy2005}.
+formed for other versions of COBRA-TF \cite{Lloyd2014}, none have been
+integrated into the CASL version of CTF. The current version of CTF has standard
+verification practices that focus on software quality engineering similar to
+those in other versions of COBRA-TF \cite{Aumiller2013}, but lacks an in
+depth verification document that focuses on numerical algorithm verification.
+This paper focues on this second type of verification and outlines the initial
+verification of the original version of the code as well as the residual version
+of the code. The verification problem is a single phase 1-D channel with
+transient inlet density and mass flow rate. The problem will undergo a
+Richardson's extrapolation in the temporal and spatial domains to verify the
+convergence and order of accuracy of the error. The study of the order of
+accuracy is considered one of the more rigorous verification criteria \cite{Roy2005}.
+This work will be expanded to perform verificaiton on the single
+phase equations in both axial and transverse dimensions \cite{Merroun2009}, two
+phase flow, and coupled fluid heat conduction \cite{Mahadevan2009}.
 
 \section{CTF}
 
@@ -124,7 +128,7 @@ calculated variables in a residual formulation. While it has the ability to
 solve the conservation equations semi-implicitly or implicitly, only the
 semi-implicit solution method is considered in this paper. This residual
 formulation should allow for easier and more in depth verification  analysis.
-This paper details the initial comparison of the residual formulation to the
+This paper details the initial verificaiton of the residual formulation and
 original code.
 
 \subsection{Software Quality Assurance}
@@ -260,20 +264,33 @@ the modified equation analysis \cite{Villatoro1999} at the end of this section.
 %Round off error, iterative convergence error.
 %Discretization error?? (Check with)
 
-To readily obtain an analytical solution and isolate only the mass and energy
-conservation equations, several simplifications to the verification problem
-are made. Only one channel is considered to make the problem 1-D. In order to
-make the problem perfectly isobaric and isokinetic, grid spacer losses,
-frictional losses, and gravity head losses are set to zero representing
-a smooth horizontal pipe. Small fluctuations in pressure and velocity may still
-occur due to the assumption that the EOS is linear. The channel geometry and
-operating conditions approximate a standard PWR as shown in table
-\ref{table:parameters}. The inlet of the channel has a constant velocity with a
-fluctuating enthalpy that corresponds to be near the standard PWR rod bundle
-coolant channel inlet conditions. The length of the transient was defined to be
-quadruple the time needed for the liquid at the inlet to advect to the outlet.
-The frequency of the sine wave was defined to generate a full period of a
-spatial wave across the length of the channel.
+To obtain an analytical solution for a subchannel code, typically the method
+of manufactured solutions \cite{Knupp2000} is needed. To readily obtain an
+analytical solution and isolate only the mass and energy conservation equations,
+several simplifications to the verification problem are made. Only one channel
+is considered to make the problem 1-D. In order to make the problem perfectly
+isobaric and isokinetic, grid spacer losses, frictional losses, and gravity head
+losses are set to zero representing a smooth horizontal pipe. Small fluctuations
+in pressure and velocity may still occur due to the assumption that the EOS is
+linear. The channel geometry and operating conditions approximate a standard PWR
+as shown in table \ref{table:parameters}. The inlet of the channel has a
+constant velocity with a fluctuating enthalpy that corresponds to be near the
+standard PWR rod bundle coolant channel inlet conditions. The problem will aslo
+have constant axial spacing and time step size. The length of the
+transient was defined to be quadruple the time needed for the liquid at the
+inlet to advect to the outlet. The frequency of the sine wave was defined to
+generate a full period of a spatial wave across the length of the channel. With
+these simplifications, the method of manufacturing solutions is unnecessary
+since the known solutions are simply the advection of the transinet inlet
+conditions. The functions for the etnhalpy $h$ and mass flow rate, $\dot{m}$,
+are given in equations \ref{eq:Sine_Wave:h} and \ref{eq:Sine_Wave:m_dot} where
+$x$ is the length from the inlet and $t$ is the simulated time. The functions
+smoothly transition to the initial condition of a straight line across the
+domain. The enthalpy and mass flow rate vary proportionally to the density such
+that an isokinetic boundary condition is created at the inlet. While these
+simplifications do not model a realistic problem, they appropriately isolate the
+1-D single phase mass and energy conservation equations for the purpose of
+verification. 
 
 \begin{table}[h]
 \center
@@ -298,15 +315,6 @@ Wave Frequency	&	$\omega$	&	1.00	&	Hz	\\ \hline
 \end{tabular}
 \end{table}
 
-The lookup table to vary the inlet enthalpy $h$ and inlet mass
-flow rate, $\dot{m}$, are generated from equations \ref{eq:Sine_Wave:h} and
-\ref{eq:Sine_Wave:m_dot} where $x$ is the length from the inlet and $t$ is the
-simulated time. The trigonometric functions assume constant axial spacing, time
-step size, and velocity. The functions smoothly transition to the initial
-condition of a straight line across the domain. These equations should also
-behave as the known solutions throughout the entire domain of the problem. The
-enthalpy and mass flow rate vary proportionally to the density such that an
-isokinetic boundary condition is created at the inlet.
 
 %$ \frac{\partial ^{2} h}{\partial t^{2}} = - \frac{1}{2}  \omega^{2}
 %(h_{1}-h_{2}) cos ( \omega ( t - \frac{x}{V_{o}} ))) $
@@ -339,15 +347,14 @@ isokinetic boundary condition is created at the inlet.
 			\right)
 \end{equation}
 
-
 The comparison between the data table and the output in CTF are shown for
 enthalpy and mass flow rate in figures \ref{fig:Inlet_h} and
 \ref{fig:Inlet_m_dot}, respectively. The CTF output was read from the high
 precision VTK data files at each point in time, which omitted the actual ghost
-cell where these values were applied. The CTF values are located at the nearest node to the inlet, and
-will experience small amounts of numerical diffusion. For large mesh sizes, this
-discrepancy is negligible as can be seen by the overlapping profiles in figures
-\ref{fig:Inlet_h} and \ref{fig:Inlet_m_dot}.
+cell where these values were applied. The CTF values are located at the nearest
+node to the inlet, and will experience small amounts of numerical diffusion. For
+large mesh sizes, this discrepancy is negligible as can be seen by the
+overlapping profiles in figures \ref{fig:Inlet_h} and \ref{fig:Inlet_m_dot}.
 
 \begin{figure}[!h]
 	\centering
@@ -433,7 +440,6 @@ discrepancy is negligible as can be seen by the overlapping profiles in figures
 %\end{figure}
 
 \subsection{Modified Equation Analysis}
-    
     
     The order of accuracy in time and space can be analytically determined for
     this problem through a modified equation analysis. Because the velocity is
@@ -634,7 +640,7 @@ equation analysis.
 The residual formulation of CTF allows for a numerical computation of the
 multivariable Jacobian matrix compared to the original analytical derivation of
 a pressure matrix. The 1-D isokinetic single phase liquid verification problem
-is a good verification problem through its isolation of the order
+is a good verification problem due its isolation of the order
 of accuracies through modified equation analysis. The discretization error for
 both versions of the code converged to zero with decreasing time step and axial
 mesh size. The order of accuracy for the temporal and spatial refinements

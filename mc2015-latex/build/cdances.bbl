@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Salko2014}
 R.~K. Salko,
@@ -24,6 +24,19 @@ C.~J. Roy,
 \newblock {\em Journal of Computational Physics}, {\bf 205}, pp. 131--156
   (2005).
 
+\bibitem{Merroun2009}
+O.~Merroun, A.~Almers, T.~E. Bardouni, B.~E. Bakkari, and E.~Chakir,
+\newblock ``{Analytical benchmarks for verification of thermal-hydraulic codes
+  based on sub-channel approach},''
+\newblock {\em Nuclear Engineering and Design}, {\bf 239}, pp. 735--748 (2009).
+
+\bibitem{Mahadevan2009}
+V.~Mahadevan, V.~Mousseau, and J.~C. Ragusa,
+\newblock ``{Verification of multiphysics software: Space and time convergence
+  studies for nonlinearly coupled applications},''
+\newblock {\em International Conference on Mathematics, Computational Methods
+  \& Reactor Physics} (2009).
+
 \bibitem{Cooper2007}
 J.~R. Cooper and R.~B. Dooley,
 \newblock ``{The International Association for the Properties of Water and
@@ -40,5 +53,10 @@ W.~L. Oberkampf and T.~G. Trucano,
 F.~Villatoro and J.~Ramos,
 \newblock ``{On the method of modified equations. I: Asymptotic analysis of the
   Euler forward difference method},'' 1999.
+
+\bibitem{Knupp2000}
+P.~J. Knupp and K.~Salari,
+\newblock ``{Code Verification by the Method of Manufactured Solutions},''
+\newblock {\em Sandia National Laboratories}, {\bf SAND2000-1444} (2000).
 
 \end{thebibliography}
