@@ -22,6 +22,6 @@ $(manuscript).pdf: $(manuscript).tex references.bib
 #=================================================================
 
 clean:
-	rm -fr build
+	rm -fr build $(manuscript).pdf
 
 .PHONY: all clean

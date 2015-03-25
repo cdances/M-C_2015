@@ -1,11 +1,12 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.10)  19 DEC 2014 16:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.8)  25 MAR 2015 08:58
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
+ Source specials enabled.
  %&-line parsing enabled.
 **cdances.tex
 (./cdances.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 4 languages loaded.
+Babel <3.9h> and hyphenation patterns for 2 languages loaded.
 (./mc2015.cls
 
 LaTeX Warning: You have requested document class `mc2015',
@@ -965,8 +966,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
 Package: lipsum 2011/04/14 v1.2 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count168
-)
-No file cdances.aux.
+) (./cdances.aux)
 \openout1 = `cdances.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
@@ -984,6 +984,7 @@ LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 27.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
@@ -1146,6 +1147,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 27.
 LaTeX Info: Redefining \pageref on input line 27.
 LaTeX Info: Redefining \nameref on input line 27.
+
+(./cdances.out) (./cdances.out)
 \@outlinefile=\write3
 \openout3 = `cdances.out'.
 
@@ -1168,99 +1171,139 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 46.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 46.
-
-
-LaTeX Warning: Citation `journal' on page 1 undefined on input line 59.
-
-
-LaTeX Warning: Citation `proceedings' on page 1 undefined on input line 60.
-
-
-LaTeX Warning: Citation `book' on page 1 undefined on input line 60.
-
-
-LaTeX Warning: Citation `misc' on page 1 undefined on input line 61.
-
-
-LaTeX Warning: Reference `eqn:sample' on page 1 undefined on input line 72.
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
+Underfull \vbox (badness 5711) has occurred while \output is active []
 
-LaTeX Warning: Reference `fig:sample' on page 2 undefined on input line 85.
+ [2
 
-<figure.png, id=17, 442.65375pt x 404.51125pt>
-File: figure.png Graphic file (type png)
- <use figure.png>
-Package pdftex.def Info: figure.png used on input line 89.
-(pdftex.def)             Requested size: 216.81pt x 198.132pt.
+]
+<images/CTF-Cells.jpg, id=84, 551.05875pt x 1023.825pt>
+File: images/CTF-Cells.jpg Graphic file (type jpg)
+
+<use images/CTF-Cells.jpg>
+Package pdftex.def Info: images/CTF-Cells.jpg used on input line 155.
+(pdftex.def)             Requested size: 140.92792pt x 261.8296pt.
+ [3 <./images/CTF-Cells.jpg>]
+<images/Jacobian_Setup.jpg, id=105, 421.575pt x 399.4925pt>
+File: images/Jacobian_Setup.jpg Graphic file (type jpg)
+
+<use images/Jacobian_Setup.jpg>
+Package pdftex.def Info: images/Jacobian_Setup.jpg used on input line 243.
+(pdftex.def)             Requested size: 187.89912pt x 178.05705pt.
 
 
-LaTeX Warning: Reference `tab:sample' on page 2 undefined on input line 100.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 127.
+[4]
 
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 127.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[2 <./figure.png>]
-No file cdances.bbl.
-LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 141.
+[5 <./images/Jacobian_Setup.jpg>]
+<images/Code_Verification/run_00_00/residual/results/Inlet_h.png, id=134, 578.1
+6pt x 433.62pt>
+File: images/Code_Verification/run_00_00/residual/results/Inlet_h.png Graphic f
+ile (type png)
 
-Package lastpage Warning: Rerun to get the references right on input line 144.
+<use images/Code_Verification/run_00_00/residual/results/Inlet_h.png>
+Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
+let_h.png used on input line 354.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
 
+<images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png, id=136, 5
+78.16pt x 433.62pt>
+File: images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png Graph
+ic file (type png)
+
+<use images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>
+Package pdftex.def Info: images/Code_Verification/run_00_00/residual/results/In
+let_m_dot.png used on input line 361.
+(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6 <./images/Code_Verification/run_00_00/residual/results/Inlet_h.png>]
+[7 <./images/Code_Verification/run_00_00/residual/results/Inlet_m_dot.png>]
+<images/Temporal_Study/Difference_rho.jpg, id=170, 803.0pt x 602.25pt>
+File: images/Temporal_Study/Difference_rho.jpg Graphic file (type jpg)
+
+<use images/Temporal_Study/Difference_rho.jpg>
+Package pdftex.def Info: images/Temporal_Study/Difference_rho.jpg used on input
+ line 548.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8] <images/Spatial_Study/Difference_rho.jpg, id=180, 803.0pt x 602.25pt>
+File: images/Spatial_Study/Difference_rho.jpg Graphic file (type jpg)
+
+<use images/Spatial_Study/Difference_rho.jpg>
+Package pdftex.def Info: images/Spatial_Study/Difference_rho.jpg used on input 
+line 561.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+ [9 <./images/Temporal_Study/Difference_rho.jpg> <./images/Spatial_Study/Differ
+ence_rho.jpg>]
+<images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=191, 803.0pt x 602.25p
+t>
+File: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jp
+g)
+ <use images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>
+Package pdftex.def Info: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg us
+ed on input line 595.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+
+<images/Spatial_Study/Order_Of_Accuracy_Summary.jpg, id=192, 803.0pt x 602.25pt
+>
+File: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jpg
+)
+ <use images/Spatial_Study/Order_Of_Accuracy_Summary.jpg>
+Package pdftex.def Info: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg use
+d on input line 602.
+(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <./images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>] (./cdances.bbl
+[11 <./images/Spatial_Study/Order_Of_Accuracy_Summary.jpg>])
 
 AED: lastpage setting LastPage
-
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 144.
-
-[3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 144.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 144.
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 669.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 669.
  (./cdances.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 144.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 144.
-
-
-Package rerunfilecheck Warning: File `cdances.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `cdances.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7F985C80FEBEDAB6C70E0BA8CC761824;503.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 144.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 669.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 669.
+Package rerunfilecheck Info: File `cdances.out' has not changed.
+(rerunfilecheck)             Checksum: BE0061C2677B97F5059C9463E9FE881F;892.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 669.
  ) 
 Here is how much of TeX's memory you used:
- 17920 strings out of 494985
- 339733 string characters out of 6180356
- 489206 words of memory out of 5000000
- 20782 multiletter control sequences out of 15000+600000
- 52268 words of font info for 104 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 43i,14n,49p,10443b,747s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18094 strings out of 495028
+ 342808 string characters out of 6181498
+ 495840 words of memory out of 5000000
+ 20810 multiletter control sequences out of 15000+600000
+ 40749 words of font info for 152 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 43i,14n,45p,10443b,899s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/sha
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cdances.pdf (3 pages, 124442 bytes).
+Output written on cdances.pdf (12 pages, 653814 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
- 35846 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 262 PDF objects out of 1000 (max. 8388607)
+ 224 compressed objects within 3 object streams
+ 57 named destinations out of 1000 (max. 500000)
+ 26777 words of extra memory for PDF output out of 29859 (max. 10000000)
 
