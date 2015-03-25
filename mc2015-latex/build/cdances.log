@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  25 MAR 2015 12:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  25 MAR 2015 13:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1190,7 +1190,7 @@ File: images/Temporal_Study/Difference_rho.jpg Graphic file (type jpg)
 <use images/Temporal_Study/Difference_rho.jpg>
 Package pdftex.def Info: images/Temporal_Study/Difference_rho.jpg used on input
  line 554.
-(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+(pdftex.def)             Requested size: 305.33788pt x 229.00441pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1201,26 +1201,29 @@ File: images/Spatial_Study/Difference_rho.jpg Graphic file (type jpg)
 <use images/Spatial_Study/Difference_rho.jpg>
 Package pdftex.def Info: images/Spatial_Study/Difference_rho.jpg used on input 
 line 567.
-(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+(pdftex.def)             Requested size: 305.33788pt x 229.00441pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [9 <./images/Temporal_Study/Difference_rho.jpg> <./images/Spatial_Study/Differ
 ence_rho.jpg>]
-<images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=197, 803.0pt x 602.25p
+<images/Temporal_Study/Order_Of_Accuracy_Summary.jpg, id=196, 803.0pt x 602.25p
 t>
 File: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jp
 g)
  <use images/Temporal_Study/Order_Of_Accuracy_Summary.jpg>
 Package pdftex.def Info: images/Temporal_Study/Order_Of_Accuracy_Summary.jpg us
 ed on input line 601.
-(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+(pdftex.def)             Requested size: 305.33788pt x 229.00441pt.
 
-<images/Spatial_Study/Order_Of_Accuracy_Summary.jpg, id=198, 803.0pt x 602.25pt
+<images/Spatial_Study/Order_Of_Accuracy_Summary.jpg, id=197, 803.0pt x 602.25pt
 >
 File: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg Graphic file (type jpg
 )
  <use images/Spatial_Study/Order_Of_Accuracy_Summary.jpg>
 Package pdftex.def Info: images/Spatial_Study/Order_Of_Accuracy_Summary.jpg use
 d on input line 608.
-(pdftex.def)             Requested size: 281.85585pt x 211.39716pt.
+(pdftex.def)             Requested size: 305.33788pt x 229.00441pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1230,21 +1233,21 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 AED: lastpage setting LastPage
 [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 675.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 675.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 677.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 677.
  (build/cdances.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 675.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 675.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 677.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 677.
 Package rerunfilecheck Info: File `cdances.out' has not changed.
 (rerunfilecheck)             Checksum: BE0061C2677B97F5059C9463E9FE881F;892.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 675.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 677.
  ) 
 Here is how much of TeX's memory you used:
- 18008 strings out of 493117
- 340829 string characters out of 6135433
+ 18011 strings out of 493117
+ 340856 string characters out of 6135433
  499348 words of memory out of 5000000
  21027 multiletter control sequences out of 15000+600000
- 41329 words of font info for 158 fonts, out of 8000000 for 9000
+ 41459 words of font info for 160 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,14n,45p,10414b,899s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -1259,10 +1262,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/tex
 mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on build/cdances.pdf (12 pages, 655527 bytes).
+Output written on build/cdances.pdf (12 pages, 655623 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
+ 269 PDF objects out of 1000 (max. 8388607)
+ 231 compressed objects within 3 object streams
  60 named destinations out of 1000 (max. 500000)
  26777 words of extra memory for PDF output out of 29859 (max. 10000000)
 

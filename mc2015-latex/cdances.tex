@@ -113,8 +113,8 @@ Richardson's extrapolation in the temporal and spatial domains to verify the
 convergence and order of accuracy of the error. The study of the order of
 accuracy is considered one of the more rigorous verification criteria \cite{Roy2005}.
 This work will be expanded to perform verificaiton on the single
-phase equations in both axial and transverse dimensions \cite{Merroun2009}, two
-phase flow, and coupled fluid heat conduction \cite{Mahadevan2009}.
+phase equations in both axial and transverse dimensions \cite{Merroun2009}, and
+coupled fluid heat conduction \cite{Mahadevan2009}.
 
 \section{CTF}
 
@@ -219,12 +219,12 @@ enthalpy as described later.
     the function $F_{j}$ with respect to each variable $X_{i}$.
     The derivative can be calculated numerically as shown by equation
     \eqref{eq:jac_numerical} where $\epsilon$ is a small numerical value.
-    Since the system is assumed to be linear, the approximation of the Jacobian
-    matrix in this manner is also assumed to be accurate. As a check, the
+    Since the system is considered linear, the approximation of the
+    Jacobian matrix in this manner is accurate. As a check, the
     numerically computed Jacobian matrix was reduced to a pressure matrix using
     guassian simulation and compared to the analytical pressure matrix from CTF.
     Each of the entries of the Jacobian matrix appeared to match to nearly
-    within machine precision.
+    within machine precision. 
     
     \begin{equation}
     	\label{eq:jac_numerical}
@@ -551,7 +551,7 @@ temporal and spatial step size.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Temporal_Study/Difference_rho}
+	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Difference_rho}
 	\caption{Difference Between Successive Temporal Refinements for Density}
 	\label{fig:Temporal:Diff_rho}
 \end{figure} 
@@ -564,7 +564,7 @@ with each other.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Spatial_Study/Difference_rho}
+	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Difference_rho}
 	\caption{Difference Between Successive Spatial Refinements for Density}
 	\label{fig:Spatial:Diff_rho}
 \end{figure} 
@@ -598,14 +598,14 @@ decreasing mesh size.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.65\textwidth]{images/Temporal_Study/Order_Of_Accuracy_Summary}
 	\caption{Temporal Order of Accuracy}
 	\label{fig:Temporal:OOA}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.60\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
+	\includegraphics[width=0.65\textwidth]{images/Spatial_Study/Order_Of_Accuracy_Summary}
 	\caption{Spatial Order of Accuracy}
 	\label{fig:Spatial:OOA}
 \end{figure}
@@ -613,8 +613,10 @@ decreasing mesh size.
 The slight differences between the original version of CTF and the residual
 formulation might be due to the different solution methods and back substitution
 of variables. Despite the small differences, both versions of the code exhibit
-order of accuracies very close the values obtained through the modified
-equation analysis.
+order of accuracies very close to 1 which was obtained through the modified
+equation analysis. One advantage of the residual formulation is that different
+numerical techniques can be readily implemented that could match higher orders
+of accuracies from other codes \cite{Merroun2009}. 
 
 %\section{Parameter Study}
 %
