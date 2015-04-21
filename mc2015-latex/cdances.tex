@@ -105,14 +105,14 @@ integrated into the CASL version of CTF. The current version of CTF has standard
 verification practices that focus on software quality engineering similar to
 those in other versions of COBRA-TF \cite{Aumiller2013}, but lacks an in
 depth verification document that focuses on numerical algorithm verification.
-This paper focues on this second type of verification and outlines the initial
+This paper focuses on this second type of verification and outlines the initial
 verification of the original version of the code as well as the residual version
 of the code. The verification problem is a single phase 1-D channel with
 transient inlet density and mass flow rate. The problem will undergo a
 Richardson's extrapolation in the temporal and spatial domains to verify the
 convergence and order of accuracy of the error. The study of the order of
 accuracy is considered one of the more rigorous verification criteria \cite{Roy2005}.
-This work will be expanded to perform verificaiton on the single
+This work will be expanded to perform verification on the single
 phase equations in both axial and transverse dimensions \cite{Merroun2009}, and
 coupled fluid heat conduction \cite{Mahadevan2009}.
 
@@ -128,7 +128,7 @@ calculated variables in a residual formulation. While it has the ability to
 solve the conservation equations semi-implicitly or implicitly, only the
 semi-implicit solution method is considered in this paper. This residual
 formulation should allow for easier and more in depth verification  analysis.
-This paper details the initial verificaiton of the residual formulation and
+This paper details the initial verification of the residual formulation and
 original code.
 
 \subsection{Software Quality Assurance}
@@ -281,8 +281,8 @@ transient was defined to be quadruple the time needed for the liquid at the
 inlet to advect to the outlet. The frequency of the sine wave was defined to
 generate a full period of a spatial wave across the length of the channel. With
 these simplifications, the method of manufacturing solutions is unnecessary
-since the known solutions are simply the advection of the transinet inlet
-conditions. The functions for the etnhalpy $h$ and mass flow rate, $\dot{m}$,
+since the known solutions are simply the advection of the transient inlet
+conditions. The functions for the enthalpy $h$ and mass flow rate, $\dot{m}$,
 are given in equations \ref{eq:Sine_Wave:h} and \ref{eq:Sine_Wave:m_dot} where
 $x$ is the length from the inlet and $t$ is the simulated time. The functions
 smoothly transition to the initial condition of a straight line across the
